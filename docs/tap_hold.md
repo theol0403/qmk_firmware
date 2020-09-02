@@ -91,8 +91,10 @@ You can then add the following function to your keymap:
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(1, KC_BSPC):
+            // Immediately select the tap action when another key is tapped.
             return true;
         default:
+            // Do not select the tap action when another key is tapped.
             return false;
     }
 }
@@ -133,8 +135,10 @@ You can then add the following function to your keymap:
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(1, KC_BSPC):
+            // Immediately select the tap action when another key is pressed.
             return true;
         default:
+            // Do not select the tap action when another key is pressed.
             return false;
     }
 }
@@ -178,8 +182,12 @@ You can then add the following function to your keymap:
 bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SFT_T(KC_SPC):
+            // Do not force the mod-tap key press to be handled as a modifier
+            // if any other key was pressed while the mod-tap key is held down.
             return true;
         default:
+            // Force the mod-tap key press to be handled as a modifier if any
+            // other key was pressed while the mod-tap key is held down.
             return false;
     }
 }
