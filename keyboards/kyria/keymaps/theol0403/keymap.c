@@ -35,13 +35,20 @@ XXX, K20, K21, K22, K23, K24, XXX, XXX,      XXX, XXX, K25, K26, K27, K28, K29, 
 #define X_NU KC_NO // available but not used
 
 enum layers { BASE, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
+#define BS BASE
+#define ME MEDR
+#define NV NAVR
+#define MS MOUR
+#define SN NSSL
+#define NU NSL
+#define FN FUNL
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT(
-    XXX, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                                     KC_Y,             KC_U,         KC_I,         KC_O,           KC_P,            XXX,
-    XXX, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                                     KC_H,             LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), XXX,
-    XXX, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,             XXX,              XXX,              XXX,              XXX,              KC_N,             KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         XXX,
-                                     XXX,          XXX,          LT(MEDR, KC_ESC), LT(NAVR, KC_SPC), LT(MOUR, KC_TAB), LT(NSSL, KC_ENT), LT(NSL, KC_BSPC), LT(FUNL, KC_DEL), XXX,          XXX
+    XXX, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                            KC_Y,           KC_U,         KC_I,         KC_O,           KC_P,            XXX,
+    XXX, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                            KC_H,           LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), XXX,
+    XXX, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,           XXX,            XXX,            XXX,            XXX,             KC_N,           KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         XXX,
+                                     XXX,          XXX,          LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB), LT(SN, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), XXX,          XXX
   )
   // [NAVR] = LAYOUT(
   //   RESET,   X_NA,    X_NA,    X_NA,    X_NA,    KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE,
