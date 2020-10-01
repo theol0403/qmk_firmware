@@ -21,7 +21,9 @@
 #endif
 
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_ANIMATIONS
+// #    define RGBLIGHT_ANIMATIONS
+#    define RGBLIGHT_EFFECT_STATIC_GRADIENT
+#    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 #    define RGBLIGHT_HUE_STEP 8
 #    define RGBLIGHT_SAT_STEP 8
 #    define RGBLIGHT_VAL_STEP 8
@@ -58,13 +60,3 @@
 #define MOUSEKEY_MAX_SPEED 6
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX 64
-
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-
-#ifndef NO_DEBUG
-#    define NO_DEBUG
-#endif  // !NO_DEBUG
-#if !defined(NO_PRINT) && !defined(CONSOLE_ENABLE)
-#    define NO_PRINT
-#endif  // !NO_PRINT
