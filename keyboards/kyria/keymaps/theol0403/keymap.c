@@ -1,58 +1,58 @@
 #include QMK_KEYBOARD_H
 
-#define XX KC_NO
+#define __ KC_NO
 
-enum layers { BASE, MDIA, NAVI, MOUS, SNUM, NUM, FUNL };
+enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 #define BS BASE
 #define ME MDIA
-#define NV NAVI
+#define NV NAV
 #define MS MOUS
-#define SN SNUM
+#define SM SYM
 #define NU NUM
-#define FN FUNL
+#define FN FUNC
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  XX, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                             KC_Y,           KC_U,         KC_I,         KC_O,           KC_P,            XX,
-  XX, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                             KC_H,           LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), XX,
-  XX, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,           XX,             XX,              XX,             XX,              KC_N,           KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         XX,
-                                  XX,           XX,           LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB),  LT(SN, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), XX,           XX
-),
-[NAVI] = LAYOUT(
-  XX,  RESET,   XX,      XX,      XX,      XX,                      KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, XX,
-  XX,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, XX,
-  XX,  XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX, XX,     KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  XX,
-                                  XX,      XX, XX, XX,  XX, KC_ENT, KC_BSPC, KC_DEL,  XX,      XX
-),
-[MOUS] = LAYOUT(
-  XX, RESET,   XX,      XX,      XX,      XX,                            XX,      XX,      XX,      XX,      XX, XX,
-  XX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                            KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XX, XX,
-  XX, XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX,      XX,      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XX, XX,
-                        XX,      XX,      XX, XX, XX,  KC_BTN1, KC_BTN3, KC_BTN2, XX,      XX
-),
-[MDIA] = LAYOUT(
-  XX, RESET,   XX,      XX,      XX,      XX,                            RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, XX,
-  XX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                            KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XX,      XX,
-  XX, XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX,      XX,      XX,      XX,      XX,      XX,      XX,      XX,
-                        XX,      XX,      XX, XX, XX,  KC_MSTP, KC_MPLY, KC_MUTE, XX,      XX
-),
-[FUNL] = LAYOUT(
-  XX, KC_F12, KC_F7, KC_F8, KC_F9, KC_PSCR,                          XX, XX,      XX,      XX,      RESET,   XX,
-  XX, KC_F11, KC_F4, KC_F5, KC_F6, KC_SLCK,                          XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
-  XX, KC_F10, KC_F1, KC_F2, KC_F3, KC_PAUS, XX,     XX,      XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
-                     XX,    XX,    KC_APP,  KC_SPC, KC_TAB,  XX, XX, XX, XX,      XX
+  __, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                             KC_Y,           KC_U,         KC_I,         KC_O,           KC_P,            __,
+  __, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                             KC_H,           LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), __,
+  __, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,           __,             __,              __,             __,              KC_N,           KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         __,
+                                  __,           __,           LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB),  LT(SM, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), __,           __
 ),
 [NUM] = LAYOUT(
-  XX, KC_LBRC, KC_7, KC_8, KC_9, KC_RBRC,                         XX, XX,      XX,      XX,      RESET,   XX,
-  XX, KC_SCLN, KC_4, KC_5, KC_6, KC_EQL,                          XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
-  XX, KC_GRV,  KC_1, KC_2, KC_3, KC_BSLS, XX,   XX,       XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
-                     XX,   XX,   KC_DOT,  KC_0, KC_MINS,  XX, XX, XX, XX,      XX
+  __, KC_LBRC, KC_7, KC_8, KC_9, KC_RBRC,                         __, __,      __,      __,      RESET,   __,
+  __, KC_SCLN, KC_4, KC_5, KC_6, KC_EQL,                          __, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, __,
+  __, KC_GRV,  KC_1, KC_2, KC_3, KC_BSLS, __,   __,       __, __, __, __,      __,      KC_ALGR, __,      __,
+                     __,   __,   KC_DOT,  KC_0, KC_MINS,  __, __, __, __,      __
 ),
-[SNUM] = LAYOUT(
-  XX, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                            XX, XX,      XX,      XX,      RESET,   XX,
-  XX, KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                            XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
-  XX, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, XX,      XX,       XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
-                        XX,      XX,      KC_LPRN, KC_RPRN, KC_UNDS,  XX, XX, XX, XX,      XX
+[SYM] = LAYOUT(
+  __, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                            __, __,      __,      __,      RESET,   __,
+  __, KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                            __, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, __,
+  __, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, __,      __,       __, __, __, __,      __,      KC_ALGR, __,      __,
+                        __,      __,      KC_LPRN, KC_RPRN, KC_UNDS,  __, __, __, __,      __
+),
+[NAV] = LAYOUT(
+  __,  RESET,   __,      __,      __,      __,                      KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, __,
+  __,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, __,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, __,
+  __,  __,      KC_ALGR, __,      __,      __, __, __,  __, __,     KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  __,
+                                  __,      __, __, __,  __, KC_ENT, KC_BSPC, KC_DEL,  __,      __
+),
+[MOUS] = LAYOUT(
+  __, RESET,   __,      __,      __,      __,                            __,      __,      __,      __,      __, __,
+  __, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, __,                            KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, __, __,
+  __, __,      KC_ALGR, __,      __,      __, __, __,  __,      __,      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, __, __,
+                        __,      __,      __, __, __,  KC_BTN1, KC_BTN3, KC_BTN2, __,      __
+),
+[FUNC] = LAYOUT(
+  __, KC_F12, KC_F7, KC_F8, KC_F9, KC_PSCR,                          __, __,      __,      __,      RESET,   __,
+  __, KC_F11, KC_F4, KC_F5, KC_F6, KC_SLCK,                          __, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, __,
+  __, KC_F10, KC_F1, KC_F2, KC_F3, KC_PAUS, __,     __,      __, __, __, __,      __,      KC_ALGR, __,      __,
+                     __,    __,    KC_APP,  KC_SPC, KC_TAB,  __, __, __, __,      __
+),
+[MDIA] = LAYOUT(
+  __, RESET,   __,      __,      __,      __,                            RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, __,
+  __, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, __,                            KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, __,      __,
+  __, __,      KC_ALGR, __,      __,      __, __, __,  __,      __,      __,      __,      __,      __,      __,      __,
+                        __,      __,      __, __, __,  KC_MSTP, KC_MPLY, KC_MUTE, __,      __
 )
 };
 
@@ -83,19 +83,19 @@ static void render_status(void) {
         case MDIA:
             oled_write_P(PSTR("Media\n"), false);
             break;
-        case NAVI:
+        case NAV:
             oled_write_P(PSTR("Navigation\n"), false);
             break;
         case MOUS:
             oled_write_P(PSTR("Mouse\n"), false);
             break;
-        case SNUM:
-            oled_write_P(PSTR("Shift Number\n"), false);
+        case SYM:
+            oled_write_P(PSTR("Symbol\n"), false);
             break;
         case NUM:
             oled_write_P(PSTR("Number\n"), false);
             break;
-        case FUNL:
+        case FUNC:
             oled_write_P(PSTR("Function\n"), false);
             break;
         default:

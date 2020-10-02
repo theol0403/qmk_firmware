@@ -33,6 +33,7 @@
 
 // Auto Shift and Retro Shift (Auto Shift for Tap Hold).
 #define AUTO_SHIFT_TIMEOUT TAPPING_TERM
+#define NO_AUTO_SHIFT_SPECIAL
 #define RETRO_SHIFT 500
 
 // Mouse key speed and acceleration.
