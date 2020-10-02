@@ -2,13 +2,13 @@
 
 #define XX KC_NO
 
-enum layers { BASE, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
+enum layers { BASE, MDIA, NAVI, MOUS, SNUM, NUM, FUNL };
 #define BS BASE
-#define ME MEDR
-#define NV NAVR
-#define MS MOUR
-#define SN NSSL
-#define NU NSL
+#define ME MDIA
+#define NV NAVI
+#define MS MOUS
+#define SN SNUM
+#define NU NUM
 #define FN FUNL
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -18,19 +18,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XX, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,           XX,             XX,              XX,             XX,              KC_N,           KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         XX,
                                   XX,           XX,           LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB),  LT(SN, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), XX,           XX
 ),
-[NAVR] = LAYOUT(
+[NAVI] = LAYOUT(
   XX,  RESET,   XX,      XX,      XX,      XX,                      KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, XX,
   XX,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, XX,
   XX,  XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX, XX,     KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  XX,
                                   XX,      XX, XX, XX,  XX, KC_ENT, KC_BSPC, KC_DEL,  XX,      XX
 ),
-[MOUR] = LAYOUT(
+[MOUS] = LAYOUT(
   XX, RESET,   XX,      XX,      XX,      XX,                            XX,      XX,      XX,      XX,      XX, XX,
   XX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                            KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XX, XX,
   XX, XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX,      XX,      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XX, XX,
                         XX,      XX,      XX, XX, XX,  KC_BTN1, KC_BTN3, KC_BTN2, XX,      XX
 ),
-[MEDR] = LAYOUT(
+[MDIA] = LAYOUT(
   XX, RESET,   XX,      XX,      XX,      XX,                            RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, XX,
   XX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                            KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XX,      XX,
   XX, XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX,      XX,      XX,      XX,      XX,      XX,      XX,      XX,
@@ -42,13 +42,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XX, KC_F10, KC_F1, KC_F2, KC_F3, KC_PAUS, XX,     XX,      XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
                      XX,    XX,    KC_APP,  KC_SPC, KC_TAB,  XX, XX, XX, XX,      XX
 ),
-[NSL] = LAYOUT(
+[NUM] = LAYOUT(
   XX, KC_LBRC, KC_7, KC_8, KC_9, KC_RBRC,                         XX, XX,      XX,      XX,      RESET,   XX,
   XX, KC_SCLN, KC_4, KC_5, KC_6, KC_EQL,                          XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
   XX, KC_GRV,  KC_1, KC_2, KC_3, KC_BSLS, XX,   XX,       XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
                      XX,   XX,   KC_DOT,  KC_0, KC_MINS,  XX, XX, XX, XX,      XX
 ),
-[NSSL] = LAYOUT(
+[SNUM] = LAYOUT(
   XX, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                            XX, XX,      XX,      XX,      RESET,   XX,
   XX, KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                            XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
   XX, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, XX,      XX,       XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
@@ -80,19 +80,19 @@ static void render_status(void) {
         case BASE:
             oled_write_P(PSTR("Base\n"), false);
             break;
-        case MEDR:
+        case MDIA:
             oled_write_P(PSTR("Media\n"), false);
             break;
-        case NAVR:
+        case NAVI:
             oled_write_P(PSTR("Navigation\n"), false);
             break;
-        case MOUR:
+        case MOUS:
             oled_write_P(PSTR("Mouse\n"), false);
             break;
-        case NSSL:
+        case SNUM:
             oled_write_P(PSTR("Shift Number\n"), false);
             break;
-        case NSL:
+        case NUM:
             oled_write_P(PSTR("Number\n"), false);
             break;
         case FUNL:
