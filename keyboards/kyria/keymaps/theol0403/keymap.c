@@ -1,38 +1,6 @@
-/* Copyright 2019 Thomas Baart <thomas@splitkb.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 #include QMK_KEYBOARD_H
 
-#define XXX KC_NO
-
-#define mLAYOUT(\
-     K00, K01, K02, K03, K04,                          K05, K06, K07, K08, K09,\
-     K10, K11, K12, K13, K14,                          K15, K16, K17, K18, K19,\
-     K20, K21, K22, K23, K24,                          K25, K26, K27, K28, K29,\
-     N30, N31, K32, K33, K34,                          K35, K36, K37, N38, N39\
-)\
-LAYOUT(\
-XXX, K00, K01, K02, K03, K04,                          K05, K06, K07, K08, K09, XXX,\
-XXX, K10, K11, K12, K13, K14,                          K15, K16, K17, K18, K19, XXX,\
-XXX, K20, K21, K22, K23, K24, XXX, XXX,      XXX, XXX, K25, K26, K27, K28, K29, XXX,\
-               XXX, XXX, K32, K33, K34,      K35, K36, K37, XXX, XXX\
-)
-
-#define X_NP KC_NO // key is not present
-#define X_NA KC_NO // present but not available for use
-#define X_NU KC_NO // available but not used
+#define XX KC_NO
 
 enum layers { BASE, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
 #define BS BASE
@@ -44,55 +12,54 @@ enum layers { BASE, MEDR, NAVR, MOUR, NSSL, NSL, FUNL };
 #define FN FUNL
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [BASE] = LAYOUT(
-    XXX, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                            KC_Y,           KC_U,         KC_I,         KC_O,           KC_P,            XXX,
-    XXX, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                            KC_H,           LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), XXX,
-    XXX, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,           XXX,            XXX,            XXX,            XXX,             KC_N,           KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         XXX,
-                                     XXX,          XXX,          LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB), LT(SN, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), XXX,          XXX
-  )
-  // [NAVR] = LAYOUT(
-  //   RESET,   X_NA,    X_NA,    X_NA,    X_NA,    KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE,
-  //   KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, X_NA,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS,
-  //   X_NA,    KC_ALGR, X_NA,    X_NA,    X_NA,    KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,
-  //   X_NP,    X_NP,    X_NA,    X_NA,    X_NA,    KC_ENT,  KC_BSPC, KC_DEL,  X_NP,    X_NP
-  // ),
-  // [MOUR] = LAYOUT(
-  //   RESET,   X_NA,    X_NA,    X_NA,    X_NA,    X_NU,    X_NU,    X_NU,    X_NU,    X_NU,
-  //   KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, X_NA,    KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, X_NU,
-  //   X_NA,    KC_ALGR, X_NA,    X_NA,    X_NA,    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, X_NU,
-  //   X_NP,    X_NP,    X_NA,    X_NA,    X_NA,    KC_BTN1, KC_BTN3, KC_BTN2, X_NP,    X_NP
-  // ),
-  // [MEDR] = LAYOUT(
-  //   RESET,   X_NA,    X_NA,    X_NA,    X_NA,    RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI,
-  //   KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, X_NA,    KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, X_NU,
-  //   X_NA,    KC_ALGR, X_NA,    X_NA,    X_NA,    X_NU,    X_NU,    X_NU,    X_NU,    X_NU,
-  //   X_NP,    X_NP,    X_NA,    X_NA,    X_NA,    KC_MSTP, KC_MPLY, KC_MUTE, X_NP,    X_NP
-  // ),
-  // [FUNL] = LAYOUT(
-  //   KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR, X_NA,    X_NA,    X_NA,    X_NA,    RESET,
-  //   KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SLCK, X_NA,    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-  //   KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS, X_NA,    X_NA,    X_NA,    KC_ALGR, X_NA,
-  //   X_NP,    X_NP,    KC_APP,  KC_SPC,  KC_TAB,  X_NA,    X_NA,    X_NA,    X_NP,    X_NP
-  // ),
-  // [NSL] = LAYOUT(
-  //   KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC, X_NA,    X_NA,    X_NA,    X_NA,    RESET,
-  //   KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,  X_NA,    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-  //   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS, X_NA,    X_NA,    X_NA,    KC_ALGR, X_NA,
-  //   X_NP,    X_NP,    KC_DOT,  KC_0,    KC_MINS, X_NA,    X_NA,    X_NA,    X_NP,    X_NP
-  // ),
-  // [NSSL] = LAYOUT(
-  //   KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, X_NA,    X_NA,    X_NA,    X_NA,    RESET,
-  //   KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS, X_NA,    KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-  //   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, X_NA,    X_NA,    X_NA,    KC_ALGR, X_NA,
-  //   X_NP,    X_NP,    KC_LPRN, KC_RPRN, KC_UNDS, X_NA,    X_NA,    X_NA,    X_NP,    X_NP
-  // )
+[BASE] = LAYOUT(
+  XX, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                             KC_Y,           KC_U,         KC_I,         KC_O,           KC_P,            XX,
+  XX, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                             KC_H,           LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), XX,
+  XX, KC_Z,         ALGR_T(KC_X), KC_C,         KC_V,         KC_B,           XX,             XX,              XX,             XX,              KC_N,           KC_M,         KC_COMM,      ALGR_T(KC_DOT), KC_SLSH,         XX,
+                                  XX,           XX,           LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB),  LT(SN, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), XX,           XX
+),
+[NAVR] = LAYOUT(
+  XX,  RESET,   XX,      XX,      XX,      XX,                      KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, XX,
+  XX,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, XX,
+  XX,  XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX, XX,     KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  XX,
+                                  XX,      XX, XX, XX,  XX, KC_ENT, KC_BSPC, KC_DEL,  XX,      XX
+),
+[MOUR] = LAYOUT(
+  XX, RESET,   XX,      XX,      XX,      XX,                            XX,      XX,      XX,      XX,      XX, XX,
+  XX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                            KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XX, XX,
+  XX, XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX,      XX,      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XX, XX,
+                        XX,      XX,      XX, XX, XX,  KC_BTN1, KC_BTN3, KC_BTN2, XX,      XX
+),
+[MEDR] = LAYOUT(
+  XX, RESET,   XX,      XX,      XX,      XX,                            RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, XX,
+  XX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XX,                            KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XX,      XX,
+  XX, XX,      KC_ALGR, XX,      XX,      XX, XX, XX,  XX,      XX,      XX,      XX,      XX,      XX,      XX,      XX,
+                        XX,      XX,      XX, XX, XX,  KC_MSTP, KC_MPLY, KC_MUTE, XX,      XX
+),
+[FUNL] = LAYOUT(
+  XX, KC_F12, KC_F7, KC_F8, KC_F9, KC_PSCR,                          XX, XX,      XX,      XX,      RESET,   XX,
+  XX, KC_F11, KC_F4, KC_F5, KC_F6, KC_SLCK,                          XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
+  XX, KC_F10, KC_F1, KC_F2, KC_F3, KC_PAUS, XX,     XX,      XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
+                     XX,    XX,    KC_APP,  KC_SPC, KC_TAB,  XX, XX, XX, XX,      XX
+),
+[NSL] = LAYOUT(
+  XX, KC_LBRC, KC_7, KC_8, KC_9, KC_RBRC,                         XX, XX,      XX,      XX,      RESET,   XX,
+  XX, KC_SCLN, KC_4, KC_5, KC_6, KC_EQL,                          XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
+  XX, KC_GRV,  KC_1, KC_2, KC_3, KC_BSLS, XX,   XX,       XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
+                     XX,   XX,   KC_DOT,  KC_0, KC_MINS,  XX, XX, XX, XX,      XX
+),
+[NSSL] = LAYOUT(
+  XX, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR,                            XX, XX,      XX,      XX,      RESET,   XX,
+  XX, KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                            XX, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, XX,
+  XX, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, XX,      XX,       XX, XX, XX, XX,      XX,      KC_ALGR, XX,      XX,
+                        XX,      XX,      KC_LPRN, KC_RPRN, KC_UNDS,  XX, XX, XX, XX,      XX
+)
 };
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_180;
 }
-
 
 static void render_qmk_logo(void) {
   static const char PROGMEM qmk_logo[] = {
@@ -144,7 +111,7 @@ static void render_status(void) {
 
 void oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_status(); // Renders the current keyboard state (layer, lock, caps, scroll, etc)
+        render_status();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
     }
 }
@@ -159,8 +126,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         } else {
             tap_code(KC_VOLD);
         }
-    }
-    else if (index == 1) {
+    } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
             tap_code(KC_DOWN);
