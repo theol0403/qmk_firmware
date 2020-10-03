@@ -13,9 +13,9 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  __, KC_Q,         KC_W,         KC_E,         KC_R,         KC_T,                                                                             KC_Y,           KC_U,         KC_I,         KC_O,           KC_P,            __,
-  __, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G,                                                                             KC_H,           LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L),   LGUI_T(KC_QUOT), __,
-  __, KC_Z,         KC_X,         KC_C,         KC_V,         KC_B,           __,             __,              __,             __,              KC_N,           KC_M,         KC_COMM,      KC_DOT,         KC_SLSH,         __,
+  __, KC_K,         KC_W,         KC_L,         KC_U,         KC_QUES,                                                                          KC_V,           KC_D,         KC_R,         KC_QUOT,           KC_Q,            __,
+  __, LGUI_T(KC_A), LALT_T(KC_T), LCTL_T(KC_H), LSFT_T(KC_E), KC_DOT,                                                                           KC_C,           LSFT_T(KC_S), LCTL_T(KC_N), LALT_T(KC_O),   LGUI_T(KC_I), __,
+  __, KC_Z,         KC_P,         KC_F,         KC_J,         KC_COMM,        __,             __,              __,             __,              KC_B,           KC_G,         KC_W,      KC_X,         KC_Y,         __,
                                   __,           __,           LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB),  LT(SM, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), __,           __
 ),
 [NUM] = LAYOUT(
