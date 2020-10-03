@@ -3,20 +3,31 @@
 #define __ KC_NO
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
-#define BS BASE
-#define ME MDIA
-#define NV NAV
-#define MS MOUS
-#define SM SYM
-#define NU NUM
-#define FN FUNC
+
+#define HM_A LGUI_T(KC_A)
+#define HM_T LALT_T(KC_T)
+#define HM_H LCTL_T(KC_H)
+#define HM_E LSFT_T(KC_E)
+
+#define HM_S LSFT_T(KC_S)
+#define HM_N LCTL_T(KC_N)
+#define HM_O LALT_T(KC_O)
+#define HM_I LGUI_T(KC_I)
+
+#define THMB_L1 LT(MDIA, KC_ESC)
+#define THMB_L2 LT(NAV , KC_SPC)
+#define THMB_L3 LT(MOUS, KC_TAB)
+
+#define THMB_R3 LT(SYM , KC_ENT)
+#define THMB_R2 LT(NUM , KC_BSPC)
+#define THMB_R1 LT(FUNC, KC_DEL)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  __, KC_K,         KC_W,         KC_L,         KC_U,         KC_QUES,                                                                          KC_V,           KC_D,         KC_R,         KC_QUOT,           KC_Q,            __,
-  __, LGUI_T(KC_A), LALT_T(KC_T), LCTL_T(KC_H), LSFT_T(KC_E), KC_DOT,                                                                           KC_C,           LSFT_T(KC_S), LCTL_T(KC_N), LALT_T(KC_O),   LGUI_T(KC_I), __,
-  __, KC_Z,         KC_P,         KC_F,         KC_J,         KC_COMM,        __,             __,              __,             __,              KC_B,           KC_G,         KC_W,      KC_X,         KC_Y,         __,
-                                  __,           __,           LT(ME, KC_ESC), LT(NV, KC_SPC), LT(MS, KC_TAB),  LT(SM, KC_ENT), LT(NU, KC_BSPC), LT(FN, KC_DEL), __,           __
+  __, KC_K, KC_W, KC_L, KC_U, KC_QUES,                                      KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, __,
+  __, HM_A, HM_T, HM_H, HM_E, KC_DOT,                                       KC_C,    HM_S, HM_N, HM_O,    HM_I, __,
+  __, KC_Z, KC_P, KC_F, KC_J, KC_COMM, __,      __,       __,      __,      KC_B,    KC_G, KC_W, KC_X,    KC_Y, __,
+                  __,   __,   THMB_L1, THMB_L2, THMB_L3,  THMB_R3, THMB_R2, THMB_R1, __,   __
 ),
 [NUM] = LAYOUT(
   __, KC_LBRC, KC_7, KC_8, KC_9, KC_RBRC,                         __, __,      __,      __,      RESET,   __,
