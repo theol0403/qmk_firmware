@@ -2,6 +2,8 @@
 
 #define _ KC_NO
 
+enum keycodes { START = SAFE_RANGE, QEXCL, DTCOL, CMCOL };
+
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 
 #define HM_A LGUI_T(KC_A)
@@ -25,9 +27,9 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  _, KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
-  _, HM_A, HM_T, HM_H, HM_E, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
-  _, KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_Y, _,
+  _, KC_K, KC_M, KC_L, KC_U, QEXCL,                                       KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
+  _, HM_A, HM_T, HM_H, HM_E, DTCOL,                                       KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
+  _, KC_Z, KC_P, KC_F, KC_J, CMCOL,   _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_Y, _,
                  _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
@@ -68,64 +70,90 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 // clang-format on
+// DTCOL
+// CMCOL
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case QEXCL:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_BIT(KC_LSHIFT)) {
+          register_code(KC_SLASH);
+        } else {
+          register_code(KC_RSHIFT);
+          register_code(KC_1);
+        }
+      } else {
+        if (get_mods() & MOD_BIT(KC_LSHIFT)) {
+          unregister_code(KC_SLASH);
+        } else {
+          unregister_code(KC_RSHIFT);
+          unregister_code(KC_1);
+        }
+      }
+      return false;
+    default:
+      return true;
+  }
+}
 
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 static void render_status(void) {
-    // Host Keyboard Layer Status
-    oled_write_P(PSTR("Layer: "), false);
-    switch (get_highest_layer(layer_state)) {
-        case BASE:
-            oled_write_P(PSTR("Base\n"), false);
-            break;
-        case MDIA:
-            oled_write_P(PSTR("Media\n"), false);
-            break;
-        case NAV:
-            oled_write_P(PSTR("Navigation\n"), false);
-            break;
-        case MOUS:
-            oled_write_P(PSTR("Mouse\n"), false);
-            break;
-        case SYM:
-            oled_write_P(PSTR("Symbol\n"), false);
-            break;
-        case NUM:
-            oled_write_P(PSTR("Number\n"), false);
-            break;
-        case FUNC:
-            oled_write_P(PSTR("Function\n"), false);
-            break;
-        default:
-            oled_write_P(PSTR("Undefined\n"), false);
-    }
+  // Host Keyboard Layer Status
+  oled_write_P(PSTR("Layer: "), false);
+  switch (get_highest_layer(layer_state)) {
+    case BASE:
+      oled_write_P(PSTR("Base\n"), false);
+      break;
+    case MDIA:
+      oled_write_P(PSTR("Media\n"), false);
+      break;
+    case NAV:
+      oled_write_P(PSTR("Navigation\n"), false);
+      break;
+    case MOUS:
+      oled_write_P(PSTR("Mouse\n"), false);
+      break;
+    case SYM:
+      oled_write_P(PSTR("Symbol\n"), false);
+      break;
+    case NUM:
+      oled_write_P(PSTR("Number\n"), false);
+      break;
+    case FUNC:
+      oled_write_P(PSTR("Function\n"), false);
+      break;
+    default:
+      oled_write_P(PSTR("Undefined\n"), false);
+  }
 }
 
 void oled_task_user(void) {
-    if (is_keyboard_master()) {
-        render_status();
-    } else {
-    }
+  if (is_keyboard_master()) {
+    render_status();
+  } else {
+  }
 }
 #endif
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    } else if (index == 1) {
-        // Page up/Page down
-        if (clockwise) {
-            tap_code(KC_DOWN);
-        } else {
-            tap_code(KC_UP);
-        }
+  if (index == 0) {
+    // Volume control
+    if (clockwise) {
+      tap_code(KC_VOLU);
+    } else {
+      tap_code(KC_VOLD);
     }
+  } else if (index == 1) {
+    // Page up/Page down
+    if (clockwise) {
+      tap_code(KC_DOWN);
+    } else {
+      tap_code(KC_UP);
+    }
+  }
 }
 #endif
