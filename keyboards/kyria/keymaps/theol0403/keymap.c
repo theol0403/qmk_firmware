@@ -73,6 +73,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_EXLM);
+    case KC_DOT:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_COLON);
+    case KC_COMM:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
   }
   return true;
 }
@@ -81,6 +85,10 @@ int16_t autoshift_custom_shifts(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
       return KC_EXLM;
+    case KC_DOT:
+      return KC_COLON;
+    case KC_COMM:
+      return KC_SCOLON;
   }
   return -2;
 }
