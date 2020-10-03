@@ -55,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       _,       _, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
-  _, KC_F12, KC_F7, KC_F8, KC_F9, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
-  _, KC_F11, KC_F4, KC_F5, KC_F6, KC_SLCK,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
-  _, KC_F10, KC_F1, KC_F2, KC_F3, KC_PAUS, _,      _,      _, _, _, _,       _,       KC_ALGR, _,       _,
+  _, KC_F12, KC_F9, KC_F8, KC_F7, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
+  _, KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
+  _, KC_F10, KC_F6, KC_F5, KC_F4, KC_PAUS, _,      _,      _, _, _, _,       _,       KC_ALGR, _,       _,
                     _,     _,     KC_APP,  KC_SPC, KC_TAB, _, _, _, _,       _
 ),
 [MDIA] = LAYOUT(
