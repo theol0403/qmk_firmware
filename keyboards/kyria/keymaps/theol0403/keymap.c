@@ -7,26 +7,26 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 #define HM_A LGUI_T(KC_A)
 #define HM_T LALT_T(KC_T)
 #define HM_H LCTL_T(KC_H)
-#define HM_E LSFT_T(KC_E)
+#define HM_I LSFT_T(KC_I)
 
 #define HM_S LSFT_T(KC_S)
 #define HM_N LCTL_T(KC_N)
 #define HM_O LALT_T(KC_O)
-#define HM_I LGUI_T(KC_I)
+#define HM_2 LGUI_T(KC_AT)
 
 #define THMB_L1 LT(MDIA, KC_ESC)
-#define THMB_L2 LT(NAV, KC_SPC)
+#define THMB_L2 LT(NAV, KC_E)
 #define THMB_L3 LT(MOUS, KC_TAB)
 
 #define THMB_R3 LT(SYM, KC_ENT)
-#define THMB_R2 LT(NUM, KC_BSPC)
-#define THMB_R1 LT(FUNC, KC_DEL)
+#define THMB_R2 LT(NUM, KC_SPC)
+#define THMB_R1 LT(FUNC, KC_BSPC)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   _, KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
-  _, HM_A, HM_T, HM_H, HM_E, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
+  _, HM_A, HM_T, HM_H, HM_I, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_2, _,
   _, KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_Y, _,
                  _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
@@ -77,6 +77,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_COLON);
     case KC_COMM:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
+    case KC_AT:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_GRAVE);
+    case KC_BSPC:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_DEL);
   }
   return true;
 }
