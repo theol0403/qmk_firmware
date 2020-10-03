@@ -2,7 +2,7 @@
 
 // system settings
 #ifdef OLED_DRIVER_ENABLE
-#    define OLED_DISPLAY_128X64
+#  define OLED_DISPLAY_128X64
 #endif
 #define ENCODER_RESOLUTION 2
 
@@ -12,15 +12,15 @@
 // rgb settings
 #ifdef RGBLIGHT_ENABLE
 // rgb hue settings
-#    define RGBLIGHT_HUE_STEP 8
-#    define RGBLIGHT_SAT_STEP 8
-#    define RGBLIGHT_VAL_STEP 8
-#    define RBGLIGHT_LED_MAP \
-        { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
+#  define RGBLIGHT_HUE_STEP 8
+#  define RGBLIGHT_SAT_STEP 8
+#  define RGBLIGHT_VAL_STEP 8
+#  define RBGLIGHT_LED_MAP \
+    { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
 // animation modes
-#    define RGBLIGHT_EFFECT_STATIC_GRADIENT
-#    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-#    define RGBLIGHT_EFFECT_RAINBOW_MOOD
+#  define RGBLIGHT_EFFECT_STATIC_GRADIENT
+#  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+#  define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #endif
 
 // tapping settings
@@ -34,7 +34,7 @@
 
 // Auto Shift and Retro Shift (Auto Shift for Tap Hold).
 #define AUTO_SHIFT_TIMEOUT TAPPING_TERM
-#define NO_AUTO_SHIFT_SPECIAL
+// #define NO_AUTO_SHIFT_SPECIAL
 #define RETRO_SHIFT 500
 
 // Mouse key speed and acceleration.
