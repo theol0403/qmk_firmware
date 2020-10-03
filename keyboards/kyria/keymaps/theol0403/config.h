@@ -4,6 +4,7 @@
 #ifdef OLED_DRIVER_ENABLE
 #    define OLED_DISPLAY_128X64
 #endif
+#define ENCODER_RESOLUTION 2
 
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
