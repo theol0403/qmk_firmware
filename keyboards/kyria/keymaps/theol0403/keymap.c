@@ -68,29 +68,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 // clang-format on
-// DTCOL
-// CMCOL
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
-      if (record->event.pressed) {
-        if (get_mods() & MOD_BIT(KC_LSHIFT)) {
-          register_code(KC_1);
-        } else {
-          return true;
-        }
-      } else {
-        if (get_mods() & MOD_BIT(KC_LSHIFT)) {
-          unregister_code(KC_1);
-        } else {
-          return true;
-        }
-      }
-      return false;
-    default:
-      return true;
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_EXLM);
   }
+  return true;
 }
 
 int16_t autoshift_custom_shifts(uint16_t keycode, keyrecord_t *record) {
@@ -98,7 +82,7 @@ int16_t autoshift_custom_shifts(uint16_t keycode, keyrecord_t *record) {
     case KC_QUES:
       return KC_EXLM;
   }
-  return -1;  // default - not an Auto Shift key
+  return -2;
 }
 
 #ifdef OLED_DRIVER_ENABLE
