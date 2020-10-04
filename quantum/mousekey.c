@@ -255,9 +255,6 @@ void mousekey_task(void) {
     mouse_report = tmpmr;
 }
 
-static int8_t last_x = 0;
-static int8_t last_y = 0;
-
 void mousekey_on(uint8_t code) {
 #    ifdef MK_KINETIC_SPEED
     if (mouse_timer == 0) {
@@ -289,12 +286,6 @@ void mousekey_on(uint8_t code) {
         mousekey_accel |= (1 << 1);
     else if (code == KC_MS_ACCEL2)
         mousekey_accel |= (1 << 2);
-    int8_t curr_y = mouse_report.y / move_unit();
-    int8_t curr_x = mouse_report.x / move_unit();
-    if (last_y != 0 && last_y != curr_y) mousekey_repeat = 0;
-    if (last_x != 0 && last_x != curr_x) mousekey_repeat = 0;
-    last_y = curr_y;
-    last_x = curr_x;
 }
 
 void mousekey_off(uint8_t code) {
@@ -329,15 +320,13 @@ void mousekey_off(uint8_t code) {
 #    endif /* #ifdef MK_KINETIC_SPEED */
     }
     if (mouse_report.v == 0 && mouse_report.h == 0) mousekey_wheel_repeat = 0;
-    if (mouse_report.y == 0) last_y = 0;
-    if (mouse_report.x == 0) last_x = 0;
 }
 
 #else /* #ifndef MK_3_SPEED */
 
 enum { mkspd_unmod, mkspd_0, mkspd_1, mkspd_2, mkspd_COUNT };
 #    ifndef MK_MOMENTARY_ACCEL
-static uint8_t mk_speed = mkspd_1;
+static uint8_t  mk_speed                 = mkspd_1;
 #    else
 static uint8_t mk_speed      = mkspd_unmod;
 static uint8_t mkspd_DEFAULT = mkspd_unmod;
