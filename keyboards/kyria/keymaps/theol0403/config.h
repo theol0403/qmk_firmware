@@ -4,6 +4,7 @@
 #ifdef OLED_DRIVER_ENABLE
 #  define OLED_DISPLAY_128X64
 #endif
+#define OLED_UPDATE_INTERVAL 20
 #define ENCODER_RESOLUTION 2
 
 // Recommended for heavy chording.
@@ -11,6 +12,7 @@
 
 // rgb settings
 #ifdef RGBLIGHT_ENABLE
+#  define RGBLIGHT_SLEEP
 // rgb hue settings
 #  define RGBLIGHT_HUE_STEP 8
 #  define RGBLIGHT_SAT_STEP 8

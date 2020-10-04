@@ -4,7 +4,7 @@
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 
-#define HM_R LGUI_T(KC_R)
+#define HM_Y LGUI_T(KC_Y)
 #define HM_T LALT_T(KC_T)
 #define HM_H LCTL_T(KC_H)
 #define HM_A LSFT_T(KC_A)
@@ -25,9 +25,9 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  _, KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_B, KC_QUOT, KC_Q, _,
-  _, HM_R, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
-  _, KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_AT,   KC_G, KC_W, KC_X,    KC_Y, _,
+  _, KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
+  _, HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
+  _, KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_AT, _,
                  _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
