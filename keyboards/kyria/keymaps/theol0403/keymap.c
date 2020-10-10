@@ -1,8 +1,9 @@
 #include QMK_KEYBOARD_H
 
 #define _ KC_NO
+#define __ ______
 
-enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
+enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
 #define HM_Y LGUI_T(KC_Y)
 #define HM_T LALT_T(KC_T)
@@ -25,15 +26,15 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  _, KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
-  _, HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
-  _, KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_AT, _,
-                 _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
+  TG(GAME), KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
+  _,        HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
+  _,        KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_AT, _,
+                        _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
-  _, KC_LBRC, KC_9, KC_8, KC_7, KC_RBRC,                      _, _,       _,       _,       RESET,   _,
+  _, KC_LBRC, KC_6, KC_5, KC_4, KC_RBRC,                      _, _,       _,       _,       RESET,   _,
   _, KC_SCLN, KC_3, KC_2, KC_1, KC_EQL,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
-  _, KC_GRV,  KC_6, KC_5, KC_4, KC_BSLS, _,    _,       _, _, _, _,       _,       KC_ALGR, _,       _,
+  _, KC_GRV,  KC_9, KC_8, KC_7, KC_BSLS, _,    _,       _, _, _, _,       _,       KC_ALGR, _,       _,
                     _,    _,    KC_DOT,  KC_0, KC_MINS, _, _, _, _,       _
 ),
 [SYM] = LAYOUT(
@@ -55,9 +56,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       _,       _, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
-  _, KC_F12, KC_F9, KC_F8, KC_F7, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
+  _, KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
   _, KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
-  _, KC_F10, KC_F6, KC_F5, KC_F4, KC_PAUS, _,      _,      _, _, _, _,       _,       KC_ALGR, _,       _,
+  _, KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      _, _, _, _,       _,       KC_ALGR, _,       _,
                     _,     _,     KC_APP,  KC_SPC, KC_TAB, _, _, _, _,       _
 ),
 [MDIA] = LAYOUT(
@@ -65,7 +66,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       _,
   _, _,       KC_ALGR, _,       _,       _, _, _,  _,       _,       _,       _,       _,       _,       _,       _,
                        _,       _,       _, _, _,  KC_MSTP, KC_MPLY, KC_MUTE, _,       _
-)
+),
+[GAME] = LAYOUT(
+  __, _, KC_Q, KC_W, KC_E, KC_R,                       _, _,       _,        _,       _,       _,
+  _,  _, KC_A, KC_S, KC_D, KC_F,                       _, KC_LSFT, KC_LCTRL, KC_LALT, KC_LGUI, _,
+  _,  _, KC_Z, KC_X, KC_C, KC_V,   _,    _,      _, _, _, _,       _,        _,       _,       _,
+               _,    _,    KC_ESC, KC_E, KC_TAB, _, _, _, _,       _
+),
 };
 // clang-format on
 
