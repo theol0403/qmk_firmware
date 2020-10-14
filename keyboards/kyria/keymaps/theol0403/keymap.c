@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
 #define _ KC_NO
-#define __ ______
+#define __ _______
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
@@ -26,9 +26,9 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  TG(GAME), KC_K, KC_M, KC_L, KC_U, KC_QUES,                                     KC_V,    KC_D, KC_R, KC_QUOT, KC_Q, _,
+  TG(GAME), KC_K, KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, KC_Q, _,
   _,        HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
-  _,        KC_Z, KC_P, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_B,    KC_G, KC_W, KC_X,    KC_AT, _,
+  _,        KC_Z, KC_M, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_EQL, _,
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
@@ -84,8 +84,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_COLON);
     case KC_COMM:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
-    case KC_AT:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_GRAVE);
+    case KC_EQL:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_UNDERSCORE);
     case THMB_R1:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_DEL);
   }
