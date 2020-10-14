@@ -10,7 +10,7 @@ ifeq ($(HAND),RIGHT)
 CFLAGS += -DMASTER_RIGHT
 
 MOUSEKEY_ENABLE = yes # Mouse keys
-AUTO_SHIFT_ENABLE = yes # Auto Shift
+# AUTO_SHIFT_ENABLE = yes # Auto Shift
 
 else ifeq ($(HAND),LEFT)
 CFLAGS += -DMASTER_LEFT
