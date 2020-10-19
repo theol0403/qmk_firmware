@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   TG(GAME), KC_K, KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, KC_Q, _,
   _,        HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
-  _,        KC_Z, KC_M, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_EQL, _,
+  _,        KC_Z, KC_M, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_SLASH, _,
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
@@ -68,10 +68,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       _,       _, _, _,  KC_MSTP, KC_MPLY, KC_MUTE, _,       _
 ),
 [GAME] = LAYOUT(
-  __, _, KC_Q, KC_W, KC_E, KC_R,                       _, _,       _,        _,       _,       _,
-  _,  _, KC_A, KC_S, KC_D, KC_F,                       _, KC_LSFT, KC_LCTRL, KC_LALT, KC_LGUI, _,
-  _,  _, KC_Z, KC_X, KC_C, KC_V,   _,    _,      _, _, _, _,       _,        _,       _,       _,
-               _,    _,    KC_ESC, KC_E, KC_TAB, _, _, _, _,       _
+  __, _, KC_Q, KC_W, KC_E, KC_R,                    _,    _,    _,    _,    _, _,
+  _,  _, KC_A, KC_S, KC_D, KC_F,                    KC_A, KC_S, KC_W, KC_D, _, _,
+  _,  _, KC_Z, KC_X, KC_C, KC_V,   _,      _, _, _, _,    _,    _,    _,    _, _,
+               _,    _,    KC_ESC, KC_TAB, _, _, _, _, _, _
 ),
 };
 // clang-format on
@@ -84,8 +84,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_COLON);
     case KC_COMM:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
-    case KC_EQL:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_UNDERSCORE);
+    case KC_SLASH:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_BSLS);
     case THMB_R1:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_DEL);
   }
@@ -131,6 +131,9 @@ static void render_status(void) {
       break;
     case FUNC:
       oled_write_P(PSTR("Function\n"), false);
+      break;
+    case GAME:
+      oled_write_P(PSTR("Game\n"), false);
       break;
     default:
       oled_write_P(PSTR("Undefined\n"), false);
