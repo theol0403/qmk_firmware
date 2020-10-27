@@ -68,10 +68,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       _,       _, _, _,  KC_MSTP, KC_MPLY, KC_MUTE, _,       _
 ),
 [GAME] = LAYOUT(
-  __, _, KC_Q, KC_W, KC_E, KC_R,                    _,    _,    _,    _,    _, _,
-  _,  _, KC_A, KC_S, KC_D, KC_F,                    KC_A, KC_S, KC_W, KC_D, _, _,
-  _,  _, KC_Z, KC_X, KC_C, KC_V,   _,      _, _, _, _,    _,    _,    _,    _, _,
-               _,    _,    KC_ESC, KC_TAB, _, _, _, _, _, _
+  __, __,   KC_Q, KC_W, KC_R, KC_R,                        __,   __,   __,   __,   __, __,
+  __, KC_Q, KC_A, KC_S, KC_D, KC_F,                        KC_A, KC_S, KC_W, KC_D, __, __,
+  __, __,   KC_Z, KC_X, KC_Q, KC_Q,   __,   __,     __, __, __,  __,   __,   __,   __, __,
+                  __,   __,   KC_ESC, KC_E, KC_TAB, __, __, __,  __,   __
 ),
 };
 // clang-format on
