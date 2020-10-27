@@ -26,8 +26,8 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  TG(GAME), KC_Z, KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, KC_SLASH, _,
-  _,        HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, _,
+  TG(GAME), _,    KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, _,    _,
+  KC_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, KC_SLASH,
   _,        KC_K, KC_M, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_Q, _,
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
