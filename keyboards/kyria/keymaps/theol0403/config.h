@@ -26,11 +26,11 @@
 #endif
 
 // tapping settings
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
-#define BILATERAL_COMBINATIONS 400
+// #define BILATERAL_COMBINATIONS 400
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
@@ -51,6 +51,6 @@
 #define MK_KINETIC_SPEED
 #define MOUSEKEY_DELAY 0
 #define MOUSEKEY_INTERVAL 16
-#define MOUSEKEY_MOVE_DELTA 2
+#define MOUSEKEY_MOVE_DELTA 4
 #define MOUSEKEY_INITIAL_SPEED 10
-#define MOUSEKEY_BASE_SPEED 10000
+#define MOUSEKEY_BASE_SPEED 100
