@@ -26,7 +26,7 @@
 #endif
 
 // tapping settings
-#define TAPPING_TERM 200
+#define TAPPING_TERM 250
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
@@ -51,6 +51,6 @@
 #define MK_KINETIC_SPEED
 #define MOUSEKEY_DELAY 0
 #define MOUSEKEY_INTERVAL 16
-#define MOUSEKEY_MOVE_DELTA 2
+#define MOUSEKEY_MOVE_DELTA 3
 #define MOUSEKEY_INITIAL_SPEED 10
-#define MOUSEKEY_BASE_SPEED 10000
+#define MOUSEKEY_BASE_SPEED 100

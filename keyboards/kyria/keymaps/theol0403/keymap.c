@@ -128,7 +128,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 static void render_status(void) {
-  oled_write_P(PSTR("Layer: "), false);
+  oled_write_P(PSTR("\nLayer: "), false);
   switch (get_highest_layer(layer_state)) {
     case BASE:
       oled_write_P(PSTR("Base\n"), false);
@@ -187,13 +187,13 @@ static void render_kyria_logo(void) {
 #  endif
 
 void oled_task_user(void) {
-  if (is_keyboard_master()) {
-    render_status();
-  }
 #  ifdef MASTER_RIGHT
   render_qmk_logo();
 #  else
   render_kyria_logo();
 #  endif
+  if (is_keyboard_master()) {
+    render_status();
+  }
 }
 #endif
