@@ -6,18 +6,6 @@
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
-enum keycodes {
-  START = SAFE_RANGE,
-  KT_Y,
-  KT_T,
-  KT_H,
-  KT_A,
-  KT_S,
-  KT_N,
-  KT_O,
-  KT_I,
-};
-
 #define HM_Y GUI_T(KC_Y)
 #define HM_T ALT_T(KC_T)
 #define HM_H CTL_T(KC_H)
@@ -27,16 +15,6 @@ enum keycodes {
 #define HM_N CTL_T(KC_N)
 #define HM_O ALT_T(KC_O)
 #define HM_I GUI_T(KC_I)
-
-#define SM_Y GUI_T(KT_Y)
-#define SM_T ALT_T(KT_T)
-#define SM_H CTL_T(KT_H)
-#define SM_A SFT_T(KT_A)
-
-#define SM_S SFT_T(KT_S)
-#define SM_N CTL_T(KT_N)
-#define SM_O ALT_T(KT_O)
-#define SM_I GUI_T(KT_I)
 
 #define THMB_L1 LT(MDIA, KC_ESC)
 #define THMB_L2 LT(NAV, KC_E)
@@ -55,10 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
-  _, KC_LBRC, KC_6, KC_5, KC_4, KC_RBRC,                      S(KC_B), S(KC_D), S(KC_R), S(KC_QUOT), _,     _,
-  _, KC_SCLN, KC_3, KC_2, KC_1, KC_EQL,                       S(KC_C), SM_S,    SM_N,    SM_O,      SM_I,   S(KC_SLASH),
-  _, KC_GRV,  KC_9, KC_8, KC_7, KC_BSLS, _,    _,       _, _, S(KC_V), S(KC_G), S(KC_W), S(KC_X),   S(KC_Q), _,
-                    _,    _,    KC_DOT,  KC_0, KC_MINS, _, _, _, _,    _
+  _, KC_LBRC, KC_6, KC_5, KC_4, KC_RBRC,                      _, _,       _,       _,       RESET,   _,
+  _, KC_SCLN, KC_3, KC_2, KC_1, KC_EQL,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
+  _, KC_GRV,  KC_9, KC_8, KC_7, KC_BSLS, _,    _,       _, _, _, _,       _,       _,       _,       _,
+                    _,    _,    KC_DOT,  KC_0, KC_MINS, _, _, _, _,       _
 ),
 [SYM] = LAYOUT(
   _, KC_LCBR, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR,                         _, _,       _,       _,       RESET,   _,
@@ -67,10 +45,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       _,       KC_LPRN, KC_RPRN, KC_UNDS, _, _, _, _,       _
 ),
 [NAV] = LAYOUT(
-  _,       _,       S(KC_P), S(KC_L), S(KC_U), S(KC_QUES),                            KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _,
-  S(KC_Z), SM_Y,    SM_T,    SM_H,    SM_A,    S(KC_DOT),                             KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, _,
-  _,       S(KC_K), S(KC_M), S(KC_F), S(KC_J), S(KC_COMM), _, _,      _,      _,      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  _,
-                    _,       _,       _,      _,           _, KC_ENT, KC_SPC, KC_BSPC, _,      _
+  _,  RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _,
+  _,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, _,
+  _,  _,       _      , _,       _,       _, _, _, _,      _,      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  _,
+                        _,       _,       _, _, _, KC_ENT, KC_DEL, KC_BSPC, _,       _
 ),
 [MOUS] = LAYOUT(
   _, RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, _,
@@ -111,55 +89,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_BSLS);
     case THMB_R1:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_DEL);
-
-    case SM_Y:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_Y));
-        return false;
-      }
-      break;
-    case SM_T:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_T));
-        return false;
-      }
-      break;
-    case SM_H:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_H));
-        return false;
-      }
-      break;
-    case SM_A:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_A));
-        return false;
-      }
-      break;
-    case SM_S:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_S));
-        return false;
-      }
-      break;
-    case SM_N:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_N));
-        return false;
-      }
-      break;
-    case SM_I:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_I));
-        return false;
-      }
-      break;
-    case SM_O:
-      if (record->event.pressed && record->tap.count == 1) {
-        tap_code16(S(KC_O));
-        return false;
-      }
-      break;
   }
   return true;
 }
