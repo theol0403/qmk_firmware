@@ -4,7 +4,7 @@
 #define _ KC_NO
 #define __ _______
 
-enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
+enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME, SHRT };
 
 #define HM_Y GUI_T(KC_Y)
 #define HM_T ALT_T(KC_T)
@@ -16,6 +16,7 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 #define HM_O ALT_T(KC_O)
 #define HM_I GUI_T(KC_I)
 
+#define THMB_L0 MO(SHRT)
 #define THMB_L1 LT(MDIA, KC_ESC)
 #define THMB_L2 LT(NAV, KC_E)
 #define THMB_L3 LT(MOUS, KC_TAB)
@@ -27,10 +28,10 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  TG(GAME), _,    KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, _,    _,
-  KC_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, KC_SLASH,
-  _,        KC_K, KC_M, KC_F, KC_J, KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_Q, _,
-                        _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
+  TG(GAME), _,    KC_P, KC_L, KC_U,    KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, _,    _,
+  KC_Z,     HM_Y, HM_T, HM_H, HM_A,    KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, KC_SLASH,
+  _,        KC_K, KC_M, KC_F, KC_J,    KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_Q, _,
+                        _,    THMB_L0, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
 ),
 [NUM] = LAYOUT(
   _, KC_LBRC, KC_6, KC_5, KC_4, KC_RBRC,                      _, _,       _,       _,       RESET,   _,
@@ -74,6 +75,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   __, __,   KC_Z, KC_X, KC_Q, KC_Q,   __,   __,     __, __, __,  __,   __,   __,   __, __,
                   __,   __,   KC_ESC, KC_E, KC_TAB, __, __, __,  __,   __
 ),
+[SHRT] = LAYOUT(
+  __, __, __, __, __, __,                 __, __, __, __, __, __,
+  __, __, __, __, __, __,                 __, __, __, __, __, __,
+  __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __,
+          __, __, KC_CUT, KC_COPY, KC_PASTE, __, __, __, __, __
+),
+// [TEMP] = LAYOUT(
+//   __, __, __, __, __, __,                 __, __, __, __, __, __,
+//   __, __, __, __, __, __,                 __, __, __, __, __, __,
+//   __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __,
+//           __, __, __, __, __, __, __, __, __, __
+// ),
+// [TEMP] = LAYOUT(
+//   _, _, _, _, _, _,             _, _, _, _, _, _,
+//   _, _, _, _, _, _,             _, _, _, _, _, _,
+//   _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,
+//            _, _, _, _, _, _, _, _, _, _
+// ),
 };
 // clang-format on
 
