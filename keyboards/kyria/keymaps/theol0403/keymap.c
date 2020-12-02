@@ -216,4 +216,6 @@ void oled_task_user(void) {
     render_status();
   }
 }
+
+void suspend_power_down_user() { oled_off(); }
 #endif
