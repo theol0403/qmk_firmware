@@ -36,14 +36,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NUM] = LAYOUT(
   _,       KC_LBRC, KC_6, KC_5, KC_4,   KC_RBRC,                            _, _,       _,       _,       RESET,   _,
   DF(NUM), KC_SCLN, KC_3, KC_2, KC_1,   KC_EQL,                             _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(NUM),
-  KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7,   KC_BSLS, _,   _,       _, _,        _, _,       _,       _,       _,       KC_LSFT,
-                          _,    _,      KC_DOT, KC_0, KC_MINS, _, DF(BASE), _, _,       _
+  KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7,   KC_BSLS, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
+                          _,    _,      KC_MINS, KC_0, KC_DOT, _, DF(BASE), _, _,       _
 ),
 [SYM] = LAYOUT(
-  _,       KC_LCBR, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR,                         _, _,       _,       _,       RESET,   _,
-  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                         _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _, _, _, _,       _,       _      , _,       KC_LSFT,
-                       _,       _,       KC_LPRN, KC_RPRN, KC_UNDS, _, _, DF(BASE), _,       _
+  _,       KC_LCBR, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR,                         _,        _,       _,       _,       RESET,   _,
+  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                         _,        KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
+  KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _, _, _,        _,       _,       _,       _,       KC_LSFT,
+                             _,       _,       KC_UNDS, KC_LPRN, KC_RPRN, _, _, DF(BASE), _,       _
 ),
 [NAV] = LAYOUT(
   _,       RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _,
