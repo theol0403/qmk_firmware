@@ -34,40 +34,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    THMB_L0, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,_
 ),
 [NUM] = LAYOUT(
-  _,       KC_LBRC, KC_6, KC_5, KC_4, KC_RBRC,                      _, _,       _,       _,       RESET,   _,
-  _,       KC_SCLN, KC_3, KC_2, KC_1, KC_EQL,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
-  KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7, KC_BSLS, _,    _,       _, _, _, _,       _,       _,       _,       KC_LSFT,
-                    _,    _,    KC_DOT,  KC_0, KC_MINS, _, _, _, _,       _
+  _,       KC_LBRC, KC_6, KC_5, KC_4,   KC_RBRC,                            _, _,       _,       _,       RESET,   _,
+  DF(NUM), KC_SCLN, KC_3, KC_2, KC_1,   KC_EQL,                             _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(NUM),
+  KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7,   KC_BSLS, _,   _,       _, _,        _, _,       _,       _,       _,       KC_LSFT,
+                          _,    _,      KC_DOT, KC_0, KC_MINS, _, DF(BASE), _, _,       _
 ),
 [SYM] = LAYOUT(
   _,       KC_LCBR, KC_AMPR, KC_ASTR, KC_LCBR, KC_RCBR,                         _, _,       _,       _,       RESET,   _,
-  _,       KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                         _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
+  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                         _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
   KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _, _, _, _,       _,       _      , _,       KC_LSFT,
-                       _,       _,       KC_LPRN, KC_RPRN, KC_UNDS, _, _, _, _,       _
+                       _,       _,       KC_LPRN, KC_RPRN, KC_UNDS, _, _, DF(BASE), _,       _
 ),
 [NAV] = LAYOUT(
-  _,        RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _,
-  _,        KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, _,
-  KC_LSFT,  _,       _      , _,       _,       _, _, _, _,      _,      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_LSFT,
-                        _,       KC_COPY, _, _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  _,       RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _,
+  DF(NAV), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, DF(NAV),
+  KC_LSFT, _,       _      , _,       _,       _, _, _, _,      _,      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_LSFT,
+                        _,       KC_COPY, _, DF(BASE), _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [MOUS] = LAYOUT(
-  _,       RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, _,
-  _,       KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _, _,
-  KC_LSFT, _,       _      , _,       _,       _, _, _,  _,      _,        KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _, KC_LSFT,
-                       _,       KC_PASTE,_, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
+  _,        RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, _,
+  DF(MOUS), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _, DF(MOUS),
+  KC_LSFT,  _,       _      , _,       _,       _, _, _,  _,      _,        KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _, KC_LSFT,
+                       _,       KC_PASTE,_, _, DF(BASE),  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
-  _,       KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
-  _,       KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, _,
-  KC_LSFT, KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      _, _, _, _,       _,       _      , _,       KC_LSFT,
-                    _,     _,     KC_APP,  KC_SPC, KC_TAB, _, _, _, _,       _
+  _,        KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
+  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(FUNC),
+  KC_LSFT,  KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      _, _, _, _,       _,       _      , _,       KC_LSFT,
+                    _,     _,     KC_APP,  KC_SPC, KC_TAB, DF(BASE), _, _, _,       _
 ),
 [MDIA] = LAYOUT(
-  _,       RESET,   _,       _,       _,       _,                          RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
-  _,       KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       _,
-  KC_LSFT, _,       _      , _,       _,       _, _, _,  _,       _,       _,       _,       _,       _,       _,       KC_LSFT,
-                       _,       _,       _, _, _,  KC_MSTP, KC_MPLY, KC_MUTE, _,       _
+  _,        RESET,   _,       _,       _,       _,                          RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
+  DF(MDIA), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
+  KC_LSFT,  _,       _      , _,       _,       _, _, _,  _,       _,       _,       _,       _,       _,       _,       KC_LSFT,
+                       _,       _,       DF(BASE), _, _,  KC_MSTP, KC_MPLY, KC_MUTE, _,       _
 ),
 [GAME] = LAYOUT(
   __, __,   KC_Q, KC_W, KC_R, KC_R,                        __,   __,   __,   __,   __, __,
@@ -146,6 +146,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 static void render_status(void) {
+  // if (biton32(default_layer_state) == NAV) {
+  //   oled_write_P(PSTR("Hold\n"), false);
+  // }
   oled_write_P(PSTR("\nLayer: "), false);
   switch (get_highest_layer(layer_state)) {
     case BASE:
