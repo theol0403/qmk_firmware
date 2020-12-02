@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TG(GAME), _,    KC_P, KC_L, KC_U,    KC_QUES,                                     KC_B,    KC_D, KC_R, KC_QUOT, _,    _,
   KC_Z,     HM_Y, HM_T, HM_H, HM_A,    KC_DOT,                                      KC_C,    HM_S, HM_N, HM_O,    HM_I, KC_SLASH,
   _,        KC_K, KC_M, KC_F, KC_J,    KC_COMM, _,       _,       _,       _,       KC_V,    KC_G, KC_W, KC_X,    KC_Q, _,
-                        _,    THMB_L0, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, _,    _
+                        _,    THMB_L0, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,_
 ),
 [NUM] = LAYOUT(
   _, KC_LBRC, KC_6, KC_5, KC_4, KC_RBRC,                      _, _,       _,       _,       RESET,   _,
@@ -49,13 +49,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _,  RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _,
   _,  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, _,
   _,  _,       _      , _,       _,       _, _, _, _,      _,      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  _,
-                        _,       _,       _, _, _, KC_ENT, KC_DEL, KC_BSPC, _,       _
+                        _,       KC_COPY, _, _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [MOUS] = LAYOUT(
   _, RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, _,
   _, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _, _,
   _, _,       _      , _,       _,       _, _, _,  _,      _,        KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _, _,
-                       _,       _,       _, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
+                       _,       KC_PASTE,_, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
   _, KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   _,
@@ -79,19 +79,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   __, __, __, __, __, __,                 __, __, __, __, __, __,
   __, __, __, __, __, __,                 __, __, __, __, __, __,
   __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __,
-          __, __, KC_CUT, KC_COPY, KC_PASTE, __, __, __, __, __
+              __, __, KC_UNDO, KC_COPY, KC_PASTE, __, __, __, __, __
 ),
 // [TEMP] = LAYOUT(
 //   __, __, __, __, __, __,                 __, __, __, __, __, __,
 //   __, __, __, __, __, __,                 __, __, __, __, __, __,
 //   __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __,
-//           __, __, __, __, __, __, __, __, __, __
+//               __, __, __, __, __, __, __, __, __, __
 // ),
 // [TEMP] = LAYOUT(
 //   _, _, _, _, _, _,             _, _, _, _, _, _,
 //   _, _, _, _, _, _,             _, _, _, _, _, _,
 //   _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _,
-//            _, _, _, _, _, _, _, _, _, _
+//               _, _, _, _, _, _, _, _, _, _
 // ),
 };
 // clang-format on
@@ -106,8 +106,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
     case KC_SLASH:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_BSLS);
-    case THMB_R1:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_DEL);
   }
   return true;
 }
