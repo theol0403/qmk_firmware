@@ -6,15 +6,15 @@
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME, SHRT };
 
-#define HM_Y GUI_T(KC_Y)
-#define HM_T ALT_T(KC_T)
-#define HM_H CTL_T(KC_H)
-#define HM_A SFT_T(KC_A)
+#define HM_Y LGUI_T(KC_Y)
+#define HM_T LALT_T(KC_T)
+#define HM_H LCTL_T(KC_H)
+#define HM_A LSFT_T(KC_A)
 
-#define HM_S SFT_T(KC_S)
-#define HM_N CTL_T(KC_N)
-#define HM_O ALT_T(KC_O)
-#define HM_I GUI_T(KC_I)
+#define HM_S RSFT_T(KC_S)
+#define HM_N RCTL_T(KC_N)
+#define HM_O RALT_T(KC_O)
+#define HM_I RGUI_T(KC_I)
 
 #define THMB_L0 MO(SHRT)
 #define THMB_L1 LT(MDIA, KC_ESC)
