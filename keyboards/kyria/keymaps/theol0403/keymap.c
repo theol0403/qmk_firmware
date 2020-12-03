@@ -99,13 +99,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_EXLM);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_EXLM);
     case KC_DOT:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_COLON);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_COLON);
     case KC_COMM:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_SCOLON);
     case KC_SLASH:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_BSLS);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_BSLS);
   }
   return true;
 }
