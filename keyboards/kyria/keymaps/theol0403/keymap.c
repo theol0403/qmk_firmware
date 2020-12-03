@@ -25,12 +25,16 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME, SHRT };
 #define THMB_R2 LT(NUM, KC_SPC)
 #define THMB_R1 LT(SYM, KC_BSPC)
 
+#define HM_Z LT(SYM, KC_Z)
+#define HM_K LT(NUM, KC_K)
+#define HM_Q LT(NAV, KC_Q)
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   TG(GAME), _,    KC_P, KC_L, KC_U,    KC_QUES,                                      KC_B,   KC_D, KC_R, KC_QUOT, _,    _,
-  KC_Z,     HM_Y, HM_T, HM_H, HM_A,    KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, KC_SLASH,
-  KC_LSFT,  KC_K, KC_M, KC_F, KC_J,    KC_COMM, OSL(NUM),OSL(SYM),OSL(MOUS),OSL(NAV),KC_V,   KC_G, KC_W, KC_X,    KC_Q, KC_LSFT,
+  HM_Z,     HM_Y, HM_T, HM_H, HM_A,    KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, KC_SLASH,
+  KC_LSFT,  HM_K, KC_M, KC_F, KC_J,    KC_COMM, OSL(NUM),OSL(SYM),OSL(MOUS),OSL(NAV),KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
                         _,    THMB_L0, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,_
 ),
 [NUM] = LAYOUT(
@@ -99,13 +103,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_EXLM);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_EXLM);
     case KC_DOT:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_COLON);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_COLON);
     case KC_COMM:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_SCOLON);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_SCOLON);
     case KC_SLASH:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSHIFT), BASE, record, KC_BSLS);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_BSLS);
   }
   return true;
 }
