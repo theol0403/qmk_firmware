@@ -42,13 +42,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   DF(BASE),KC_UNDS, KC_6, KC_5, KC_4,   KC_PLUS,                            _, _,       _,       _,       RESET,   DF(BASE),
   DF(NUM), KC_SCLN, KC_3, KC_2, KC_1,   KC_EQL,                             _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(NUM),
   KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7,   KC_MINS, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
-                          _,    _,      KC_LPRN, KC_0, KC_RPRN, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+                          _,    _,      KC_0, KC_LPRN, KC_RPRN, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [SYM] = LAYOUT(
   DF(BASE),KC_LCBR, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC,                         _,        _,       _,       _,       RESET,   DF(BASE),
   DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                         _,        KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
   KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _, _, _,        _,       _,       _,       _,       KC_LSFT,
-                             _,       _,       KC_LCBR, KC_MINS, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+                             _,       _,       KC_MINS, KC_LCBR, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [NAV] = LAYOUT(
   DF(BASE),RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, DF(BASE),
@@ -104,13 +104,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_EXLM);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_EXLM) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_EXLM);
     case KC_DOT:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_COLON);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_COLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_COLON);
     case KC_COMM:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_SCOLON);
-    case KC_SLASH:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT | KC_RSFT), BASE, record, KC_BSLS);
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_SCOLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_SCOLON);
+    case HM_SL:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_BSLS);
   }
   return true;
 }
