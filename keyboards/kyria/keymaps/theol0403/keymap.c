@@ -4,7 +4,13 @@
 #define _ KC_NO
 #define __ _______
 
-enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME, SHRT };
+enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
+
+#define U_RDO C(KC_Y)  // KC_AGIN
+#define U_PST S(KC_INS)
+#define U_CPY C(KC_INS)
+#define U_CUT S(KC_DEL)
+#define U_UND C(KC_Z)  // KC_UNDO
 
 #define HM_Y LGUI_T(KC_Y)
 #define HM_T LALT_T(KC_T)
@@ -16,7 +22,6 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME, SHRT };
 #define HM_O RALT_T(KC_O)
 #define HM_I GUI_T(KC_I)
 
-#define THMB_L0 MO(SHRT)
 #define THMB_L1 LT(MDIA, KC_ESC)
 #define THMB_L2 LT(NAV, KC_E)
 #define THMB_L3 LT(MOUS, KC_TAB)
@@ -33,10 +38,10 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME, SHRT };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  MO(FUNC), _,    KC_P, KC_L, KC_U,    KC_QUES,                                      KC_B,   KC_D, KC_R, KC_QUOT, _,    MO(MDIA),
-  HM_Z,     HM_Y, HM_T, HM_H, HM_A,    KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, HM_SL,
-  KC_LSFT,  HM_K, KC_M, KC_F, KC_J,    KC_COMM, OSL(NUM),OSL(SYM),OSL(MOUS),OSL(NAV),KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
-                        _,    THMB_L0, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
+  MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,   KC_D, KC_R, KC_QUOT, _,    MO(MDIA),
+  HM_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, HM_SL,
+  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, OSL(NUM),OSL(SYM),OSL(MOUS),OSL(NAV),KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
+                        _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
   DF(BASE),KC_UNDS, KC_6, KC_5, KC_4,   KC_PLUS,                            _, _,       _,       _,       RESET,   DF(BASE),
@@ -51,10 +56,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _,       _,       KC_LCBR, KC_MINS, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [NAV] = LAYOUT(
-  DF(BASE),RESET,   _,       _,       _,       _,                       KC_AGIN, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, DF(BASE),
-  DF(NAV), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_CAPS, DF(NAV),
-  KC_LSFT, _,       _      , _,       _,       _, _, _, _,      _,      KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_LSFT,
-                        _,       KC_COPY, _, _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE),RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, DF(BASE),
+  DF(NAV), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   DF(NAV),
+  KC_LSFT, U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   KC_LSFT,
+                             _,       KC_COPY, _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [MOUS] = LAYOUT(
   DF(BASE), RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, DF(BASE),
@@ -79,12 +84,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   __, KC_Q, KC_A, KC_S, KC_D, KC_F,                        KC_A, KC_S, KC_W, KC_D, __, __,
   __, __,   KC_Z, KC_X, KC_Q, KC_Q,   __,   __,     __, __, __,  __,   __,   __,   __, __,
                   __,   __,   KC_ESC, KC_E, KC_TAB, __, __, __,  __,   __
-),
-[SHRT] = LAYOUT(
-  __, __, __, __, __, __,                 __, __, __, __, __, __,
-  __, __, __, __, __, __,                 __, __, __, __, __, __,
-  __, __, __, __, __, C(KC_W), __, __, __, __, __, __, __, __, __, __,
-              __, __, KC_UNDO, KC_COPY, KC_PASTE, __, __, __, __, __
 ),
 // [TEMP] = LAYOUT(
 //   __, __, __, __, __, __,                 __, __, __, __, __, __,
