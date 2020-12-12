@@ -50,16 +50,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _,    _,      KC_LPRN, KC_0, KC_RPRN, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [SYM] = LAYOUT(
-  DF(BASE),KC_LCBR, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC,                         _,        _,       _,       _,       RESET,   DF(BASE),
-  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                         _,        KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _, _, _,        _,       _,       _,       _,       KC_LSFT,
-                             _,       _,       KC_LCBR, KC_MINS, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE),KC_LCBR, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC,                                   _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                                   _,       KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
+  KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _,      _,      _,       _,       _,       _,       _,   KC_LSFT,
+                             _,       _,       KC_LCBR, KC_MINS, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
   DF(BASE),RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, DF(BASE),
   DF(NAV), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   DF(NAV),
-  KC_LSFT, U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   KC_LSFT,
-                             _,       KC_COPY, _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  KC_LSFT, U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      C(KC_LEFT),C(S(KC_LEFT)),C(S(KC_RGHT)),C(KC_RGHT),  _, KC_LSFT,
+                             _,       KC_COPY, _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MOUS] = LAYOUT(
   DF(BASE), RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, DF(BASE),
@@ -74,10 +74,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [MDIA] = LAYOUT(
-  DF(BASE), RESET,   _,       _,       _,       _,                               RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
-  DF(MDIA), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                               KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
-  KC_LSFT,  _,       _      , _,       _,       _, _, _,        _,      _,       _,       _,       _,       _,       _,       KC_LSFT,
-                       _,       _,     _,       _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _
+  DF(BASE), RESET,   _,       _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
+  DF(MDIA), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
+  KC_LSFT,  U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   KC_LSFT,
+                              _,       _,       _,     _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _
 ),
 [GAME] = LAYOUT(
   __, __,   KC_Q, KC_W, KC_R, KC_R,                        __,   __,   __,   __,   __, __,
@@ -114,16 +114,33 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-int16_t autoshift_custom_shifts(uint16_t keycode, keyrecord_t *record) {
+#define THUMB_TERM 180
+#define PINKY_TERM 300
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case KC_QUES:
-      return KC_EXLM;
-    case KC_DOT:
-      return KC_COLON;
-    case KC_COMM:
-      return KC_SCOLON;
+    case THMB_R1:
+      return THUMB_TERM;
+    case THMB_R2:
+      return THUMB_TERM + 30;
+    case THMB_R3:
+      return THUMB_TERM;
+    case THMB_L1:
+      return THUMB_TERM;
+    case THMB_L2:
+      return THUMB_TERM + 20;
+    case THMB_L3:
+      return THUMB_TERM;
+    case HM_Y:
+      return PINKY_TERM;
+    case HM_T:
+      return PINKY_TERM;
+    case HM_O:
+      return PINKY_TERM;
+    case HM_I:
+      return PINKY_TERM;
+    default:
+      return TAPPING_TERM;
   }
-  return -2;
 }
 
 #ifdef ENCODER_ENABLE
