@@ -58,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NAV] = LAYOUT(
   DF(BASE),RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, DF(BASE),
   DF(NAV), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   DF(NAV),
-  KC_LSFT, U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      C(KC_LEFT),C(S(KC_LEFT)),C(S(KC_RGHT)),C(KC_RGHT),  _, KC_LSFT,
+  KC_LSFT, U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   KC_LSFT,
                              _,       KC_COPY, _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MOUS] = LAYOUT(
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [MDIA] = LAYOUT(
   DF(BASE), RESET,   _,       _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
   DF(MDIA), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
-  KC_LSFT,  U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   KC_LSFT,
+  KC_LSFT,  U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       _,       _,       _,       _,       _,       KC_LSFT,
                               _,       _,       _,     _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _
 ),
 [GAME] = LAYOUT(
