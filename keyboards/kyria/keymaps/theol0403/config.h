@@ -21,9 +21,10 @@
 #  define RBGLIGHT_LED_MAP \
     { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
 // animation modes
-#  define RGBLIGHT_EFFECT_STATIC_GRADIENT
-#  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-#  define RGBLIGHT_EFFECT_RAINBOW_MOOD
+// #  define RGBLIGHT_EFFECT_STATIC_GRADIENT
+// #  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+// #  define RGBLIGHT_EFFECT_RAINBOW_MOOD
+#  define RGBLIGHT_ANIMATIONS
 #endif
 
 // tapping settings
