@@ -22,9 +22,9 @@
     { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
 // animation modes
 // #  define RGBLIGHT_EFFECT_STATIC_GRADIENT
-// #  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+#  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 // #  define RGBLIGHT_EFFECT_RAINBOW_MOOD
-#  define RGBLIGHT_ANIMATIONS
+// #  define RGBLIGHT_ANIMATIONS
 #endif
 
 // tapping settings
@@ -38,19 +38,10 @@
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
 
-// Auto Shift and Retro Shift (Auto Shift for Tap Hold).
-// #define AUTO_SHIFT_TIMEOUT TAPPING_TERM
-// #define NO_AUTO_SHIFT_SPECIAL
-// #define RETRO_SHIFT 500
-// #define AUTO_SHIFT_NO_SETUP
+#define COMBO_TERM 70
+#define COMBO_STRICT_TIMER
 
 // Mouse key speed and acceleration.
-// #define MOUSEKEY_DELAY 0
-// #define MOUSEKEY_INTERVAL 16
-// #define MOUSEKEY_WHEEL_DELAY 0
-// #define MOUSEKEY_MAX_SPEED 4
-// #define MOUSEKEY_TIME_TO_MAX 24
-
 #define MK_KINETIC_SPEED
 #define MOUSEKEY_DELAY 0
 #define MOUSEKEY_INTERVAL 16
