@@ -44,16 +44,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
-  DF(BASE),KC_UNDS, KC_6, KC_5, KC_4,   KC_PLUS,                            _, _,       _,       _,       RESET,   DF(BASE),
-  DF(NUM), KC_SCLN, KC_3, KC_2, KC_1,   KC_EQL,                             _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
-  KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7,   KC_MINS, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
-                          _,    _,      KC_LPRN, KC_0, KC_RPRN, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                            _, _,       _,       _,       RESET,   DF(BASE),
+  DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                             _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
+  KC_LSFT, KC_DLR,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
+                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [SYM] = LAYOUT(
-  DF(BASE),KC_LCBR, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC,                                   _,       _,       _,       _,       RESET,   DF(BASE),
-  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                                   _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _,      _,      _,       _,       _,       _,       _,   KC_LSFT,
-                             _,       _,       KC_LCBR, KC_MINS, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
+  DF(BASE),KC_TILD, KC_LT,   KC_LBRC, KC_GT,   KC_RBRC,                                 _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(SYM), KC_CIRC, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
+  KC_LSFT, KC_GRV,  KC_PIPE, KC_LCBR, KC_HASH, KC_RCBR, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
+                             _,       _,       KC_UNDS, KC_AT, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
   DF(BASE),RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, DF(BASE),
