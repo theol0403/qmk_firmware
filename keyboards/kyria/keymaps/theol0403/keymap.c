@@ -14,11 +14,11 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
 #define HM_Y LGUI_T(KC_Y)
 #define HM_T LALT_T(KC_T)
-#define HM_H LCTL_T(KC_H)
-#define HM_A LSFT_T(KC_A)
+#define HM_H LSFT_T(KC_H)
+#define HM_A LCTL_T(KC_A)
 
-#define HM_S RSFT_T(KC_S)
-#define HM_N RCTL_T(KC_N)
+#define HM_S RCTL_T(KC_S)
+#define HM_N RSFT_T(KC_N)
 #define HM_O RALT_T(KC_O)
 #define HM_I GUI_T(KC_I)
 
@@ -45,37 +45,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [NUM] = LAYOUT(
   DF(BASE),KC_UNDS, KC_6, KC_5, KC_4,   KC_PLUS,                            _, _,       _,       _,       RESET,   DF(BASE),
-  DF(NUM), KC_SCLN, KC_3, KC_2, KC_1,   KC_EQL,                             _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(NUM),
+  DF(NUM), KC_SCLN, KC_3, KC_2, KC_1,   KC_EQL,                             _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
   KC_LSFT, KC_GRV,  KC_9, KC_8, KC_7,   KC_MINS, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
                           _,    _,      KC_LPRN, KC_0, KC_RPRN, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [SYM] = LAYOUT(
   DF(BASE),KC_LCBR, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC,                                   _,       _,       _,       _,       RESET,   DF(BASE),
-  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                                   _,       KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(SYM),
+  DF(SYM), KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                                   _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
   KC_LSFT, KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE, _,       _,       _,      _,      _,       _,       _,       _,       _,   KC_LSFT,
                              _,       _,       KC_LCBR, KC_MINS, KC_RCBR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
   DF(BASE),RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, DF(BASE),
-  DF(NAV), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   DF(NAV),
+  DF(NAV), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   DF(NAV),
   KC_LSFT, U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   KC_LSFT,
                              _,       KC_COPY, _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MOUS] = LAYOUT(
   DF(BASE), RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, DF(BASE),
-  DF(MOUS), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _, DF(MOUS),
+  DF(MOUS), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _, DF(MOUS),
   KC_LSFT,  _,       _      , _,       _,       _, _, _,  _,      _,        KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _, KC_LSFT,
                        _,       KC_PASTE,_, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
   DF(BASE), KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   DF(BASE),
-  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI, DF(FUNC),
+  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(FUNC),
   KC_LSFT,  KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      _, _, _, _,       _,       _      , _,       KC_LSFT,
                     _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [MDIA] = LAYOUT(
   DF(BASE), RESET,   _,       _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
-  DF(MDIA), KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
+  DF(MDIA), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
   KC_LSFT,  U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       _,       _,       _,       _,       _,       KC_LSFT,
                               _,       _,       _,     _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _
 ),
