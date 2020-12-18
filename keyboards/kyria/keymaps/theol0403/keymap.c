@@ -50,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [SYM] = LAYOUT(
-  DF(BASE),KC_TILD, KC_LT,   KC_LBRC, KC_GT,   KC_RBRC,                                 _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(BASE),KC_TILD, KC_LT,   KC_LCBR, KC_GT,   KC_RCBR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
   DF(SYM), KC_CIRC, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_GRV,  KC_PIPE, KC_LCBR, KC_HASH, KC_RCBR, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
+  KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
                              _,       _,       KC_UNDS, KC_AT, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
@@ -167,37 +167,31 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 static void render_status(void) {
-  // if (biton32(default_layer_state) == NAV) {
-  //   oled_write_P(PSTR("Hold\n"), false);
-  // }
-  oled_write_P(PSTR("\nLayer: "), false);
   switch (get_highest_layer(layer_state)) {
     case BASE:
       oled_write_P(PSTR("Base\n"), false);
       break;
     case MDIA:
-      oled_write_P(PSTR("Media\n"), false);
+      oled_write_P(PSTR("Med\n"), false);
       break;
     case NAV:
-      oled_write_P(PSTR("Navigation\n"), false);
+      oled_write_P(PSTR("Nav\n"), false);
       break;
     case MOUS:
-      oled_write_P(PSTR("Mouse\n"), false);
+      oled_write_P(PSTR("Mous\n"), false);
       break;
     case SYM:
-      oled_write_P(PSTR("Symbol\n"), false);
+      oled_write_P(PSTR("Sym\n"), false);
       break;
     case NUM:
-      oled_write_P(PSTR("Number\n"), false);
+      oled_write_P(PSTR("Num\n"), false);
       break;
     case FUNC:
-      oled_write_P(PSTR("Function\n"), false);
+      oled_write_P(PSTR("Fun\n"), false);
       break;
     case GAME:
       oled_write_P(PSTR("Game\n"), false);
       break;
-    default:
-      oled_write_P(PSTR("Undefined\n"), false);
   }
 }
 
@@ -241,3 +235,16 @@ void oled_task_user(void) {
 
 void suspend_power_down_user() { oled_off(); }
 #endif
+
+#include "combos/combos_helper.h"
+
+int16_t get_combo_term(uint16_t index, combo_t *combo) {
+  int i = 0;
+  while (pgm_read_word(&combo->keys[i]) != COMBO_END) {
+    i++;
+  }
+  if (i > 0 && i <= 2) {
+    return 10;
+  }
+  return COMBO_TERM;
+}

@@ -5,8 +5,8 @@ endif
 OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
 ENCODER_ENABLE = yes       # Enables the use of one or more encoders
 RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
-MOUSEKEY_ENABLE = yes # Mouse keys
-# AUTO_SHIFT_ENABLE = yes # Auto Shift
+MOUSEKEY_ENABLE = no# Mouse keys
+COMBO_ENABLE = yes
 
 ifeq ($(HAND),RIGHT)
 CFLAGS += -DMASTER_RIGHT
