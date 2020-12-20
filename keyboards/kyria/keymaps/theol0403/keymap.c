@@ -50,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
 ),
 [SYM] = LAYOUT(
-  DF(BASE),KC_TILD, KC_LT,   KC_LBRC, KC_GT,   KC_RBRC,                                 _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(BASE),KC_TILD, KC_LT,   KC_LCBR, KC_GT,   KC_RCBR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
   DF(SYM), KC_CIRC, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_GRV,  KC_PIPE, KC_LCBR, KC_HASH, KC_RCBR, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
+  KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
                              _,       _,       KC_UNDS, KC_AT, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
