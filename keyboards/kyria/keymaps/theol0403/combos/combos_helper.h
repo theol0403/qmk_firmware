@@ -27,8 +27,12 @@
 #define COMB K_ENUM
 #define SUBS A_ENUM
 #define TOGG A_ENUM
+#undef BEGIN_SECTION
+#undef END_SECTION
+#define BEGIN_SECTION(name) BEGIN_##name,
+#define END_SECTION(name) END_##name,
 enum combos {
-#include "combos.def"
+#include "combos.h"
   COMBO_LENGTH
 };
 // Export length to combo module
@@ -41,7 +45,11 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define COMB K_DATA
 #define SUBS A_DATA
 #define TOGG A_DATA
-#include "combos.def"
+#undef BEGIN_SECTION
+#undef END_SECTION
+#define BEGIN_SECTION BLANK
+#define END_SECTION BLANK
+#include "combos.h"
 #undef COMB
 #undef SUBS
 #undef TOGG
@@ -50,8 +58,13 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define COMB K_COMB
 #define SUBS A_COMB
 #define TOGG A_COMB
+#undef BEGIN_SECTION
+#undef END_SECTION
+const uint16_t PROGMEM empty_combo[] = {COMBO_END};
+#define BEGIN_SECTION(name) [BEGIN_##name] = {.keys = &(empty_combo)[0]},
+#define END_SECTION(name) [END_##name] = {.keys = &(empty_combo)[0]},
 combo_t key_combos[] = {
-#include "combos.def"
+#include "combos.h"
 };
 #undef COMB
 #undef SUBS
@@ -61,9 +74,13 @@ combo_t key_combos[] = {
 #define COMB BLANK
 #define SUBS A_ACTI
 #define TOGG A_TOGG
+#undef BEGIN_SECTION
+#undef END_SECTION
+#define BEGIN_SECTION BLANK
+#define END_SECTION BLANK
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch (combo_index) {
-#include "combos.def"
+#include "combos.h"
   }
 
   // Allow user overrides per keymap
