@@ -38,8 +38,9 @@
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
 
-#define COMBO_TERM 17
+#define COMBO_TERM 30
 #define COMBO_STRICT_TIMER
+#define COMBO_TERM_PER_COMBO
 
 // Mouse key speed and acceleration.
 #define MK_KINETIC_SPEED

@@ -237,3 +237,14 @@ void suspend_power_down_user() { oled_off(); }
 #endif
 
 #include "combos/combos_helper.h"
+
+int16_t get_combo_term(uint16_t index, combo_t *combo) {
+  int i = 0;
+  while (pgm_read_word(&combo->keys[i]) != COMBO_END) {
+    i++;
+  }
+  if (i > 0 && i <= 2) {
+    return 10;
+  }
+  return COMBO_TERM;
+}
