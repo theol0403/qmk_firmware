@@ -27,6 +27,10 @@
 #define COMB K_ENUM
 #define SUBS A_ENUM
 #define TOGG A_ENUM
+#undef BEGIN_SECTION
+#undef END_SECTION
+#define BEGIN_SECTION(name) BEGIN_##name,
+#define END_SECTION(name) END_##name,
 enum combos {
 #include "combos.def"
   COMBO_LENGTH
@@ -41,6 +45,10 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define COMB K_DATA
 #define SUBS A_DATA
 #define TOGG A_DATA
+#undef BEGIN_SECTION
+#undef END_SECTION
+#define BEGIN_SECTION BLANK
+#define END_SECTION BLANK
 #include "combos.def"
 #undef COMB
 #undef SUBS
