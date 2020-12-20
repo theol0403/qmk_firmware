@@ -241,7 +241,10 @@ void suspend_power_down_user() { oled_off(); }
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
     case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-      return 10;
+      return 7;
+      break;
+    case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+      return 15;
       break;
     default:
       return COMBO_TERM;
