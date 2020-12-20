@@ -41,6 +41,7 @@
 #define COMBO_TERM 30
 #define COMBO_STRICT_TIMER
 #define COMBO_TERM_PER_COMBO
+#define EXTRA_LONG_COMBOS
 
 // Mouse key speed and acceleration.
 #define MK_KINETIC_SPEED
