@@ -236,4 +236,4 @@ void oled_task_user(void) {
 void suspend_power_down_user() { oled_off(); }
 #endif
 
-#include "g/keymap_combo.h"
+#include "combos/combos_helper.h"
