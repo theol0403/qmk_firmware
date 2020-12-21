@@ -8,6 +8,9 @@ RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
 MOUSEKEY_ENABLE = yes# Mouse keys
 COMBO_ENABLE = yes
 
+BOOTMAGIC_ENABLE = no
+COMMAND_ENABLE = no
+
 ifeq ($(HAND),RIGHT)
 CFLAGS += -DMASTER_RIGHT
 else ifeq ($(HAND),LEFT)
