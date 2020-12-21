@@ -38,7 +38,7 @@ END_SECTION(CORRECTIVE_BIGRAMS)
 
 BEGIN_SECTION(TRIGRAMS)
 SUBS(tri_the, "the", HM_T, HM_H, THMB_L2)
-SUBS(tri_and, "and ", HM_A, HM_N, KC_D)
+SUBS(tri_and, "and", HM_A, HM_N, KC_D)
 SUBS(tri_ing, "ing", HM_I, HM_N, KC_G)
 SUBS(tri_ion, "ion", HM_I, HM_O, HM_N)
 SUBS(tri_tio, "tio", HM_T, HM_I, HM_O)
