@@ -1,8 +1,4 @@
 
-COMB(bi_hi, S(HM_I), HM_H, HM_I)
-COMB(bi_col, KC_COLN, HM_N, KC_DOT)
-
-SUBS(bi_kc, "KC_", HM_K, KC_C)
 
 BEGIN_SECTION(WORDS)
 
@@ -13,7 +9,7 @@ SUBS(word_this, "this", HM_T, HM_H, HM_S)
 SUBS(word_his, "his", HM_H, HM_S)
 SUBS(word_from, "from", KC_F, KC_M)
 SUBS(word_which, "which", KC_W, HM_H)
-SUBS(word_have, "have", HM_H, THMB_L2)
+SUBS(word_have, "have", HM_H, HM_A, THMB_L2)
 SUBS(word_had, "had", KC_D, HM_H)
 SUBS(word_they, "they", HM_T, HM_Y)
 SUBS(word_were, "were", KC_W, THMB_L2)
@@ -56,6 +52,7 @@ SUBS(word_very, "very", KC_V, HM_Y)
 SUBS(word_between, "between", KC_B, THMB_L2)
 SUBS(word_made, "made", KC_M, KC_D)
 SUBS(word_many, "many", KC_M, HM_N)
+SUBS(word_here, "here", HM_H, THMB_L2, KC_R)
 // SUBS(word_over,"over", HM_O, KC_R)
 // SUBS(word_like,"like", KC_L, THMB_L2)
 // SUBS(word_those,"those", HM_T, THMB_L2)
@@ -104,6 +101,5 @@ SUBS(word_many, "many", KC_M, HM_N)
 // SUBS(word_another,"another", HM_A, KC_R)
 // SUBS(word_little,"little", KC_L, THMB_L2)
 // SUBS(word_found,"found", KC_F, KC_D)
-SUBS(word_here, "here", HM_H, THMB_L2, KC_R)
 
 END_SECTION(WORDS)
