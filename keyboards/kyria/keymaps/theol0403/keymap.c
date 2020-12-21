@@ -116,6 +116,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #define THUMB_TERM 180
 #define PINKY_TERM 300
+#define CTRL_TERM 200
+#define SHIFT_TERM 150
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
@@ -138,6 +140,14 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
       return PINKY_TERM;
     case HM_I:
       return PINKY_TERM;
+    case HM_H:
+      return SHIFT_TERM;
+    case HM_N:
+      return SHIFT_TERM;
+    case HM_A:
+      return CTRL_TERM;
+    case HM_S:
+      return CTRL_TERM;
     default:
       return TAPPING_TERM;
   }
@@ -155,6 +165,9 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
       break;
     case BEGIN_WORDS ... END_WORDS:
       return 20;
+      break;
+    case BEGIN_SYMBOLS ... END_SYMBOLS:
+      return 50;
       break;
     default:
       return COMBO_TERM;
