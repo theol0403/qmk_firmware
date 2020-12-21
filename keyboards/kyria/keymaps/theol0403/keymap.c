@@ -247,7 +247,7 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
       return 25;
       break;
     case BEGIN_WORDS ... END_WORDS:
-      return 15;
+      return 20;
       break;
     default:
       return COMBO_TERM;
