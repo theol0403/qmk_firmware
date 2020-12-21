@@ -1,20 +1,20 @@
 // credit germ from gboards
 // Keymap helpers
 
-#define K_ENUM(name, key, ...) name,
+#define K_ENUM(name, key, ...) combo_##name,
 #define K_DATA(name, key, ...) const uint16_t PROGMEM cmb_##name[] = {__VA_ARGS__, COMBO_END};
-#define K_COMB(name, key, ...) [name] = COMBO(cmb_##name, key),
+#define K_COMB(name, key, ...) [combo_##name] = COMBO(cmb_##name, key),
 
-#define A_ENUM(name, string, ...) name,
+#define A_ENUM(name, string, ...) combo_##name,
 #define A_DATA(name, string, ...) const uint16_t PROGMEM cmb_##name[] = {__VA_ARGS__, COMBO_END};
-#define A_COMB(name, string, ...) [name] = COMBO_ACTION(cmb_##name),
+#define A_COMB(name, string, ...) [combo_##name] = COMBO_ACTION(cmb_##name),
 #define A_ACTI(name, string, ...)     \
-  case name:                          \
+  case combo_##name:                  \
     if (pressed) SEND_STRING(string); \
     break;
 
 #define A_TOGG(name, layer, ...)      \
-  case name:                          \
+  case combo_##name:                  \
     if (pressed) layer_invert(layer); \
     break;
 
@@ -81,12 +81,11 @@ combo_t key_combos[] = {
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch (combo_index) {
 #include "combos.h"
-  }
-
-  // Allow user overrides per keymap
+    // Allow user overrides per keymap
 #if __has_include("combos_user.h")
 #  include "combos_user.h"
 #endif
+  }
 }
 #undef COMB
 #undef SUBS
