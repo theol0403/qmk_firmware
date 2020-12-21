@@ -153,7 +153,8 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
-#include "combos/combos_helper.h"
+#ifdef COMBO_ENABLE
+#  include "combos/combos_helper.h"
 
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
@@ -173,6 +174,7 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
       return COMBO_TERM;
   }
 }
+#endif
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
