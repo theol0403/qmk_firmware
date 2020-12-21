@@ -28,7 +28,7 @@
 #endif
 
 // tapping settings
-#define TAPPING_TERM 200
+#define TAPPING_TERM 150
 #define TAPPING_TERM_PER_KEY
 
 // Prevent normal rollover on alphas from accidentally triggering mods.

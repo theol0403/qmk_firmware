@@ -143,6 +143,24 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+#include "combos/combos_helper.h"
+
+int16_t get_combo_term(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
+      return 8;
+      break;
+    case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+      return 25;
+      break;
+    case BEGIN_WORDS ... END_WORDS:
+      return 20;
+      break;
+    default:
+      return COMBO_TERM;
+  }
+}
+
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) {
@@ -235,21 +253,3 @@ void oled_task_user(void) {
 
 void suspend_power_down_user() { oled_off(); }
 #endif
-
-#include "combos/combos_helper.h"
-
-int16_t get_combo_term(uint16_t index, combo_t *combo) {
-  switch (index) {
-    case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-      return 8;
-      break;
-    case BEGIN_TRIGRAMS ... END_TRIGRAMS:
-      return 25;
-      break;
-    case BEGIN_WORDS ... END_WORDS:
-      return 20;
-      break;
-    default:
-      return COMBO_TERM;
-  }
-}

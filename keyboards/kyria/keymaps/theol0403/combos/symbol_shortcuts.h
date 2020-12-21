@@ -1,7 +1,7 @@
 
 #include "keycode.h"
 BEGIN_SECTION(SYMBOLS)
-COMB(bi_hi, S(HM_I), HM_H, HM_I)
+COMB(bi_hi, S(KC_I), HM_H, HM_I)
 SUBS(bi_kc, "KC_", HM_K, KC_C)
 
 COMB(bi_col, KC_COLN, HM_N, KC_DOT)
