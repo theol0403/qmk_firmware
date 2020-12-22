@@ -40,19 +40,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,   KC_D, KC_R, KC_QUOT, _,    MO(MDIA),
   HM_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, HM_SL,
-  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, OSL(NUM),OSL(SYM),OSL(MOUS),OSL(NAV),KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
+  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
-  DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                            _, _,       _,       _,       RESET,   DF(BASE),
-  DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                             _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
-  KC_LSFT, KC_DLR,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
-                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
+  KC_LSFT, KC_CIRC,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
+                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
   DF(BASE),KC_TILD, KC_LT,   KC_LCBR, KC_GT,   KC_RCBR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
-  DF(SYM), KC_CIRC, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
+  DF(SYM), KC_ASTR, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
+  KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      KC_BSPC, _,       _,       _,       _,       KC_LSFT,
                              _,       _,       KC_UNDS, KC_AT, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
@@ -68,13 +68,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       KC_PASTE,_, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
-  DF(BASE), KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   DF(BASE),
-  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(FUNC),
-  KC_LSFT,  KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      _, _, _, _,       _,       _      , _,       KC_LSFT,
-                    _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE), KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(FUNC),
+  KC_LSFT,  KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      KC_ENT, _,      _,       _,       _,       _,       _,       KC_LSFT,
+                           _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MDIA] = LAYOUT(
-  DF(BASE), RESET,   _,       _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
+  DF(BASE), RESET,   EEP_RST, _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, _,
   DF(MDIA), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
   KC_LSFT,  U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       _,       _,       _,       _,       _,       KC_LSFT,
                               _,       _,       _,     _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _
@@ -121,7 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
-      return THUMB_TERM - 60 + 600;
+      return THUMB_TERM - 60;
     case THMB_R2:
       return THUMB_TERM + 10;
     case THMB_R3:
@@ -154,13 +154,35 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  int tapping = get_event_keycode(record->event, false);
   switch (keycode) {
     case THMB_R1:
       return true;
-    default:
-      // Do not select the hold action when another key is pressed.
-      return false;
+    case THMB_R2:
+      switch (tapping) {
+        case THMB_L1:
+        case THMB_L3:
+        case KC_QUES:
+          return true;
+      }
+      break;
+    case HM_N:
+      switch (tapping) {
+        case KC_DOT:
+        case KC_QUES:
+        case KC_COMMA:
+          return true;
+      }
+      break;
+    case HM_H:
+      switch (tapping) {
+        case KC_QUOT:
+        case HM_SL:
+        case HM_I:
+          return true;
+      }
   }
+  return false;
 }
 
 #ifdef COMBO_ENABLE
@@ -177,7 +199,10 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
     case BEGIN_WORDS ... END_WORDS:
       return 20;
       break;
-    case BEGIN_SYMBOLS ... END_SYMBOLS:
+    case BEGIN_SHORTCUT ... END_SHORTCUT:
+      return 20;
+      break;
+    case BEGIN_HOLDS ... END_HOLDS:
       return 70;
       break;
     default:
@@ -185,7 +210,14 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
   }
 }
 
-bool get_combo_must_tap(uint16_t index, combo_t *combo) { return true; }
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case BEGIN_HOLDS ... END_HOLDS:
+      return false;
+    default:
+      return true;
+  }
+}
 
 #endif
 
@@ -241,7 +273,7 @@ static void render_status(void) {
   }
 }
 
-#  ifdef MASTER_RIGHT
+#  if IS_LEFT == false
 // clang-format off
 static void render_qmk_logo(void) {
   static const char PROGMEM qmk_logo[] = {
@@ -269,7 +301,7 @@ static void render_kyria_logo(void) {
 #  endif
 
 void oled_task_user(void) {
-#  ifdef MASTER_RIGHT
+#  if IS_LEFT == false
   render_qmk_logo();
 #  else
   render_kyria_logo();
@@ -281,3 +313,5 @@ void oled_task_user(void) {
 
 void suspend_power_down_user() { oled_off(); }
 #endif
+
+bool is_keyboard_left(void) { return IS_LEFT; }
