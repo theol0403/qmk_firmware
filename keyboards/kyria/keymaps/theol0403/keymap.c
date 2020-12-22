@@ -44,15 +44,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
-  DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                            _, _,       _,       _,       RESET,   DF(BASE),
-  DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                             _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
-  KC_LSFT, KC_DLR,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,      _, _,        _, _,       _,       _,       _,       KC_LSFT,
-                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
+  KC_LSFT, KC_DLR,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
+                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
   DF(BASE),KC_TILD, KC_LT,   KC_LCBR, KC_GT,   KC_RCBR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
   DF(SYM), KC_CIRC, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
-  KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      _,       _,       _,       _,       _,       KC_LSFT,
+  KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      KC_BSPC, _,       _,       _,       _,       KC_LSFT,
                              _,       _,       KC_UNDS, KC_AT, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
@@ -68,10 +68,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        _,       KC_PASTE,_, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
-  DF(BASE), KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                       _, _,       _,       _,       RESET,   DF(BASE),
-  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                       _, KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(FUNC),
-  KC_LSFT,  KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      _, _, _, _,       _,       _      , _,       KC_LSFT,
-                    _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,       _
+  DF(BASE), KC_F10, KC_F6, KC_F5, KC_F4, KC_PSCR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(FUNC), KC_F11, KC_F3, KC_F2, KC_F1, KC_SLCK,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(FUNC),
+  KC_LSFT,  KC_F12, KC_F9, KC_F8, KC_F7, KC_PAUS, _,      _,      KC_ENT, _,      _,       _,       _,       _,       _,       KC_LSFT,
+                           _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MDIA] = LAYOUT(
   DF(BASE), RESET,   _,       _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
@@ -180,12 +180,22 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
     case BEGIN_SYMBOLS ... END_SYMBOLS:
       return 70;
       break;
+    case BEGIN_HOLDS ... END_HOLDS:
+      return 70;
+      break;
     default:
       return COMBO_TERM;
   }
 }
 
-bool get_combo_must_tap(uint16_t index, combo_t *combo) { return true; }
+bool get_combo_must_tap(uint16_t index, combo_t *combo) {
+  switch (index) {
+    case BEGIN_HOLDS ... END_HOLDS:
+      return false;
+    default:
+      return true;
+  }
+}
 
 #endif
 
