@@ -1,7 +1,4 @@
-
-#include "keycode.h"
-#include "quantum_keycodes.h"
-BEGIN_SECTION(SYMBOLS)
+BEGIN_SECTION(SHORTCUT)
 TAPP(sym_hi, S(KC_I), HM_H, HM_I)
 // SUBS(sym_kc, "KC_", HM_K, KC_C)
 
@@ -13,11 +10,7 @@ TAPP(sym_quot, S(KC_QUOT), HM_H, KC_QUOT)
 TAPP(sym_slash, KC_BSLASH, HM_H, HM_SL)
 
 TAPP(dash, KC_MINS, THMB_L1, THMB_R2)
-
-// COMB(one, KC_1, HM_S, KC_D)
-// COMB(two, KC_2, HM_N, KC_R)
-// COMB(three, KC_3, HM_O, KC_QUOT)
-END_SECTION(SYMBOLS)
+END_SECTION(SHORTCUT)
 
 BEGIN_SECTION(HOLDS)
 COMB(space, KC_SPC, OSL(NAV), THMB_R2)

@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,   KC_D, KC_R, KC_QUOT, _,    MO(MDIA),
   HM_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, HM_SL,
-  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, OSL(NUM),OSL(SYM),OSL(MOUS),OSL(NAV),KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
+  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
@@ -121,7 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
-      return THUMB_TERM - 60 + 600;
+      return THUMB_TERM - 60;
     case THMB_R2:
       return THUMB_TERM + 10;
     case THMB_R3:
@@ -154,13 +154,33 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  int tapping = get_event_keycode(record->event, false);
   switch (keycode) {
     case THMB_R1:
       return true;
-    default:
-      // Do not select the hold action when another key is pressed.
-      return false;
+    case THMB_R2:
+      switch (tapping) {
+        case THMB_L1:
+        case KC_MINS:
+          return true;
+      }
+      break;
+    case HM_N:
+      switch (tapping) {
+        case KC_DOT:
+        case KC_QUES:
+        case KC_COMMA:
+          return true;
+      }
+    case HM_H:
+      switch (tapping) {
+        case KC_QUOT:
+        case HM_SL:
+        case HM_I:
+          return true;
+      }
   }
+  return false;
 }
 
 #ifdef COMBO_ENABLE
@@ -177,8 +197,8 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
     case BEGIN_WORDS ... END_WORDS:
       return 20;
       break;
-    case BEGIN_SYMBOLS ... END_SYMBOLS:
-      return 70;
+    case BEGIN_SHORTCUT ... END_SHORTCUT:
+      return 20;
       break;
     case BEGIN_HOLDS ... END_HOLDS:
       return 70;

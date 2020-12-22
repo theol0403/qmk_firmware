@@ -169,7 +169,7 @@ bool process_tapping(keyrecord_t *keyp) {
                         tapping_key.tap.interrupted = true;
 #    if defined(HOLD_ON_OTHER_KEY_PRESS) || defined(HOLD_ON_OTHER_KEY_PRESS_PER_KEY)
 #        if defined(HOLD_ON_OTHER_KEY_PRESS_PER_KEY)
-                        if (get_hold_on_other_key_press(get_event_keycode(tapping_key.event, false), &tapping_key))
+                        if (get_hold_on_other_key_press(get_event_keycode(tapping_key.event, false), keyp))
 #        endif
                         {
                             debug("Tapping: End. No tap. Interfered by pressed key\n");
