@@ -18,6 +18,8 @@ COMB(ent, KC_ENT, OSL(MOUS), THMB_R3)
 COMB(e, KC_E, OSL(NUM), THMB_L2)
 COMB(tab, KC_TAB, OSL(SYM), THMB_L3)
 
+TAPP(dash, KC_MINS, THMB_L1, THMB_R2)
+
 // COMB(one, KC_1, HM_S, KC_D)
 // COMB(two, KC_2, HM_N, KC_R)
 // COMB(three, KC_3, HM_O, KC_QUOT)
