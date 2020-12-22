@@ -3,7 +3,7 @@
 #include "quantum_keycodes.h"
 BEGIN_SECTION(SYMBOLS)
 TAPP(sym_hi, S(KC_I), HM_H, HM_I)
-SUBS(sym_kc, "KC_", HM_K, KC_C)
+// SUBS(sym_kc, "KC_", HM_K, KC_C)
 
 TAPP(sym_col, KC_COLN, HM_N, KC_DOT)
 TAPP(sym_exl, KC_EXLM, HM_N, KC_QUES)
@@ -17,4 +17,8 @@ COMB(back, KC_BSPC, KC_V, THMB_R1)
 COMB(ent, KC_ENT, OSL(MOUS), THMB_R3)
 COMB(e, KC_E, OSL(NUM), THMB_L2)
 COMB(tab, KC_TAB, OSL(SYM), THMB_L3)
+
+// COMB(one, KC_1, HM_S, KC_D)
+// COMB(two, KC_2, HM_N, KC_R)
+// COMB(three, KC_3, HM_O, KC_QUOT)
 END_SECTION(SYMBOLS)

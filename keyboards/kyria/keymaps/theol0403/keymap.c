@@ -114,22 +114,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-#define THUMB_TERM 180
+#define THUMB_TERM 200
 #define PINKY_TERM 300
 #define CTRL_TERM 200
 #define SHIFT_TERM 150
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
-      return THUMB_TERM;
+      return THUMB_TERM - 60 + 600;
     case THMB_R2:
-      return THUMB_TERM + 30;
+      return THUMB_TERM + 10;
     case THMB_R3:
       return THUMB_TERM;
     case THMB_L1:
       return THUMB_TERM;
     case THMB_L2:
-      return THUMB_TERM + 20;
+      return THUMB_TERM;
     case THMB_L3:
       return THUMB_TERM;
     case HM_Y:
@@ -153,6 +153,16 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case THMB_R1:
+      return true;
+    default:
+      // Do not select the hold action when another key is pressed.
+      return false;
+  }
+}
+
 #ifdef COMBO_ENABLE
 #  include "combos/combos_helper.h"
 
@@ -168,7 +178,7 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
       return 20;
       break;
     case BEGIN_SYMBOLS ... END_SYMBOLS:
-      return 50;
+      return 70;
       break;
     default:
       return COMBO_TERM;
