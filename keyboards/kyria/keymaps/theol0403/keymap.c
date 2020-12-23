@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            _,     _,     KC_APP,  KC_SPC, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MDIA] = LAYOUT(
-  DF(BASE), RESET,   _,       _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, _,
+  DF(BASE), RESET,   EEP_RST, _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, _,
   DF(MDIA), KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, _,       DF(MDIA),
   KC_LSFT,  U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       _,       _,       _,       _,       _,       KC_LSFT,
                               _,       _,       _,     _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _

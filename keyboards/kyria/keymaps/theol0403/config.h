@@ -7,9 +7,13 @@
 #define OLED_UPDATE_INTERVAL 20
 #define ENCODER_RESOLUTION 2
 
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
-#define DEFER_KEYBOARD_REPORT_ENABLE
+
+#define MASTER_RIGHT
 
 // rgb settings
 #ifdef RGBLIGHT_ENABLE
@@ -18,8 +22,11 @@
 #  define RGBLIGHT_HUE_STEP 8
 #  define RGBLIGHT_SAT_STEP 8
 #  define RGBLIGHT_VAL_STEP 8
-#  define RBGLIGHT_LED_MAP \
-    { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
+#  define RGBLIGHT_LIMIT_VAL 150
+// #  define RBGLIGHT_LED_MAP
+//     { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
+#  define RGBLIGHT_LED_MAP \
+    { 0, 1, 2, 9, 8, 7, 4, 3, 5, 6, 19, 18, 17, 10, 11, 12, 15, 16, 14, 13 }
 // animation modes
 // #  define RGBLIGHT_EFFECT_STATIC_GRADIENT
 #  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -35,7 +42,6 @@
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT
-// #define BILATERAL_COMBINATIONS 400
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define TAPPING_FORCE_HOLD
@@ -45,6 +51,7 @@
 #define COMBO_TERM_PER_COMBO
 #define COMBO_MUST_HOLD_MODS
 #define COMBO_MUST_TAP_PER_COMBO
+#define COMBO_HOLD_TERM 150
 
 // Mouse key speed and acceleration.
 #define MK_KINETIC_SPEED
