@@ -161,7 +161,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case THMB_R2:
       switch (tapping) {
         case THMB_L1:
-        case KC_MINS:
+          // case KC_MINS:
           return true;
       }
       break;
@@ -172,6 +172,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case KC_COMMA:
           return true;
       }
+      break;
     case HM_H:
       switch (tapping) {
         case KC_QUOT:

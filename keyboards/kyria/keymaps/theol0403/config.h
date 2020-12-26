@@ -23,10 +23,10 @@
 #  define RGBLIGHT_SAT_STEP 8
 #  define RGBLIGHT_VAL_STEP 8
 #  define RGBLIGHT_LIMIT_VAL 150
-// #  define RBGLIGHT_LED_MAP
-//     { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
-#  define RGBLIGHT_LED_MAP \
-    { 0, 1, 2, 9, 8, 7, 4, 3, 5, 6, 19, 18, 17, 10, 11, 12, 15, 16, 14, 13 }
+#  define RBGLIGHT_LED_MAP \
+    { 9, 8, 6, 7, 5, 3, 2, 4, 1, 0, 10, 12, 13, 11, 14, 16, 17, 15, 18, 19 }
+// #  define RGBLIGHT_LED_MAP
+//     { 0, 1, 2, 9, 8, 7, 4, 3, 5, 6, 19, 18, 17, 10, 11, 12, 15, 16, 14, 13 }
 // animation modes
 // #  define RGBLIGHT_EFFECT_STATIC_GRADIENT
 #  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
