@@ -6,14 +6,13 @@
 #endif
 #define OLED_UPDATE_INTERVAL 20
 #define ENCODER_RESOLUTION 2
+#define ENCODER_DIRECTION_FLIP
 
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 
 // Recommended for heavy chording.
 #define QMK_KEYS_PER_SCAN 4
-
-#define MASTER_RIGHT
 
 // rgb settings
 #ifdef RGBLIGHT_ENABLE

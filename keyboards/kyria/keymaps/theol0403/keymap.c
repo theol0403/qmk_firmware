@@ -46,12 +46,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NUM] = LAYOUT(
   DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
   DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
-  KC_LSFT, KC_DLR,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
+  KC_LSFT, KC_CIRC,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
                           _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
   DF(BASE),KC_TILD, KC_LT,   KC_LCBR, KC_GT,   KC_RCBR,                                 _,       _,       _,       _,       RESET,   DF(BASE),
-  DF(SYM), KC_CIRC, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
+  DF(SYM), KC_ASTR, KC_PERC, KC_LPRN, KC_DLR,  KC_RPRN,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(SYM),
   KC_LSFT, KC_GRV,  KC_PIPE, KC_LBRC, KC_HASH, KC_RBRC, _,     _,       _,      _,      KC_BSPC, _,       _,       _,       _,       KC_LSFT,
                              _,       _,       KC_UNDS, KC_AT, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
@@ -161,7 +161,8 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case THMB_R2:
       switch (tapping) {
         case THMB_L1:
-          // case KC_MINS:
+        case THMB_L3:
+        case KC_QUES:
           return true;
       }
       break;
