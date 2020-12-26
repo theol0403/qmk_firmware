@@ -272,7 +272,7 @@ static void render_status(void) {
   }
 }
 
-#  ifdef MASTER_RIGHT
+#  if IS_LEFT == false
 // clang-format off
 static void render_qmk_logo(void) {
   static const char PROGMEM qmk_logo[] = {
@@ -300,7 +300,7 @@ static void render_kyria_logo(void) {
 #  endif
 
 void oled_task_user(void) {
-#  ifdef MASTER_RIGHT
+#  if IS_LEFT == false
   render_qmk_logo();
 #  else
   render_kyria_logo();
@@ -312,3 +312,5 @@ void oled_task_user(void) {
 
 void suspend_power_down_user() { oled_off(); }
 #endif
+
+bool is_keyboard_left(void) { return IS_LEFT; }
