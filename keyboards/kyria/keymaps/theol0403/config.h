@@ -3,16 +3,18 @@
 // system settings
 #ifdef OLED_DRIVER_ENABLE
 #  define OLED_DISPLAY_128X64
+#  define OLED_UPDATE_INTERVAL 20
 #endif
-#define OLED_UPDATE_INTERVAL 20
-#define ENCODER_RESOLUTION 2
-#define ENCODER_DIRECTION_FLIP
+
+#ifdef ENCODER_ENABLE
+#  define ENCODER_RESOLUTION 2
+#  define ENCODER_DIRECTION_FLIP
+#endif
 
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 
-// Recommended for heavy chording.
-#define QMK_KEYS_PER_SCAN 4
+#define QMK_KEYS_PER_SCAN 4  // Recommended for heavy chording.
 
 // rgb settings
 #ifdef RGBLIGHT_ENABLE
@@ -28,6 +30,7 @@
 //     { 0, 1, 2, 9, 8, 7, 4, 3, 5, 6, 19, 18, 17, 10, 11, 12, 15, 16, 14, 13 }
 // animation modes
 // #  define RGBLIGHT_EFFECT_STATIC_GRADIENT
+// #  define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #  define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 // #  define RGBLIGHT_EFFECT_RAINBOW_MOOD
 // #  define RGBLIGHT_ANIMATIONS
@@ -59,7 +62,3 @@
 #define MOUSEKEY_MOVE_DELTA 3
 #define MOUSEKEY_INITIAL_SPEED 10
 #define MOUSEKEY_BASE_SPEED 100
-
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
-#define NO_ACTION_ONESHOT

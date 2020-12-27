@@ -35,8 +35,6 @@
 #define TAPP K_ENUM
 #undef BEGIN_SECTION
 #undef END_SECTION
-#define BEGIN_SECTION(name) BEGIN_##name,
-#define END_SECTION(name) END_##name,
 enum combos {
 #include "combos.h"
   COMBO_LENGTH
@@ -70,9 +68,6 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #define TAPP A_COMB
 #undef BEGIN_SECTION
 #undef END_SECTION
-const uint16_t PROGMEM empty_combo[] = {COMBO_END};
-#define BEGIN_SECTION(name) [BEGIN_##name] = {.keys = &(empty_combo)[0]},
-#define END_SECTION(name) [END_##name] = {.keys = &(empty_combo)[0]},
 combo_t key_combos[] = {
 #include "combos.h"
 };
@@ -86,10 +81,6 @@ combo_t key_combos[] = {
 #define SUBS A_ACTI
 #define TOGG A_TOGG
 #define TAPP A_TAPP
-#undef BEGIN_SECTION
-#undef END_SECTION
-#define BEGIN_SECTION BLANK
-#define END_SECTION BLANK
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch (combo_index) {
 #include "combos.h"
