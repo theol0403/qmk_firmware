@@ -1,4 +1,4 @@
-BEGIN_SECTION(CORRECTIVE_BIGRAMS)
+#define BEGIN_CORRECTIVE_BIGRAMS combo_bi_th
 SUBS(bi_th, "th", HM_T, HM_H)
 SUBS(bi_he, "he", HM_H, THMB_L2)
 SUBS(bi_in, "in", HM_I, HM_N)
@@ -34,9 +34,9 @@ SUBS(bi_us, "us", KC_U, HM_S)
 SUBS(bi_we, "we", KC_W, THMB_L2)
 SUBS(bi_up, "up", KC_U, KC_P)
 SUBS(bi_if, "if", HM_I, KC_F)
-END_SECTION(CORRECTIVE_BIGRAMS)
+#define END_CORRECTIVE_BIGRAMS combo_bi_if
 
-BEGIN_SECTION(TRIGRAMS)
+#define BEGIN_TRIGRAMS combo_tri_the
 SUBS(tri_the, "the", HM_T, HM_H, THMB_L2)
 SUBS(tri_and, "and", HM_A, HM_N, KC_D)
 SUBS(tri_ing, "ing", HM_I, HM_N, KC_G)
@@ -76,4 +76,4 @@ SUBS(tri_one, "one", HM_O, HM_N, THMB_L2)
 SUBS(tri_you, "you", HM_Y, HM_O, KC_U)
 SUBS(ng_ions, "ions", HM_I, HM_O, HM_N, HM_S)
 SUBS(ng_tion, "tion", HM_T, HM_I, HM_O, HM_N)
-END_SECTION(TRIGRAMS)
+#define END_TRIGRAMS combo_ng_tion

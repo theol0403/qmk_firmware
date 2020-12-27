@@ -1,6 +1,10 @@
 #include "keycode.h"
 #include QMK_KEYBOARD_H
 
+#ifdef TAP_DANCE_ENABLE
+#  include "tapdances.h"
+#endif
+
 #define _ KC_NO
 #define __ _______
 
@@ -38,10 +42,10 @@ enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,   KC_D, KC_R, KC_QUOT, _,    MO(MDIA),
-  HM_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                       KC_C,   HM_S, HM_N, HM_O,    HM_I, HM_SL,
-  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,   KC_G, KC_W, KC_X,    HM_Q, KC_LSFT,
-                        _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
+  MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,    KC_D,  KC_R, KC_QUOT, _,    MO(MDIA),
+  HM_Z,     HM_Y, HM_T, HM_H, HM_A, DOTT,                                         KC_C,    HM_S,  HM_N, HM_O,    HM_I, HM_SL,
+  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q, KC_LSFT,
+                        _,    COPP, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
   DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
@@ -104,7 +108,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_EXLM) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_EXLM);
-    case KC_DOT:
+    case DOTT:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_COLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_COLON);
     case KC_COMM:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_SCOLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_SCOLON);

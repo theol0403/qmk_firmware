@@ -1,6 +1,4 @@
-
-
-BEGIN_SECTION(WORDS)
+#define BEGIN_WORDS combo_word_that
 
 SUBS(word_that, "that", HM_T, HM_H, HM_A)
 SUBS(word_was, "was", KC_W, HM_A)
@@ -101,4 +99,4 @@ SUBS(word_their, "their", HM_T, HM_I, KC_R)
 // SUBS(word_little,"little", KC_L, THMB_L2)
 // SUBS(word_found,"found", KC_F, KC_D)
 
-END_SECTION(WORDS)
+#define END_WORDS combo_word_their
