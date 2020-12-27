@@ -116,8 +116,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #define THUMB_TERM 200
 #define PINKY_TERM 300
-#define CTRL_TERM 200
-#define SHIFT_TERM 150
+#define CTRL_TERM 220
+#define SHIFT_TERM 180
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
@@ -181,6 +181,13 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case HM_I:
           return true;
       }
+      break;
+    case THMB_L2:
+      switch (tapping) {
+        case THMB_R1:
+          return true;
+      }
+      break;
   }
   return false;
 }
