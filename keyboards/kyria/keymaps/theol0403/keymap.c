@@ -10,6 +10,8 @@
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
+enum custom_keycodes { START = SAFE_RANGE, ARROW };
+
 #define U_RDO C(KC_Y)  // KC_AGIN
 #define U_PST S(KC_INS)
 #define U_CPY C(KC_INS)
@@ -48,9 +50,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    COPP, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
-  DF(BASE),KC_PERC, KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(BASE),ARROW,   KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
   DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
-  KC_LSFT, KC_CIRC,  KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
+  KC_LSFT, KC_CIRC, KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
                           _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
@@ -114,6 +116,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_SCOLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_SCOLON);
     case HM_SL:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_BSLS);
+    case ARROW:
+      if (record->event.pressed) {
+        SEND_STRING("->");
+      }
+      break;
   }
   return true;
 }
@@ -161,6 +168,9 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   int tapping = get_event_keycode(record->event, false);
   switch (keycode) {
     case THMB_R1:
+    case THMB_R3:
+    case THMB_L1:
+    case THMB_L3:
       return true;
     case THMB_R2:
       switch (tapping) {
