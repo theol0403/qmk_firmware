@@ -136,32 +136,23 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     case THMB_R2:
       return THUMB_TERM + 10;
     case THMB_R3:
-      return THUMB_TERM;
     case THMB_L1:
-      return THUMB_TERM;
     case THMB_L2:
-      return THUMB_TERM;
     case THMB_L3:
       return THUMB_TERM;
     case HM_Y:
-      return PINKY_TERM;
     case HM_T:
-      return PINKY_TERM;
     case HM_O:
-      return PINKY_TERM;
     case HM_I:
       return PINKY_TERM;
     case HM_H:
-      return SHIFT_TERM;
     case HM_N:
       return SHIFT_TERM;
     case HM_A:
-      return CTRL_TERM;
     case HM_S:
       return CTRL_TERM;
-    default:
-      return TAPPING_TERM;
   }
+  return TAPPING_TERM;
 }
 
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
