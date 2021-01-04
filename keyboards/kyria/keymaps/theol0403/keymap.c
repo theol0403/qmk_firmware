@@ -44,9 +44,9 @@ enum custom_keycodes { START = SAFE_RANGE, ARROW };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,    KC_D,  KC_R, KC_QUOT, _,    MO(MDIA),
-  HM_Z,     HM_Y, HM_T, HM_H, HM_A, DOTT,                                         KC_C,    HM_S,  HM_N, HM_O,    HM_I, HM_SL,
-  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q, KC_LSFT,
+  MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,    KC_D,  KC_R, KC_QUOT, KC_BSLS, MO(MDIA),
+  HM_Z,     HM_Y, HM_T, HM_H, HM_A, DOTT,                                         KC_C,    HM_S,  HM_N, HM_O,    HM_I,    HM_SL,
+  KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q,    KC_LSFT,
                         _,    COPP, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
@@ -159,15 +159,10 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   int tapping = get_event_keycode(record->event, false);
   switch (keycode) {
     case THMB_R1:
-    case THMB_R3:
-    case THMB_L1:
-    case THMB_L3:
-      return true;
     case THMB_R2:
       switch (tapping) {
         case THMB_L1:
         case THMB_L3:
-        case KC_QUES:
           return true;
       }
       break;
@@ -193,6 +188,18 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
           return true;
       }
       break;
+  }
+  return false;
+}
+
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+  // int tapping = get_event_keycode(record->event, false);
+  switch (keycode) {
+    case THMB_R1:
+    case THMB_R3:
+    case THMB_L1:
+    case THMB_L3:
+      return true;
   }
   return false;
 }
