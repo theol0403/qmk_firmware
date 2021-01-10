@@ -2,7 +2,7 @@
 TAPP(sym_hi, S(KC_I), HM_H, HM_I)
 // SUBS(sym_kc, "KC_", HM_K, KC_C)
 
-TAPP(sym_col, KC_COLN, HM_N, DOTT)
+TAPP(sym_col, KC_COLN, HM_N, KC_DOT)
 TAPP(sym_exl, KC_EXLM, HM_N, KC_QUES)
 TAPP(sym_scol, KC_SCOLON, HM_N, KC_COMMA)
 
@@ -10,6 +10,9 @@ TAPP(sym_quot, S(KC_QUOT), HM_H, KC_QUOT)
 TAPP(sym_slash, KC_BSLASH, HM_H, HM_SL)
 
 TAPP(dash, KC_MINS, THMB_L1, THMB_R2)
+
+COMB(dott, SENT, KC_DOT, HM_H)
+COMB(ques, QUES, KC_QUES, HM_H)
 #define END_SHORTCUT combo_dash
 
 #define BEGIN_HOLDS combo_space

@@ -10,7 +10,7 @@
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
-enum custom_keycodes { START = SAFE_RANGE, ARROW };
+enum custom_keycodes { START = SAFE_RANGE, ARROW, SENT, QUES };
 
 #define U_RDO C(KC_Y)  // KC_AGIN
 #define U_PST S(KC_INS)
@@ -45,9 +45,9 @@ enum custom_keycodes { START = SAFE_RANGE, ARROW };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   MO(FUNC), _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,    KC_D,  KC_R, KC_QUOT, KC_BSLS, MO(MDIA),
-  HM_Z,     HM_Y, HM_T, HM_H, HM_A, DOTT,                                         KC_C,    HM_S,  HM_N, HM_O,    HM_I,    HM_SL,
+  HM_Z,     HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                         KC_C,    HM_S,  HM_N, HM_O,    HM_I,    HM_SL,
   KC_LSFT,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q,    KC_LSFT,
-                        _,    COPP, THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
+                        _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
   DF(BASE),ARROW,   KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
@@ -110,15 +110,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case KC_QUES:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_EXLM) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_EXLM);
-    case DOTT:
+    case KC_DOT:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_COLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_COLON);
     case KC_COMM:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_SCOLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_SCOLON);
     case HM_SL:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_BSLS);
+    case HM_T:
+      return custom_keycode_on_modifiers(MOD_BIT(KC_LALT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RALT), BASE, record, A(KC_TAB));
     case ARROW:
       if (record->event.pressed) {
         SEND_STRING("->");
+      }
+      break;
+    case SENT:
+      if (record->event.pressed) {
+        tap_code(KC_DOT);
+        tap_code(KC_SPC);
+        set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
+      }
+      break;
+    case QUES:
+      if (record->event.pressed) {
+        if (!(get_mods() & MOD_MASK_SHIFT)) {
+          tap_code16(KC_QUES);
+        } else {
+          tap_code16(KC_EXLM);
+        }
+        tap_code(KC_SPC);
+        set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
       }
       break;
   }
@@ -185,6 +205,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     case THMB_L2:
       switch (tapping) {
         case THMB_R1:
+          return true;
+      }
+      break;
+    case HM_T:
+      switch (tapping) {
+        case THMB_L3:
           return true;
       }
       break;
