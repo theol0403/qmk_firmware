@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
-  DF(BASE),ARROW,   KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(BASE),_,       KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
   DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
   KC_LSFT, KC_CIRC, KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
                           _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
