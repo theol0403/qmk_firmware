@@ -22,6 +22,11 @@
     if (pressed) tap_code16(code); \
     break;
 
+#define A_TAPP8(name, code, ...) \
+  case combo_##name:             \
+    if (pressed) tap_code(code); \
+    break;
+
 #define BLANK(...)
 // Generate data needed for combos/actions
 // Create Enum
@@ -29,10 +34,12 @@
 #undef SUBS
 #undef TOGG
 #undef TAPP
+#undef TAPP8
 #define COMB K_ENUM
 #define SUBS K_ENUM
 #define TOGG K_ENUM
 #define TAPP K_ENUM
+#define TAPP8 K_ENUM
 #undef BEGIN_SECTION
 #undef END_SECTION
 enum combos {
@@ -47,10 +54,12 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #undef SUBS
 #undef TOGG
 #undef TAPP
+#undef TAPP8
 #define COMB K_DATA
 #define SUBS A_DATA
 #define TOGG A_DATA
 #define TAPP A_DATA
+#define TAPP8 A_DATA
 #undef BEGIN_SECTION
 #undef END_SECTION
 #define BEGIN_SECTION BLANK
@@ -60,12 +69,14 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #undef SUBS
 #undef TOGG
 #undef TAPP
+#undef TAPP8
 
 // Fill combo array
 #define COMB K_COMB
 #define SUBS A_COMB
 #define TOGG A_COMB
 #define TAPP A_COMB
+#define TAPP8 A_COMB
 #undef BEGIN_SECTION
 #undef END_SECTION
 combo_t key_combos[] = {
@@ -75,12 +86,14 @@ combo_t key_combos[] = {
 #undef SUBS
 #undef TOGG
 #undef TAPP
+#undef TAPP8
 
 // Fill QMK hook
 #define COMB BLANK
 #define SUBS A_ACTI
 #define TOGG A_TOGG
 #define TAPP A_TAPP
+#define TAPP8 A_TAPP8
 void process_combo_event(uint16_t combo_index, bool pressed) {
   switch (combo_index) {
 #include "combos.h"
@@ -94,3 +107,4 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
 #undef SUBS
 #undef TOGG
 #undef TAPP
+#undef TAPP8
