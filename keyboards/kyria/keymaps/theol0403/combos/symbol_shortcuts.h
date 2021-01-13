@@ -13,7 +13,8 @@ TAPP8(dash, KC_MINS, THMB_L1, THMB_R2)
 
 COMB(dott, SENT, KC_DOT, HM_H)
 COMB(ques, QUES, KC_QUES, HM_H)
-#define END_SHORTCUT combo_dash
+COMB(arrow, ARROW, KC_L, KC_U)
+#define END_SHORTCUT combo_arrow
 
 #define BEGIN_HOLDS combo_space
 COMB(space, KC_SPC, OSL(NAV), THMB_R2)

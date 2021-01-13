@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                         _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2,  THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
-  DF(BASE),ARROW,   KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
+  DF(BASE),_,       KC_6, KC_5, KC_4, KC_ASTR,                                _,       _,       _,       _,       RESET,   DF(BASE),
   DF(NUM), KC_EQL,  KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_LCTL, KC_LSFT, KC_LALT, KC_LGUI, DF(NUM),
   KC_LSFT, KC_CIRC, KC_9, KC_8, KC_7, KC_SLSH, _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       KC_LSFT,
                           _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
@@ -143,8 +143,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #define THUMB_TERM 200
 #define PINKY_TERM 300
-#define CTRL_TERM 220
-#define SHIFT_TERM 180
+#define CTRL_TERM 200
+#define SHIFT_TERM 150
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
@@ -255,23 +255,22 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
   switch (index) {
     case BEGIN_HOLDS ... END_HOLDS:
       return false;
-    default:
-      return true;
   }
+  return true;
 }
 
 #endif
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 0) {
+  if (!index) {
     // Volume control
     if (clockwise) {
       tap_code(KC_VOLU);
     } else {
       tap_code(KC_VOLD);
     }
-  } else if (index == 1) {
+  } else {
     // Page up/Page down
     if (clockwise) {
       tap_code(KC_UP);
