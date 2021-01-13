@@ -143,8 +143,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 #define THUMB_TERM 200
 #define PINKY_TERM 300
-#define CTRL_TERM 220
-#define SHIFT_TERM 180
+#define CTRL_TERM 200
+#define SHIFT_TERM 150
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
@@ -255,23 +255,22 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
   switch (index) {
     case BEGIN_HOLDS ... END_HOLDS:
       return false;
-    default:
-      return true;
   }
+  return true;
 }
 
 #endif
 
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
-  if (index == 0) {
+  if (!index) {
     // Volume control
     if (clockwise) {
       tap_code(KC_VOLU);
     } else {
       tap_code(KC_VOLD);
     }
-  } else if (index == 1) {
+  } else {
     // Page up/Page down
     if (clockwise) {
       tap_code(KC_UP);
