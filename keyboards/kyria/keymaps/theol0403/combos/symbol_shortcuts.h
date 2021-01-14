@@ -10,10 +10,13 @@ TAPP(sym_quot, S(KC_QUOT), HM_H, KC_QUOT)
 TAPP8(sym_slash, KC_BSLASH, HM_H, HM_SL)
 
 TAPP8(dash, KC_MINS, THMB_L1, THMB_R2)
+TAPP(under, KC_UNDS, THMB_L1, THMB_R1)
 
 COMB(dott, SENT, KC_DOT, HM_H)
 COMB(ques, QUES, KC_QUES, HM_H)
+
 COMB(arrow, ARROW, KC_L, KC_U)
+// COMB(capsl, KC_CAPS, KC_L, KC_U)
 #define END_SHORTCUT combo_arrow
 
 #define BEGIN_HOLDS combo_space
