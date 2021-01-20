@@ -10,9 +10,9 @@ TAP_DANCE_ENABLE = no
 MAGIC_ENABLE = no
 SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
+MOUSEKEY_ENABLE = no
 
 ifeq ($(HAND),RIGHT)
-MOUSEKEY_ENABLE = yes # Mouse keys
 COMBO_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
