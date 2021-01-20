@@ -19,6 +19,7 @@ COMB(ques, QUES, KC_QUES, HM_H)
 
 COMB(osshift, OSM(MOD_RSFT), KC_D, KC_R)
 COMB(osrshift, OSM(MOD_LSFT), KC_L, KC_U)
+COMB(smrtcaps, SMRTCAPS, KC_R, KC_D, KC_QUOT)
 
 SUBS(semi, ";\n", KC_W, KC_G)
 SUBS(arrow, "->", KC_F, KC_J)
@@ -28,7 +29,7 @@ SUBS(arrow, "->", KC_F, KC_J)
 #define BEGIN_HOLDS combo_space
 COMB(space, KC_SPC, OSL(NAV), THMB_R2)
 COMB(back, KC_BSPC, KC_V, THMB_R1)
-COMB(ent, KC_ENT, OSL(MOUS), THMB_R3)
+// COMB(ent, KC_ENT, OSL(MOUS), THMB_R3)
 COMB(e, KC_E, OSL(NUM), THMB_L2)
 COMB(tab, KC_TAB, OSL(SYM), THMB_L3)
 #define END_HOLDS combo_tab

@@ -1,12 +1,13 @@
+#include "action_code.h"
 #include "keycode.h"
 #include QMK_KEYBOARD_H
 
 #define _ KC_NO
 #define __ _______
 
-enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
+enum layers { BASE, NUM, SYM, NAV, FUNC, MDIA, GAME };
 
-enum custom_keycodes { START = SAFE_RANGE, SENT, QUES };
+enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS };
 
 #define U_RDO C(KC_Y)  // KC_AGIN
 #define U_PST S(KC_INS)
@@ -26,7 +27,7 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES };
 
 #define THMB_L1 LT(MDIA, KC_ESC)
 #define THMB_L2 LT(NAV, KC_E)
-#define THMB_L3 LT(MOUS, KC_TAB)
+#define THMB_L3 MT(MOD_LSFT, KC_TAB)
 
 #define THMB_R3 LT(FUNC, KC_ENT)
 #define THMB_R2 LT(NUM, KC_SPC)
@@ -34,7 +35,7 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES };
 
 #define HM_Z LT(NUM, KC_Z)
 #define HM_K LT(SYM, KC_K)
-#define HM_Q LT(MOUS, KC_Q)
+#define HM_Q KC_Q
 #define HM_SL LT(NAV, KC_SLASH)
 
 #define L(l) DF(l)
@@ -45,10 +46,10 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES };
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
-  _,    _,    KC_P, KC_L, KC_U, KC_QUES,                                      KC_B,    KC_D,  KC_R, KC_QUOT, KC_BSLS, _,
-  HM_Z, HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                       KC_C,    HM_S,  HM_N, HM_O,    HM_I,    HM_SL,
-  LSF,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), MO(MOUS), MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q,    RSF,
-                    _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3,  THMB_R2, THMB_R1, KC_DEL,TG(GAME)
+  _,    _,    KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D,  KC_R, KC_QUOT, KC_BSLS, _,
+  HM_Z, HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S,  HM_N, HM_O,    HM_I,    HM_SL,
+  LSF,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), _,       MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q,    RSF,
+                    _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
 ),
 [NUM] = LAYOUT(
   L(NUM), _,       KC_6, KC_5, KC_4, KC_CIRC,                                _,       _,       _,       _,       RESET,   L(NUM), 
@@ -67,12 +68,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   UNL,    KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   UNL,     
   LSF,    U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   RSF,
                             _,       _,       _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
-),
-[MOUS] = LAYOUT(
-  L(MOUS), RESET,   _,       _,       _,       _,                          _,       _,       _,       _,       _, L(MOUS), 
-  UNL,     KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                          KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _, UNL,     
-  LSF,     _,       _,       _,       _,       _, _, _,  _,       _,       KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _, RSF,
-                             _,       _,       _, _, _,  KC_BTN3, KC_BTN1, KC_BTN2, _,       _
 ),
 [FUNC] = LAYOUT(
   L(FUNC), KC_F10, KC_F6, KC_F5, KC_F4, _,                                       _,       _,       _,       _,       RESET,   L(FUNC), 
@@ -107,7 +102,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+bool smart_caps_on = false;
+
+void smart_caps_enable(void) {
+  smart_caps_on = true;
+  register_mods(MOD_LSFT);
+}
+
+void smart_caps_disable(void) {
+  smart_caps_on = false;
+  unregister_mods(MOD_LSFT);
+}
+
+void smart_caps_pulse(uint16_t keycode, keyrecord_t *record) {
+  if (smart_caps_on && record->event.pressed) {
+    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) || (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) {
+      keycode = keycode & 0xFF;
+    }
+
+    // Just return if it's an alpha or any of the other
+    if (keycode >= KC_A && keycode <= KC_Z) return;
+
+    // Catch any other non-breaking keycodes (ie keycodes that won't disable smart caps)
+    switch (keycode) {
+      case KC_BSPC:
+      case KC_UNDS:
+      case KC_MINS:
+        return;
+    }
+
+    // If we didn't return earlier, disable smart caps
+    smart_caps_disable();
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  smart_caps_pulse(keycode, record);
   switch (keycode) {
     case KC_QUES:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_EXLM) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_EXLM);
@@ -137,6 +167,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
       }
       break;
+    case SMRTCAPS:
+      if (record->event.pressed) {
+        smart_caps_enable();
+      }
+      return false;
   }
   return true;
 }
@@ -293,9 +328,6 @@ static void render_status(void) {
       break;
     case NAV:
       oled_write_P(PSTR("Na\n"), false);
-      break;
-    case MOUS:
-      oled_write_P(PSTR("Ms\n"), false);
       break;
     case SYM:
       oled_write_P(PSTR("Sy\n"), false);
