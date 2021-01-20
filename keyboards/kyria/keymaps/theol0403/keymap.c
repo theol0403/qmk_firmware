@@ -6,7 +6,7 @@
 
 enum layers { BASE, NUM, SYM, NAV, MOUS, FUNC, MDIA, GAME };
 
-enum custom_keycodes { START = SAFE_RANGE, ARROW, SENT, QUES };
+enum custom_keycodes { START = SAFE_RANGE, SENT, QUES };
 
 #define U_RDO C(KC_Y)  // KC_AGIN
 #define U_PST S(KC_INS)
@@ -119,11 +119,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_BSLS);
     case HM_T:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LALT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RALT), BASE, record, A(KC_TAB));
-    case ARROW:
-      if (record->event.pressed) {
-        SEND_STRING("->");
-      }
-      break;
     case SENT:
       if (record->event.pressed) {
         tap_code(KC_DOT);

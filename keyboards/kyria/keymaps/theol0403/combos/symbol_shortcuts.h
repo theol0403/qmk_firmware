@@ -1,3 +1,5 @@
+#include "action_code.h"
+#include "keycode.h"
 #define BEGIN_SHORTCUT combo_sym_hi
 TAPP(sym_hi, S(KC_I), HM_H, HM_I)
 // SUBS(sym_kc, "KC_", HM_K, KC_C)
@@ -15,7 +17,11 @@ TAPP(under, KC_UNDS, THMB_L1, THMB_R1)
 COMB(dott, SENT, KC_DOT, HM_H)
 COMB(ques, QUES, KC_QUES, HM_H)
 
-COMB(arrow, ARROW, KC_L, KC_U)
+COMB(osshift, OSM(MOD_RSFT), KC_D, KC_R)
+COMB(osrshift, OSM(MOD_LSFT), KC_L, KC_U)
+
+SUBS(semi, ";\n", KC_W, KC_G)
+SUBS(arrow, "->", KC_F, KC_J)
 // COMB(capsl, KC_CAPS, KC_L, KC_U)
 #define END_SHORTCUT combo_arrow
 
