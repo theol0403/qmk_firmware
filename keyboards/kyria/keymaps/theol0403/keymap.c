@@ -107,27 +107,30 @@ bool smart_caps_on = false;
 
 void smart_caps_check_disable(uint16_t keycode, keyrecord_t *record) {
   if (smart_caps_on && record->event.pressed) {
+    if (get_mods() != 0) {
+      smart_caps_on = false;
+      return;
+    }
     // if button is a tap-hold, extract the keycode
     switch (keycode) {
       case QK_MOD_TAP ... QK_MOD_TAP_MAX:
       case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
         keycode = keycode & 0xFF;
-      default:
         // if the mod-tap is being held, ignore it until it has been tapped
-        if (record->tap.count != 0) {
-          // Catch non-breaking keycodes (ie keycodes that won't disable smart caps)
-          switch (keycode) {
-            case KC_A ... KC_Z:
-            case KC_BSPC:
-            case KC_DEL:
-            case KC_UNDS:
-            case KC_MINS:
-              break;
-            default:
-              // If we didn't return earlier, disable smart caps
-              smart_caps_on = false;
-          }
-        }
+        if (record->tap.count == 0) return;
+    }
+
+    // Catch non-breaking keycodes (ie keycodes that won't disable smart caps)
+    switch (keycode) {
+      case KC_A ... KC_Z:
+      case KC_BSPC:
+      case KC_DEL:
+      case KC_UNDS:
+      case KC_MINS:
+        break;
+      default:
+        // If we didn't return earlier, disable smart caps
+        smart_caps_on = false;
     }
   }
 }
