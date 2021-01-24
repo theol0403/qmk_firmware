@@ -17,9 +17,7 @@ TAPP(under, KC_UNDS, THMB_L1, THMB_R1)
 COMB(dott, SENT, KC_DOT, HM_H)
 COMB(ques, QUES, KC_QUES, HM_H)
 
-COMB(osshift, OSM(MOD_RSFT), KC_D, KC_R)
-COMB(osrshift, OSM(MOD_LSFT), KC_L, KC_U)
-COMB(smrtcaps, SMRTCAPS, KC_R, KC_D, KC_QUOT)
+COMB(smrtcaps, SMRTCAPS, KC_R, KC_D)
 
 SUBS(semi, ";\n", KC_W, KC_G)
 SUBS(arrow, "->", KC_F, KC_J)

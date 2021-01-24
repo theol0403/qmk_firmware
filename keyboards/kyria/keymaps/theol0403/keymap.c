@@ -1,3 +1,4 @@
+#include "action.h"
 #include "action_code.h"
 #include "keycode.h"
 #include QMK_KEYBOARD_H
@@ -104,40 +105,59 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool smart_caps_on = false;
 
-void smart_caps_enable(void) {
-  smart_caps_on = true;
-  register_mods(MOD_LSFT);
-}
-
-void smart_caps_disable(void) {
-  smart_caps_on = false;
-  unregister_mods(MOD_LSFT);
-}
-
-void smart_caps_pulse(uint16_t keycode, keyrecord_t *record) {
+void smart_caps_check_disable(uint16_t keycode, keyrecord_t *record) {
   if (smart_caps_on && record->event.pressed) {
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) || (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) {
-      keycode = keycode & 0xFF;
-    }
-
-    // Just return if it's an alpha or any of the other
-    if (keycode >= KC_A && keycode <= KC_Z) return;
-
-    // Catch any other non-breaking keycodes (ie keycodes that won't disable smart caps)
+    // if button is a tap-hold, extract the keycode
     switch (keycode) {
-      case KC_BSPC:
-      case KC_UNDS:
-      case KC_MINS:
-        return;
+      case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+      case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+        keycode = keycode & 0xFF;
+      default:
+        // if the mod-tap is being held, ignore it until it has been tapped
+        if (record->tap.count != 0) {
+          // Catch non-breaking keycodes (ie keycodes that won't disable smart caps)
+          switch (keycode) {
+            case KC_A ... KC_Z:
+            case KC_BSPC:
+            case KC_DEL:
+            case KC_UNDS:
+            case KC_MINS:
+              break;
+            default:
+              // If we didn't return earlier, disable smart caps
+              smart_caps_on = false;
+          }
+        }
     }
-
-    // If we didn't return earlier, disable smart caps
-    smart_caps_disable();
   }
 }
 
+bool smart_caps_decide(uint16_t keycode, keyrecord_t *record) {
+  if (smart_caps_on) {
+    switch (keycode) {
+      case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+      case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+        keycode = keycode & 0xFF;
+    }
+
+    switch (keycode) {
+      case KC_A ... KC_Z:
+        if (record->event.pressed) {
+          register_code16(S(keycode));
+        } else {
+          unregister_code16(S(keycode));
+        }
+        return false;
+    }
+  }
+  return true;
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  smart_caps_pulse(keycode, record);
+  smart_caps_check_disable(keycode, record);
+  if (!smart_caps_decide(keycode, record)) {
+    return false;
+  };
   switch (keycode) {
     case KC_QUES:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_EXLM) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_EXLM);
@@ -169,7 +189,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case SMRTCAPS:
       if (record->event.pressed) {
-        smart_caps_enable();
+        smart_caps_on = true;
       }
       return false;
   }
