@@ -1,6 +1,7 @@
 // credit germ from gboards
 // Keymap helpers
 
+#include "action.h"
 #define K_ENUM(name, key, ...) combo_##name,
 #define K_DATA(name, key, ...) const uint16_t PROGMEM cmb_##name[] = {__VA_ARGS__, COMBO_END};
 #define K_COMB(name, key, ...) [combo_##name] = COMBO(cmb_##name, key),
@@ -95,6 +96,16 @@ combo_t key_combos[] = {
 #define TAPP A_TAPP
 #define TAPP8 A_TAPP8
 void process_combo_event(uint16_t combo_index, bool pressed) {
+  if (smart_caps_on) {
+    switch (combo_index) {
+      case BEGIN_CORRECTIVE_BIGRAMS ... END_WORDS:
+        if (pressed) {
+          register_mods(MOD_LSFT);
+        } else {
+          unregister_mods(MOD_LSFT);
+        }
+    }
+  }
   switch (combo_index) {
 #include "combos.h"
     // Allow user overrides per keymap
