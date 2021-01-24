@@ -138,6 +138,7 @@ bool smart_caps_decide(uint16_t keycode, keyrecord_t *record) {
       case QK_MOD_TAP ... QK_MOD_TAP_MAX:
       case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
         keycode = keycode & 0xFF;
+        if (record->tap.count == 0) return true;
     }
 
     switch (keycode) {
