@@ -39,7 +39,7 @@
 // tapping settings
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
-// #define PERMISSIVE_HOLD
+#define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
 

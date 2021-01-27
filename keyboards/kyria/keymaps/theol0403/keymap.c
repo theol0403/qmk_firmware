@@ -105,8 +105,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool smart_caps_on = false;
 
+// check if smart caps should be disabled
 void smart_caps_check_disable(uint16_t keycode, keyrecord_t *record) {
   if (smart_caps_on && record->event.pressed) {
+    // if any modifier is being pressed with this keycode, disable smart caps
     if (get_mods() != 0) {
       smart_caps_on = false;
       return;
@@ -116,7 +118,7 @@ void smart_caps_check_disable(uint16_t keycode, keyrecord_t *record) {
       case QK_MOD_TAP ... QK_MOD_TAP_MAX:
       case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
         keycode = keycode & 0xFF;
-        // if the mod-tap is being held, ignore it until it has been tapped
+        // if the tap-hold is being held, don't disable smart caps
         if (record->tap.count == 0) return;
     }
 
@@ -129,21 +131,25 @@ void smart_caps_check_disable(uint16_t keycode, keyrecord_t *record) {
       case KC_MINS:
         break;
       default:
-        // If we didn't return earlier, disable smart caps
+        // If we didn't break earlier, disable smart caps
         smart_caps_on = false;
     }
   }
 }
 
-bool smart_caps_decide(uint16_t keycode, keyrecord_t *record) {
+bool smart_caps_apply(uint16_t keycode, keyrecord_t *record) {
   if (smart_caps_on) {
+    // if button is a tap-hold, extract the keycode
     switch (keycode) {
       case QK_MOD_TAP ... QK_MOD_TAP_MAX:
       case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
         keycode = keycode & 0xFF;
+        // if the tap-hold is being held don't shift, and process as usual
+        // otherwise if tap-hold is being tapped, treat as the underlying alpha
         if (record->tap.count == 0) return true;
     }
 
+    // keys we want to shift
     switch (keycode) {
       case KC_A ... KC_Z:
         if (record->event.pressed) {
@@ -151,6 +157,7 @@ bool smart_caps_decide(uint16_t keycode, keyrecord_t *record) {
         } else {
           unregister_code16(S(keycode));
         }
+        // don't process the keycode any further
         return false;
     }
   }
@@ -159,7 +166,7 @@ bool smart_caps_decide(uint16_t keycode, keyrecord_t *record) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   smart_caps_check_disable(keycode, record);
-  if (!smart_caps_decide(keycode, record)) {
+  if (!smart_caps_apply(keycode, record)) {
     return false;
   };
   switch (keycode) {
@@ -179,7 +186,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(KC_SPC);
         set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
       }
-      break;
+      return false;
     case QUES:
       if (record->event.pressed) {
         if (!(get_mods() & MOD_MASK_SHIFT)) {
@@ -190,7 +197,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(KC_SPC);
         set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
       }
-      break;
+      return false;
     case SMRTCAPS:
       if (record->event.pressed) {
         smart_caps_on = true;
@@ -280,6 +287,10 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     case THMB_R3:
     case THMB_L1:
     case THMB_L3:
+    case THMB_L2:
+    case THMB_R2:
+    case HM_N:
+    case HM_H:
       return true;
   }
   return false;
