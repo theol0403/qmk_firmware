@@ -1,6 +1,8 @@
 #define BEGIN_WORDS combo_word_that
 
 SUBS(word_that, "that", HM_T, HM_H, HM_A)
+SUBS(word_inf, "infinity", HM_I, HM_N, KC_F)
+
 // SUBS(word_was, "was", KC_W, HM_A)
 // SUBS(word_with, "with", KC_W, HM_T)
 // SUBS(word_this, "this", HM_T, HM_H, HM_S)
@@ -99,4 +101,4 @@ SUBS(word_that, "that", HM_T, HM_H, HM_A)
 // SUBS(word_little,"little", KC_L, THMB_L2)
 // SUBS(word_found,"found", KC_F, KC_D)
 
-#define END_WORDS combo_word_that
+#define END_WORDS combo_word_inf

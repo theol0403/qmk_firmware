@@ -281,16 +281,12 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-  // int tapping = get_event_keycode(record->event, false);
   switch (keycode) {
     case THMB_R1:
     case THMB_R3:
     case THMB_L1:
     case THMB_L3:
     case THMB_L2:
-    case THMB_R2:
-    case HM_N:
-    case HM_H:
       return true;
   }
   return false;
