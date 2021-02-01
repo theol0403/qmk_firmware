@@ -298,16 +298,16 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
     case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-      return 8;
+      return 9;
       break;
     case BEGIN_TRIGRAMS ... END_TRIGRAMS:
-      return 25;
+      return 30;
       break;
     case BEGIN_WORDS ... END_WORDS:
-      return 20;
+      return 25;
       break;
     case BEGIN_SHORTCUT ... END_SHORTCUT:
-      return 20;
+      return 25;
       break;
     case BEGIN_HOLDS ... END_HOLDS:
       return 70;
@@ -336,8 +336,8 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       uint16_t other = pgm_read_word(&combo->keys[other_index]);
       switch (other) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          uint8_t mod   = (other >> 8) & 0x1F;
-          uint8_t final = mod & 0x10 ? mod << 4 : mod;
+          uint8_t mod   = (other >> 8) & 0x3;
+          uint8_t final = (mod & 0x10 ? mod << 4 : mod) & 0x33;
           register_mods(final);
         }
       }
