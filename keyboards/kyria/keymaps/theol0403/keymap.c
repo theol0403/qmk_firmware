@@ -322,6 +322,38 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
       return false;
   }
   return true;
+
+#  include "print.h"
+
+bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
+  uprintf("state: %d\n", combo->state);
+  uprintf("key released: %d\n", key_index);
+  // remove the key that was released from the state
+  uint8_t new_state = (~(1 << key_index) & combo->state);
+  uprintf("new_state: %d\n", new_state);
+  // the number of keys remaining
+  switch (__builtin_popcount(new_state)) {
+    case 1: {
+      // the index of the other key
+      uint8_t other_index = __builtin_ctz(new_state);
+      uprintf("other_index: %d\n", other_index);
+      // the other keycode
+      uint16_t other = pgm_read_word(&combo->keys[other_index]);
+      switch (other) {
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
+          uint8_t mod   = (other >> 8) & 0x1F;
+          uint8_t final = mod & 0x10 ? mod << 4 : mod;
+          register_mods(final);
+        }
+      }
+      break;
+    };
+    case 0:
+      uprintf("clearing\n");
+      clear_mods();
+      break;
+  }
+  return false;
 }
 
 #endif

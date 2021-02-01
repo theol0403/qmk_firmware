@@ -55,6 +55,8 @@
 #define COMBO_MUST_HOLD_MODS
 #define COMBO_MUST_TAP_PER_COMBO
 #define COMBO_HOLD_TERM 150
+#define COMBO_PROCESS_KEY_RELEASE
+#define COMBO_BUFFER_LENGTH 8
 
 // Mouse key speed and acceleration.
 #define MK_KINETIC_SPEED
