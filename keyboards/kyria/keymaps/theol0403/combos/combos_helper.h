@@ -106,6 +106,15 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         }
     }
   }
+  action_tapping_process((keyrecord_t){});
+  if (get_mods() & MOD_MASK_SHIFT) {
+    switch (combo_index) {
+      case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+      case BEGIN_WORDS ... END_WORDS:
+        clear_mods();
+        set_oneshot_mods(MOD_LSFT);
+    }
+  }
   switch (combo_index) {
 #include "combos.h"
     // Allow user overrides per keymap

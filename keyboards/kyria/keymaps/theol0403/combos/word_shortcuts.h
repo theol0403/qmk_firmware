@@ -2,6 +2,7 @@
 
 SUBS(word_that, "that", HM_T, HM_H, HM_A)
 SUBS(word_inf, "infinity", HM_I, HM_N, KC_F)
+SUBS(word_the, "The", HM_T, HM_H, THMB_L2, HM_N)
 
 // SUBS(word_was, "was", KC_W, HM_A)
 // SUBS(word_with, "with", KC_W, HM_T)
