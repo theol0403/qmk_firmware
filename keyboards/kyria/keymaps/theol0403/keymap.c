@@ -324,6 +324,13 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
   return true;
 }
 
+#  define NEW_RECORD(press)                  \
+    .event = {                               \
+        .key     = {.col = 254, .row = 254}, \
+        .time    = timer_read() | 1,         \
+        .pressed = press,                    \
+    }
+
 bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
   // the number of keys remaining
   switch (__builtin_popcount(combo->state)) {
@@ -336,14 +343,19 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       uint16_t other = pgm_read_word(&combo->keys[other_index]);
       switch (other) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          uint8_t mod   = (other >> 8) & 0x3;
-          uint8_t final = (mod & 0x10 ? mod << 4 : mod) & 0x33;
-          register_mods(final);
+          uint8_t mod = (other >> 8) & 0x3;
+          action_tapping_process((keyrecord_t){
+              NEW_RECORD(true),
+              .keycode = MT(mod, KC_NO),
+          });
           break;
         }
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
           uint8_t layer = (other >> 8) & 0x3;
-          layer_on(layer);
+          action_tapping_process((keyrecord_t){
+              NEW_RECORD(true),
+              .keycode = LT(layer, KC_NO),
+          });
           break;
         }
       }
@@ -356,14 +368,19 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       uint16_t last = pgm_read_word(&combo->keys[last_index]);
       switch (last) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          uint8_t mod   = (last >> 8) & 0x3;
-          uint8_t final = (mod & 0x10 ? mod << 4 : mod) & 0x33;
-          unregister_mods(final);
+          uint8_t mod = (last >> 8) & 0x3;
+          action_tapping_process((keyrecord_t){
+              NEW_RECORD(false),
+              .keycode = MT(mod, KC_NO),
+          });
           break;
         }
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
           uint8_t layer = (last >> 8) & 0x3;
-          layer_off(layer);
+          action_tapping_process((keyrecord_t){
+              NEW_RECORD(false),
+              .keycode = LT(layer, KC_NO),
+          });
           break;
         }
       }
