@@ -350,19 +350,19 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       break;
     }
     case 1: {
-      // the index of the other key
-      uint8_t other_index = __builtin_ctz(combo->state);
+      // the index of the last key
+      uint8_t last_index = __builtin_ctz(combo->state);
       // the other keycode
-      uint16_t other = pgm_read_word(&combo->keys[other_index]);
-      switch (other) {
+      uint16_t last = pgm_read_word(&combo->keys[last_index]);
+      switch (last) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          uint8_t mod   = (other >> 8) & 0x3;
+          uint8_t mod   = (last >> 8) & 0x3;
           uint8_t final = (mod & 0x10 ? mod << 4 : mod) & 0x33;
           unregister_mods(final);
           break;
         }
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-          uint8_t layer = (other >> 8) & 0x3;
+          uint8_t layer = (last >> 8) & 0x3;
           layer_off(layer);
           break;
         }
