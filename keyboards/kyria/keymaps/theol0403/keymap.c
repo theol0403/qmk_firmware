@@ -36,7 +36,7 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS };
 
 #define HM_Z LT(NUM, KC_Z)
 #define HM_K LT(SYM, KC_K)
-#define HM_Q KC_Q
+#define HM_Q LT(MDIA, KC_Q)
 #define HM_SL LT(NAV, KC_SLASH)
 
 #define L(l) DF(l)
@@ -332,18 +332,20 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
     }
 
 bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
-  // the number of keys remaining
-  switch (__builtin_popcount(combo->state)) {
-    case 2: {
-      // remove the key that was released from the state
-      uint8_t new_state = (~(1 << key_index) & combo->state);
-      // the index of the other key
-      uint8_t other_index = __builtin_ctz(new_state);
-      // the other keycode
-      uint16_t other = pgm_read_word(&combo->keys[other_index]);
+  // count the number of keys that were held down before
+  uint8_t count = __builtin_popcount(combo->state);
+  // if the key being released is the first that breaks the combo
+  if (pgm_read_word(&combo->keys[count]) == COMBO_END) {
+    // loop through all keys that are still held down
+    for (uint8_t i = 0; i < count; ++i) {
+      // don't touch the key that was released
+      if (i == key_index) continue;
+      // get the keycode of the keys still being pressed
+      uint16_t other = pgm_read_word(&combo->keys[i]);
       switch (other) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          uint8_t mod = (other >> 8) & 0x3;
+          // in the case that the keycode is a MT, get the mod and apply it
+          uint8_t mod = (other >> 8) & 0x1F;
           action_tapping_process((keyrecord_t){
               NEW_RECORD(true),
               .keycode = MT(mod, KC_NO),
@@ -351,7 +353,8 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
           break;
         }
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-          uint8_t layer = (other >> 8) & 0x3;
+          // in the case that the keycode is a LT, get the layer and apply it
+          uint8_t layer = (other >> 8) & 0x1F;
           action_tapping_process((keyrecord_t){
               NEW_RECORD(true),
               .keycode = LT(layer, KC_NO),
@@ -359,32 +362,26 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
           break;
         }
       }
-      break;
     }
-    case 1: {
-      // the index of the last key
-      uint8_t last_index = __builtin_ctz(combo->state);
-      // the other keycode
-      uint16_t last = pgm_read_word(&combo->keys[last_index]);
-      switch (last) {
-        case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          uint8_t mod = (last >> 8) & 0x3;
-          action_tapping_process((keyrecord_t){
-              NEW_RECORD(false),
-              .keycode = MT(mod, KC_NO),
-          });
-          break;
-        }
-        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-          uint8_t layer = (last >> 8) & 0x3;
-          action_tapping_process((keyrecord_t){
-              NEW_RECORD(false),
-              .keycode = LT(layer, KC_NO),
-          });
-          break;
-        }
+  } else {
+    // release all the tap-holds one by one
+    switch (keycode) {
+      case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
+        uint8_t mod = (keycode >> 8) & 0x1F;
+        action_tapping_process((keyrecord_t){
+            NEW_RECORD(false),
+            .keycode = MT(mod, KC_NO),
+        });
+        break;
       }
-      break;
+      case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
+        uint8_t layer = (keycode >> 8) & 0x1F;
+        action_tapping_process((keyrecord_t){
+            NEW_RECORD(false),
+            .keycode = LT(layer, KC_NO),
+        });
+        break;
+      }
     }
   }
   return false;
