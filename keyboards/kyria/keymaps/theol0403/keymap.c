@@ -343,45 +343,17 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       // get the keycode of the keys still being pressed
       uint16_t other = pgm_read_word(&combo->keys[i]);
       switch (other) {
-        case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-          // in the case that the keycode is a MT, get the mod and apply it
-          uint8_t mod = (other >> 8) & 0x1F;
-          action_tapping_process((keyrecord_t){
-              NEW_RECORD(true),
-              .keycode = MT(mod, KC_NO),
-          });
-          break;
-        }
-        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-          // in the case that the keycode is a LT, get the layer and apply it
-          uint8_t layer = (other >> 8) & 0x1F;
-          action_tapping_process((keyrecord_t){
-              NEW_RECORD(true),
-              .keycode = LT(layer, KC_NO),
-          });
-          break;
-        }
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+          action_tapping_process((keyrecord_t){NEW_RECORD(true), .keycode = other & ~0xFF});
       }
     }
   } else {
     // release all the tap-holds one by one
     switch (keycode) {
-      case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
-        uint8_t mod = (keycode >> 8) & 0x1F;
-        action_tapping_process((keyrecord_t){
-            NEW_RECORD(false),
-            .keycode = MT(mod, KC_NO),
-        });
-        break;
-      }
-      case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
-        uint8_t layer = (keycode >> 8) & 0x1F;
-        action_tapping_process((keyrecord_t){
-            NEW_RECORD(false),
-            .keycode = LT(layer, KC_NO),
-        });
-        break;
-      }
+      case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+      case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+        action_tapping_process((keyrecord_t){NEW_RECORD(false), .keycode = keycode & ~0xFF});
     }
   }
   return false;
