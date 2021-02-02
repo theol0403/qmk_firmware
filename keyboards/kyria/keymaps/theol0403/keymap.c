@@ -325,11 +325,11 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
 }
 
 bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
-  // remove the key that was released from the state
-  uint8_t new_state = (~(1 << key_index) & combo->state);
   // the number of keys remaining
-  switch (__builtin_popcount(new_state)) {
-    case 1: {
+  switch (__builtin_popcount(combo->state)) {
+    case 2: {
+      // remove the key that was released from the state
+      uint8_t new_state = (~(1 << key_index) & combo->state);
       // the index of the other key
       uint8_t other_index = __builtin_ctz(new_state);
       // the other keycode
@@ -339,13 +339,36 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
           uint8_t mod   = (other >> 8) & 0x3;
           uint8_t final = (mod & 0x10 ? mod << 4 : mod) & 0x33;
           register_mods(final);
+          break;
+        }
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
+          uint8_t layer = (other >> 8) & 0x3;
+          layer_on(layer);
+          break;
         }
       }
       break;
-    };
-    case 0:
-      clear_mods();
+    }
+    case 1: {
+      // the index of the other key
+      uint8_t other_index = __builtin_ctz(combo->state);
+      // the other keycode
+      uint16_t other = pgm_read_word(&combo->keys[other_index]);
+      switch (other) {
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX: {
+          uint8_t mod   = (other >> 8) & 0x3;
+          uint8_t final = (mod & 0x10 ? mod << 4 : mod) & 0x33;
+          unregister_mods(final);
+          break;
+        }
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX: {
+          uint8_t layer = (other >> 8) & 0x3;
+          layer_off(layer);
+          break;
+        }
+      }
       break;
+    }
   }
   return false;
 }
