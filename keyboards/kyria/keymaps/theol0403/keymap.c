@@ -286,7 +286,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     case THMB_R3:
     case THMB_L1:
     case THMB_L3:
-    case THMB_L2:
       return true;
   }
   return false;
@@ -298,10 +297,10 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
     case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-      return 9;
+      return 5;
       break;
     case BEGIN_TRIGRAMS ... END_TRIGRAMS:
-      return 30;
+      return 25;
       break;
     case BEGIN_WORDS ... END_WORDS:
       return 25;
@@ -345,7 +344,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       switch (other) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX:
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
-          action_tapping_process((keyrecord_t){NEW_RECORD(true), .keycode = other & ~0xFF});
+          action_tapping_process((keyrecord_t){NEW_RECORD(true), .keycode = other & 0xFF00});
       }
     }
   } else {
@@ -353,7 +352,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     switch (keycode) {
       case QK_MOD_TAP ... QK_MOD_TAP_MAX:
       case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
-        action_tapping_process((keyrecord_t){NEW_RECORD(false), .keycode = keycode & ~0xFF});
+        action_tapping_process((keyrecord_t){NEW_RECORD(false), .keycode = keycode & 0xFF00});
     }
   }
   return false;
