@@ -291,6 +291,12 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   return false;
 }
 
+bool get_bilateral_combinations(keypos_t *hold, keypos_t *tap) {
+  bool same     = (hold->row < MATRIX_ROWS / 2) == (tap->row < MATRIX_ROWS / 2);
+  bool adjacent = same && (abs(hold->row - tap->row) < 3) && (abs(tap->col - hold->col) < 3);
+  return adjacent;
+}
+
 #ifdef COMBO_ENABLE
 #  include "combos/combos_helper.h"
 
