@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NUM] = LAYOUT(
   L(NUM), _,       KC_6, KC_5, KC_4, KC_CIRC,                                _,       _,       _,       _,       RESET,   L(NUM), 
   UNL,    KC_ASTR, KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_RCTL, KC_RSFT, KC_RALT, KC_RGUI, UNL,     
-  LSF,    _,       KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       RSF,
+  LSF,    KC_SLSH, KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       RSF,
                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
@@ -303,10 +303,10 @@ bool get_bilateral_combinations(keypos_t *hold, keypos_t *tap) {
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
     case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-      return 5;
+      return 9;
       break;
     case BEGIN_TRIGRAMS ... END_TRIGRAMS:
-      return 25;
+      return 30;
       break;
     case BEGIN_WORDS ... END_WORDS:
       return 25;
@@ -350,6 +350,8 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
       switch (other) {
         case QK_MOD_TAP ... QK_MOD_TAP_MAX:
         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+          // remove alt and gui
+          if ((other & QK_MOD_TAP) == QK_MOD_TAP) other = other & 0xF3FF;
           action_tapping_process((keyrecord_t){NEW_RECORD(true), .keycode = other & 0xFF00});
       }
     }
@@ -358,6 +360,7 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
     switch (keycode) {
       case QK_MOD_TAP ... QK_MOD_TAP_MAX:
       case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+        if ((keycode & QK_MOD_TAP) == QK_MOD_TAP) keycode = keycode & 0xF3FF;
         action_tapping_process((keyrecord_t){NEW_RECORD(false), .keycode = keycode & 0xFF00});
     }
   }
