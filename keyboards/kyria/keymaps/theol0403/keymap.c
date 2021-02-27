@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [NUM] = LAYOUT(
   L(NUM), _,       KC_6, KC_5, KC_4, KC_CIRC,                                _,       _,       _,       _,       RESET,   L(NUM), 
   UNL,    KC_ASTR, KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_RCTL, KC_RSFT, KC_RALT, KC_RGUI, UNL,     
-  LSF,    KC_SLSH, KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _,      KC_SPC, _,       _,       _,       _,       _,       RSF,
+  LSF,    KC_SLSH, KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _,      KC_SPC, _,       KC_LPRN, KC_RPRN, KC_CIRC, _,       RSF,
                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
@@ -300,7 +300,7 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R2:
     case THMB_R1:
-    case THMB_L2:
+      // case THMB_L2:
       return true;
   }
   return false;
