@@ -13,6 +13,7 @@
 
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
+#define LAYER_STATE_8BIT
 
 #define QMK_KEYS_PER_SCAN 4  // Recommended for heavy chording.
 
@@ -42,7 +43,7 @@
 #define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
-#define BILATERAL_COMBINATIONS
+#define BILATERAL_COMBINATIONS 300
 #define RETRO_TAPPING_PER_KEY
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
