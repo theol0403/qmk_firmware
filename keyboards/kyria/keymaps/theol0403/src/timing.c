@@ -1,4 +1,4 @@
-#include "keymap.h"
+#include "../keymap.h"
 
 #define THUMB_TERM 190
 #define PINKY_TERM 230

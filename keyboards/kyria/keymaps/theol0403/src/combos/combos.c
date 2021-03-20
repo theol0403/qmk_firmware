@@ -1,7 +1,5 @@
-#include "keymap.h"
-
-#ifdef COMBO_ENABLE
-#  include "combos/combos_helper.h"
+#include "../../keymap.h"
+#include "combos_helper.h"
 
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
@@ -69,5 +67,3 @@ bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key
   }
   return false;
 }
-
-#endif

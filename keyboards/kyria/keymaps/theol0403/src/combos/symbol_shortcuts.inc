@@ -1,5 +1,3 @@
-#include "action_code.h"
-#include "keycode.h"
 #define BEGIN_SHORTCUT combo_sym_hi
 TAPP(sym_hi, S(KC_I), U_H, U_I)
 // SUBS(sym_kc, "KC_", U_K, KC_C)

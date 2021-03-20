@@ -1,6 +1,5 @@
-#include "keymap.h"
+#include "../keymap.h"
 
-#ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; }
 
 static void render_status(void) {
@@ -71,4 +70,3 @@ void oled_task_user(void) {
 }
 
 void suspend_power_down_user() { oled_off(); }
-#endif

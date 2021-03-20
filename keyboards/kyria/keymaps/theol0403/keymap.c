@@ -1,5 +1,5 @@
 #include "keymap.h"
-#include "smartcaps.h"
+#include "src/smartcaps.h"
 
 // structural helpers
 #define _ KC_NO

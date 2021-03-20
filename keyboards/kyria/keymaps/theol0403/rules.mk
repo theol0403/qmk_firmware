@@ -13,11 +13,6 @@ SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
 MOUSEKEY_ENABLE = no
 
-SRC += combos.c
-SRC += oled.c
-SRC += smartcaps.c
-SRC += timing.c
-
 ifeq ($(HAND),RIGHT)
 COMBO_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
@@ -25,3 +20,14 @@ else ifeq ($(HAND),LEFT)
 CFLAGS += -DIS_LEFT=true
 endif
 
+
+ifeq ($(strip $(COMBO_ENABLE)), yes)
+	SRC += src/combos/combos.c
+endif
+
+ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
+	SRC += src/oled.c
+endif
+
+SRC += src/smartcaps.c
+SRC += src/timing.c

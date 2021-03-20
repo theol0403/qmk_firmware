@@ -1,7 +1,6 @@
-// credit germ from gboards
-// Keymap helpers
+// credit to germ from gboards
+// this helper takes a combo definition file (combos.inc) and converts it to a qmk-compatible combo syntax
 
-#include "action.h"
 #define K_ENUM(name, key, ...) combo_##name,
 #define K_DATA(name, key, ...) const uint16_t PROGMEM cmb_##name[] = {__VA_ARGS__, COMBO_END};
 #define K_COMB(name, key, ...) [combo_##name] = COMBO(cmb_##name, key),
@@ -44,7 +43,7 @@
 #undef BEGIN_SECTION
 #undef END_SECTION
 enum combos {
-#include "combos.h"
+#include "combos.inc"
   COMBO_LENGTH
 };
 // Export length to combo module
@@ -65,7 +64,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #undef END_SECTION
 #define BEGIN_SECTION BLANK
 #define END_SECTION BLANK
-#include "combos.h"
+#include "combos.inc"
 #undef COMB
 #undef SUBS
 #undef TOGG
@@ -81,7 +80,7 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 #undef BEGIN_SECTION
 #undef END_SECTION
 combo_t key_combos[] = {
-#include "combos.h"
+#include "combos.inc"
 };
 #undef COMB
 #undef SUBS
@@ -96,6 +95,7 @@ combo_t key_combos[] = {
 #define TAPP A_TAPP
 #define TAPP8 A_TAPP8
 void process_combo_event(uint16_t combo_index, bool pressed) {
+  // // apply smart caps to combos
   // if (smart_caps_on) {
   //   switch (combo_index) {
   //     case BEGIN_CORRECTIVE_BIGRAMS ... END_WORDS:
@@ -106,6 +106,8 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   //       }
   //   }
   // }
+
+  // only shift first character of word combo
   action_tapping_process((keyrecord_t){});
   if (get_mods() & MOD_MASK_SHIFT) {
     switch (combo_index) {
@@ -115,11 +117,12 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
         set_oneshot_mods(MOD_LSFT);
     }
   }
+
   switch (combo_index) {
-#include "combos.h"
-    // Allow user overrides per keymap
-#if __has_include("combos_user.h")
-#  include "combos_user.h"
+#include "combos.inc"
+// Allow user overrides per keymap
+#if __has_include("user_combos.inc")
+#  include "user_combos.inc"
 #endif
   }
 }
