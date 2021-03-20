@@ -13,6 +13,11 @@ SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
 MOUSEKEY_ENABLE = no
 
+SRC += combos.c
+SRC += oled.c
+SRC += smartcaps.c
+SRC += timing.c
+
 ifeq ($(HAND),RIGHT)
 COMBO_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
