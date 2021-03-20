@@ -1,0 +1,91 @@
+[legends]
+U_EXLM = !
+KC_EXLM = !
+U_QUES = ? !
+KC_QUES = ? !
+KC_GT = >
+KC_LT = <
+KC_HASH = #
+KC_PERC = %
+KC_AT = @
+KC_DLR = $
+KC_CIRC = ^
+KC_LCBR = {
+KC_LPRN = (
+KC_LBRC = [
+KC_RCBR = }
+KC_RPRN = )
+KC_RBRC = ]
+KC_PIPE = |
+KC_GRV = ` ~
+KC_TILD = ~
+KC_PLUS = +
+KC_AMPR = &
+KC_UNDS = _
+KC_MINS = -
+KC_EQL = =
+U_SL = / \
+KC_SLSH = / \
+U_COMM = , ;
+KC_COMM = , ;
+KC_ASTR = *
+U_DOT = . :
+KC_DOT = . :
+KC_BSLS = \ |
+U_QUOT = ' "
+KC_QUOT = ' "
+KC_SCLN = ; :
+_ =
+__ =
+
+U_P = P
+U_L = L
+U_U = U
+U_Z = Z
+
+U_Y = Y
+U_T = T
+U_H = H
+U_A = A
+
+U_K = K
+U_M = M
+U_F = F
+U_J = J
+U_B = B
+U_D = D
+U_R = R
+
+U_C = C
+U_S = S
+U_N = N
+U_O = O
+U_I = I
+
+U_V = V
+U_G = G
+U_W = W
+U_X = X
+U_Q = Q
+
+U_TH =
+U_GM =
+
+T_L1 = ESC
+T_L2 = E
+T_L3 = TAB
+
+T_R0 = DEL
+T_R1 = BSPC
+T_R2 = SPC
+T_R3 = ENT
+
+UNL =
+L(NUM) =
+L(SYM) =
+L(NAV) =
+L(FUN) =
+L(MDA) =
+
+RST =
+EST =

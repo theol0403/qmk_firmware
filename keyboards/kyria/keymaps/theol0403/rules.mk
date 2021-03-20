@@ -1,6 +1,6 @@
-ifndef HAND
-HAND = RIGHT
-endif
+.PHONY: %
+%:
+	keymapviz -r keyboards/kyria/keymaps/theol0403/keymap.c -c keyboards/kyria/keymaps/theol0403/keymapviz.toml > /dev/null
 
 OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
 ENCODER_ENABLE = yes       # Enables the use of one or more encoders
@@ -12,6 +12,10 @@ MAGIC_ENABLE = no
 SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
 MOUSEKEY_ENABLE = no
+
+ifndef HAND
+HAND = RIGHT
+endif
 
 ifeq ($(HAND),RIGHT)
 COMBO_ENABLE = yes
