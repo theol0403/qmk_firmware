@@ -3,7 +3,7 @@
 // system settings
 #ifdef OLED_DRIVER_ENABLE
 #  define OLED_DISPLAY_128X64
-#  define OLED_UPDATE_INTERVAL 20
+#  define OLED_UPDATE_INTERVAL 40
 #endif
 
 #ifdef ENCODER_ENABLE

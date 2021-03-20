@@ -6,7 +6,7 @@
 #define _ KC_NO
 #define __ _______
 
-enum layers { BASE, NUM, SYM, NAV, FUNC, MDIA, GAME };
+enum layers { BASE, NUM, SYM, NAV, FUNC, MDIA, THE, GAME };
 
 enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS };
 
@@ -23,7 +23,7 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS };
 
 #define HM_S RCTL_T(KC_S)
 #define HM_N RSFT_T(KC_N)
-#define HM_O RALT_T(KC_O)
+#define HM_O LALT_T(KC_O)
 #define HM_I GUI_T(KC_I)
 
 #define THMB_L1 LT(MDIA, KC_ESC)
@@ -49,38 +49,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT(
   _,    _,    KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D,  KC_R, KC_QUOT, KC_BSLS, _,
   HM_Z, HM_Y, HM_T, HM_H, HM_A, KC_DOT,                                      KC_C,    HM_S,  HM_N, HM_O,    HM_I,    HM_SL,
-  LSF,  HM_K, KC_M, KC_F, KC_J, KC_COMM, MO(NUM), MO(SYM), _,       MO(NAV), KC_V,    KC_G,  KC_W, KC_X,    HM_Q,    RSF,
-                    _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,TG(GAME)
+  LSF,  HM_K, KC_M, KC_F, KC_J, KC_COMM, _,       _,       TG(THE),TG(GAME), KC_V,    KC_G,  KC_W, KC_X,    HM_Q,    RSF,
+                    _,    _,    THMB_L1, THMB_L2, THMB_L3, THMB_R3, THMB_R2, THMB_R1, KC_DEL,_
 ),
 [NUM] = LAYOUT(
-  L(NUM), _,       KC_6, KC_5, KC_4, KC_CIRC,                                _,       _,       _,       _,       RESET,   L(NUM), 
-  UNL,    KC_ASTR, KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_RCTL, KC_RSFT, KC_RALT, KC_RGUI, UNL,     
+  L(NUM), _,       KC_6, KC_5, KC_4, KC_CIRC,                                _,       _,       _,       _,       RESET,   L(NUM),
+  UNL,    KC_ASTR, KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
   LSF,    KC_SLSH, KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _,      KC_SPC, _,       KC_LPRN, KC_RPRN, KC_CIRC, _,       RSF,
                          _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [SYM] = LAYOUT(
-  L(SYM), KC_TILD, KC_LT,   KC_LCBR, KC_RCBR, KC_GT,                                    _,       _,       _,       EEP_RST, RESET,   L(SYM), 
-  UNL,    KC_HASH, KC_PERC, KC_LPRN, KC_RPRN, KC_AT,                                    _,       KC_RCTL, KC_RSFT, KC_RALT, KC_RGUI, UNL,     
+  L(SYM), KC_TILD, KC_LT,   KC_LCBR, KC_RCBR, KC_GT,                                    _,       _,       _,       EEP_RST, RESET,   L(SYM),
+  UNL,    KC_HASH, KC_PERC, KC_LPRN, KC_RPRN, KC_AT,                                    _,       KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
   LSF,    KC_GRV,  KC_PIPE, KC_LBRC, KC_RBRC, KC_EQL,  _,      _,       _,      _,      KC_BSPC, _,       _,       _,       _,       RSF,
                             _,       _,       KC_UNDS, KC_DLR, KC_AMPR, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [NAV] = LAYOUT(
-  L(NAV), RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, L(NAV), 
-  UNL,    KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   UNL,     
+  L(NAV), RESET,   _,       _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, L(NAV),
+  UNL,    KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, U_UND,   UNL,
   LSF,    U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _, _,      _,      U_UND,   U_PST,   U_CPY,   U_CUT,   U_RDO,   RSF,
                             _,       _,       _,     _, _, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [FUNC] = LAYOUT(
-  L(FUNC), KC_F10, KC_F6, KC_F5, KC_F4, _,                                       _,       _,       _,       _,       RESET,   L(FUNC), 
-  UNL,     KC_F11, KC_F3, KC_F2, KC_F1, KC_PSCR,                                 _,       KC_RCTL, KC_RSFT, KC_RALT, KC_RGUI, UNL,     
+  L(FUNC), KC_F10, KC_F6, KC_F5, KC_F4, _,                                       _,       _,       _,       _,       RESET,   L(FUNC),
+  UNL,     KC_F11, KC_F3, KC_F2, KC_F1, KC_PSCR,                                 _,       KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
   LSF,     KC_F12, KC_F9, KC_F8, KC_F7, _,       _,      _,      KC_ENT, _,      _,       _,       _,       _,       _,       RSF,
                           _,     _,     KC_ESC,  KC_APP, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
 ),
 [MDIA] = LAYOUT(
-  L(MDIA), RESET,   EEP_RST, _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, L(MDIA), 
-  UNL,     KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, UNL,     
+  L(MDIA), RESET,   EEP_RST, _,       _,       _,                                      RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, L(MDIA),
+  UNL,     KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                                      KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, UNL,
   LSF,     U_RDO,   U_CUT,   U_CPY,   U_PST,   U_UND, _, _,          _,       _,       _,       _,       _,       _,       _,       RSF,
                              _,       _,       _,     _, _, KC_MSTP, KC_MPLY, KC_MUTE, _,       _
+),
+[THE] = LAYOUT(
+  _,    _,    KC_P, KC_L, KC_U, KC_QUES,                                     KC_B,    KC_D,  KC_R, KC_QUOT, KC_BSLS, _,
+  KC_Z, KC_Y, KC_T, KC_H, KC_A, KC_DOT,                                      KC_C,    KC_S,  KC_N, KC_O,    KC_I,    KC_SLASH,
+  LSF,  KC_K, KC_M, KC_F, KC_J, KC_COMM, _, _, TG(THE),_, KC_V,    KC_G,  KC_W, KC_X,    KC_Q,    RSF,
+                    _,    _,    KC_ESC, KC_E, KC_TAB, KC_ENT, KC_SPACE, KC_BSPC, KC_DEL,_
 ),
 [GAME] = LAYOUT(
   __, __,   KC_Q, KC_W, KC_R, KC_R,                        __,   __,   __,   __,   __, __,
@@ -178,8 +184,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_SCOLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_SCOLON);
     case HM_SL:
       return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BASE, record, KC_BSLS);
-    case HM_T:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LALT), BASE, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RALT), BASE, record, A(KC_TAB));
     case SENT:
       if (record->event.pressed) {
         tap_code(KC_DOT);
@@ -207,16 +211,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-#define THUMB_TERM 200
-#define PINKY_TERM 300
-#define CTRL_TERM 200
-#define SHIFT_TERM 150
+#define THUMB_TERM 190
+#define PINKY_TERM 230
+#define CTRL_TERM 180
+#define SHIFT_TERM 130
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case THMB_R1:
       return THUMB_TERM - 60;
     case THMB_R2:
-      return THUMB_TERM + 10;
+      return THUMB_TERM + 20;
     case THMB_R3:
     case THMB_L1:
     case THMB_L2:
@@ -317,12 +321,12 @@ bool get_bilateral_combinations(keypos_t *hold, keypos_t *tap) {
 
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
-    case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-      return 9;
-      break;
-    case BEGIN_TRIGRAMS ... END_TRIGRAMS:
-      return 30;
-      break;
+    // case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
+    //   return 9;
+    //   break;
+    // case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+    //   return 30;
+    //   break;
     case BEGIN_WORDS ... END_WORDS:
       return 25;
       break;
@@ -429,6 +433,9 @@ static void render_status(void) {
       break;
     case GAME:
       oled_write_P(PSTR("G\n"), false);
+      break;
+    case THE:
+      oled_write_P(PSTR("THE\n"), false);
       break;
   }
 }

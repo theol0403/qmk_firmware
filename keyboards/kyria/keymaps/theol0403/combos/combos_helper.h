@@ -96,20 +96,20 @@ combo_t key_combos[] = {
 #define TAPP A_TAPP
 #define TAPP8 A_TAPP8
 void process_combo_event(uint16_t combo_index, bool pressed) {
-  if (smart_caps_on) {
-    switch (combo_index) {
-      case BEGIN_CORRECTIVE_BIGRAMS ... END_WORDS:
-        if (pressed) {
-          register_mods(MOD_LSFT);
-        } else {
-          unregister_mods(MOD_LSFT);
-        }
-    }
-  }
+  // if (smart_caps_on) {
+  //   switch (combo_index) {
+  //     case BEGIN_CORRECTIVE_BIGRAMS ... END_WORDS:
+  //       if (pressed) {
+  //         register_mods(MOD_LSFT);
+  //       } else {
+  //         unregister_mods(MOD_LSFT);
+  //       }
+  //   }
+  // }
   action_tapping_process((keyrecord_t){});
   if (get_mods() & MOD_MASK_SHIFT) {
     switch (combo_index) {
-      case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+      // case BEGIN_TRIGRAMS ... END_TRIGRAMS:
       case BEGIN_WORDS ... END_WORDS:
         clear_mods();
         set_oneshot_mods(MOD_LSFT);
