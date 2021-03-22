@@ -3,6 +3,7 @@
 static bool smart_caps_on = false;
 
 void smart_caps_enable() { smart_caps_on = true; }
+bool smart_caps_status() { return smart_caps_on; }
 
 // decide whether the incoming keycode should disable smart caps
 void smart_caps_check_disable(uint16_t keycode, keyrecord_t *record) {

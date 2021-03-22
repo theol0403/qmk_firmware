@@ -1,24 +1,28 @@
 #include "../keymap.h"
+#include "smartcaps.h"
 
 #define COMBOS_FILE "combos/combos.h"
 #include "combos_helper.h"
 
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
   switch (index) {
-    // case BEGIN_CORRECTIVE_BIGRAMS ... END_CORRECTIVE_BIGRAMS:
-    //   return 9;
-    //   break;
-    // case BEGIN_TRIGRAMS ... END_TRIGRAMS:
-    //   return 30;
-    //   break;
-    case BEGIN_WORDS ... END_WORDS:
+    case BEGIN_ACCELERATORS ... END_ACCELERATORS:
       return 25;
       break;
-    case BEGIN_SHORTCUT ... END_SHORTCUT:
-      return 25;
+    case BEGIN_ACTIONS ... END_ACTIONS:
+      return 40;
       break;
     case BEGIN_HOLDS ... END_HOLDS:
       return 70;
+      break;
+    case BEGIN_BIGRAMS ... END_BIGRAMS:
+      return 7;
+      break;
+    case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+      return 20;
+      break;
+    case BEGIN_WORDS ... END_WORDS:
+      return 25;
       break;
   }
   return COMBO_TERM;

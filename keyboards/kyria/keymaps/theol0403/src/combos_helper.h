@@ -95,21 +95,23 @@ const combo_t key_combos[] = {
 #define TAPP A_TAPP
 #define TAPP8 A_TAPP8
 void process_combo_event(uint16_t combo_index, bool pressed) {
-  // // apply smart caps to combos
-  // if (smart_caps_on) {
-  //   switch (combo_index) {
-  //     case BEGIN_CORRECTIVE_BIGRAMS ... END_WORDS:
-  //       if (pressed) {
-  //         register_mods(MOD_LSFT);
-  //       } else {
-  //         unregister_mods(MOD_LSFT);
-  //       }
-  //   }
-  // }
-
-  // only shift first character of word combo
+  // resolve any pending mod-taps
   action_tapping_process((keyrecord_t){});
-  if (get_mods() & MOD_MASK_SHIFT) {
+
+  // apply smart caps to combos
+  if (smart_caps_status()) {
+    switch (combo_index) {
+      case BEGIN_BIGRAMS ... END_BIGRAMS:
+      case BEGIN_TRIGRAMS ... END_TRIGRAMS:
+      case BEGIN_WORDS ... END_WORDS:
+        if (pressed) {
+          register_mods(MOD_LSFT);
+        } else {
+          unregister_mods(MOD_LSFT);
+        }
+    }
+  } else if (get_mods() & MOD_MASK_SHIFT) {
+    // only shift first character of word combo
     switch (combo_index) {
       // case BEGIN_TRIGRAMS ... END_TRIGRAMS:
       case BEGIN_WORDS ... END_WORDS:

@@ -102,4 +102,4 @@ SUBS(word_the, "The", U_T, U_H, T_L2, U_N)
 // SUBS(word_little,"little", KC_L, T_L2)
 // SUBS(word_found,"found", KC_F, KC_D)
 
-#define END_WORDS combo_word_inf
+#define END_WORDS combo_word_the
