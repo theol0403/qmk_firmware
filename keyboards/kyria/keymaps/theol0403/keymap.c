@@ -158,15 +158,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return false;
   };
   switch (keycode) {
-      // custom shifted keycode pairs
-    case KC_QUES:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), -1, record, KC_EXLM) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BSE, record, KC_EXLM);
-    case KC_DOT:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), -1, record, KC_COLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BSE, record, KC_COLON);
-    case KC_COMM:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), -1, record, KC_SCOLON) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BSE, record, KC_SCOLON);
-    case U_SL:
-      return custom_keycode_on_modifiers(MOD_BIT(KC_LSFT), -1, record, KC_BSLS) && custom_keycode_on_modifiers(MOD_BIT(KC_RSFT), BSE, record, KC_BSLS);
       // finish a sentence using period and space and shift the next character
     case SENT:
       if (record->event.pressed) {
