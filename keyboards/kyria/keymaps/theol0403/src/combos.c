@@ -1,6 +1,6 @@
 #include "../keymap.h"
 
-#define COMBOS_FILE "../combos/combos.inc"
+#define COMBOS_FILE "combos/combos.inc"
 #include "combos_helper.h"
 
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
