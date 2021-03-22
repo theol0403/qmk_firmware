@@ -53,6 +53,7 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS };
 #define U_Q LT(MDA, KC_Q)
 
 // left thumbs
+#define T_LK KC_MUTE
 #define T_L1 LT(MDA, KC_ESC)
 #define T_L2 LT(NAV, KC_E)
 #define T_L3 MT(MOD_LSFT, KC_TAB)
