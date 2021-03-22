@@ -19,6 +19,7 @@ endif
 
 ifeq ($(HAND),RIGHT)
 COMBO_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
 CFLAGS += -DIS_LEFT=true
@@ -31,6 +32,10 @@ endif
 
 ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
 	SRC += src/oled.c
+endif
+
+ifeq ($(strip $(KEY_OVERRIDE_ENABLE)), yes)
+	SRC += src/overrides.c
 endif
 
 SRC += src/smartcaps.c
