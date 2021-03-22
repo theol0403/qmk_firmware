@@ -13,18 +13,18 @@ SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
 MOUSEKEY_ENABLE = no
 
+COMBO_ENABLE = yes
+KEY_OVERRIDE_ENABLE = yes
+
 ifndef HAND
 HAND = RIGHT
 endif
 
 ifeq ($(HAND),RIGHT)
-COMBO_ENABLE = yes
-KEY_OVERRIDE_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
 CFLAGS += -DIS_LEFT=true
 endif
-
 
 ifeq ($(strip $(COMBO_ENABLE)), yes)
 	SRC += src/combos.c
