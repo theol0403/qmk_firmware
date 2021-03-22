@@ -1,4 +1,6 @@
-#include "../../keymap.h"
+#include "../keymap.h"
+
+#define COMBOS_FILE "../combos/combos.inc"
 #include "combos_helper.h"
 
 int16_t get_combo_term(uint16_t index, combo_t *combo) {
@@ -30,12 +32,12 @@ bool get_combo_must_tap(uint16_t index, combo_t *combo) {
   return true;
 }
 
-#  define NEW_RECORD(press)                  \
-    .event = {                               \
-        .key     = {.col = 254, .row = 254}, \
-        .time    = timer_read() | 1,         \
-        .pressed = press,                    \
-    }
+#define NEW_RECORD(press)                  \
+  .event = {                               \
+      .key     = {.col = 254, .row = 254}, \
+      .time    = timer_read() | 1,         \
+      .pressed = press,                    \
+  }
 
 bool process_combo_key_release(uint16_t combo_index, combo_t *combo, uint8_t key_index, uint16_t keycode) {
   // count the number of keys that were held down before

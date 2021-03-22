@@ -26,7 +26,7 @@ endif
 
 
 ifeq ($(strip $(COMBO_ENABLE)), yes)
-	SRC += src/combos/combos.c
+	SRC += src/combos.c
 endif
 
 ifeq ($(strip $(OLED_DRIVER_ENABLE)), yes)
