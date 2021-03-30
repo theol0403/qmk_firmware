@@ -39,13 +39,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
  * |      | / \  |  9   |  8   |  7   |  =   |      |      |  |      |      |      |  (   |  )   |  ^   |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
- *                      |      |      |  -   |  0   |  +   |  | ENT  | SPC  | BSPC | DEL  |      |
+ *                      |      |      |  -   |  0   |  +   |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------' */
 [NUM] = LAYOUT(
-  _, _,       KC_6, KC_5, KC_4, KC_CIRC,                                _,       _,       _,       _,       _,       L(NUM),
-  _, KC_ASTR, KC_3, KC_2, KC_1, KC_DOT,                                 _,       KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
-  _, KC_SLSH, KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _,      _,      _,       KC_LPRN, KC_RPRN, KC_CIRC, _,       _,
-                    _,    _,    KC_MINS, KC_0, KC_PLUS, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
+  _, _,       KC_6, KC_5, KC_4, KC_CIRC,                      _, _,       _,       _,       _,       L(NUM),
+  _, KC_ASTR, KC_3, KC_2, KC_1, KC_DOT,                       _, KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
+  _, KC_SLSH, KC_9, KC_8, KC_7, KC_EQL,  _,    _,       _, _, _, KC_LPRN, KC_RPRN, KC_CIRC, _,       _,
+                    _,    _,    KC_MINS, KC_0, KC_PLUS, _, _, _, _,       _
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |  |   |  <   |  {   |  }   |  >   |                              |      |      |      |      |      |      |
@@ -54,13 +54,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
  * |      | ` ~  |  &   |  [   |  ]   |  =   |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
- *                      |      |      |  _   |  $   |  #   |  | ENT  | SPC  | BSPC | DEL  |      |
+ *                      |      |      |  _   |  $   |  #   |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------' */
 [SYM] = LAYOUT(
-  _, KC_PIPE, KC_LT,   KC_LCBR, KC_RCBR, KC_GT,                                    _,       _,       _,       _,       _,       L(SYM),
-  _, KC_ASTR, KC_PERC, KC_LPRN, KC_RPRN, KC_AT,                                    _,       KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
-  _, KC_GRV,  KC_AMPR, KC_LBRC, KC_RBRC, KC_EQL,  _,      _,       _,      _,      _,       _,       _,       _,       _,       _,
-                       _,       _,       KC_UNDS, KC_DLR, KC_HASH, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
+  _, KC_PIPE, KC_LT,   KC_LCBR, KC_RCBR, KC_GT,                          _, _,       _,       _,       _,       L(SYM),
+  _, KC_ASTR, KC_PERC, KC_LPRN, KC_RPRN, KC_AT,                          _, KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
+  _, KC_GRV,  KC_AMPR, KC_LBRC, KC_RBRC, KC_EQL,  _,      _,       _, _, _, _,       _,       _,       _,       _,
+                       _,       _,       KC_UNDS, KC_DLR, KC_HASH, _, _, _, _,       _
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |      |      |      |      |      |                              | HOME | PGDN | PGUP | END  | CAPS |      |
@@ -84,13 +84,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
  * |      | F12  |  F9  |  F8  |  F7  |      |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
- *                      |      |      | ESC  | APP  | TAB  |  | ENT  | SPC  | BSPC | DEL  |      |
+ *                      |      |      | ESC  | APP  | TAB  |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------' */
 [FUN] = LAYOUT(
-  _, KC_F10, KC_F6, KC_F5, KC_F4, _,                                       _,       _,       _,       _,       _,       L(FUN),
-  _, KC_F11, KC_F3, KC_F2, KC_F1, KC_PSCR,                                 _,       KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
-  _, KC_F12, KC_F9, KC_F8, KC_F7, _,       _,      _,      _,      _,      _,       _,       _,       _,       _,       _,
-                    _,     _,     KC_ESC,  KC_APP, KC_TAB, KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _
+  _, KC_F10, KC_F6, KC_F5, KC_F4, _,                             _, _,       _,       _,       _,       L(FUN),
+  _, KC_F11, KC_F3, KC_F2, KC_F1, KC_PSCR,                       _, KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,
+  _, KC_F12, KC_F9, KC_F8, KC_F7, _,       _,      _,      _, _, _, _,       _,       _,       _,       _,
+                    _,     _,     KC_ESC,  KC_APP, KC_TAB, _, _, _, _,       _
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |      |      |      |      |      |                              |RGB_TO|RGB_MO|RGB_VA|RGB_HU|RGB_SA|      |

@@ -13,8 +13,8 @@ SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
 MOUSEKEY_ENABLE = no
 
-COMBO_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
+COMBO_ENABLE = yes
 
 ifndef HAND
 HAND = RIGHT
@@ -40,3 +40,4 @@ endif
 
 SRC += src/smartcaps.c
 SRC += src/timing.c
+

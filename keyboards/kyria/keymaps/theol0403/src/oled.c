@@ -7,10 +7,10 @@ static void render_status(void) {
       oled_write_P(PSTR("\nLayer\n"), false);
   switch (get_highest_layer(layer_state)) {
     case BSE:
-      oled_write_P(PSTR("Base\n"), false);
+      oled_write_P(PSTR("Bse\n"), false);
       break;
     case MDA:
-      oled_write_P(PSTR("Media\n"), false);
+      oled_write_P(PSTR("Med\n"), false);
       break;
     case NAV:
       oled_write_P(PSTR("Nav\n"), false);
@@ -25,7 +25,7 @@ static void render_status(void) {
       oled_write_P(PSTR("Fun\n"), false);
       break;
     case GME:
-      oled_write_P(PSTR("Game\n"), false);
+      oled_write_P(PSTR("Gme\n"), false);
       break;
     case THE:
       oled_write_P(PSTR("THE\n"), false);

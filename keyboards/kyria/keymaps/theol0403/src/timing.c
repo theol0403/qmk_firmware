@@ -89,15 +89,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   return false;
 }
 
-bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case T_R2:
-    case T_R1:
-      // case T_L2:
-      return true;
-  }
-  return false;
-}
 
 bool get_bilateral_combinations(keypos_t *hold, keypos_t *tap) {
   bool same     = (hold->row < MATRIX_ROWS / 2) == (tap->row < MATRIX_ROWS / 2);
