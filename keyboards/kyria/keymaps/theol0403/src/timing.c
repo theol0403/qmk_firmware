@@ -1,9 +1,9 @@
 #include "../keymap.h"
 
 #define THUMB_TERM 190
-#define PINKY_TERM 230
-#define CTRL_TERM 180
-#define SHIFT_TERM 130
+#define PINKY_TERM 240
+#define CTRL_TERM 200
+#define SHIFT_TERM 140
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case T_R1:
@@ -88,7 +88,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
   }
   return false;
 }
-
 
 bool get_bilateral_combinations(keypos_t *hold, keypos_t *tap) {
   bool same     = (hold->row < MATRIX_ROWS / 2) == (tap->row < MATRIX_ROWS / 2);

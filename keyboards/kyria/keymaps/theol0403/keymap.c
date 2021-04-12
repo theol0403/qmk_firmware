@@ -15,6 +15,9 @@
 #define U_TH TG(THE)
 #define U_GM TG(GME)
 
+// misc
+#define T2_G MOD_LGUI
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* ,-----------------------------------------.                              ,-----------------------------------------.
@@ -22,15 +25,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |  Z   |  Y   |  T   |  H   |  A   | . :  |                              |  C   |  S   |  N   |  O   |  I   | / \  |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |  K   |  M   |  F   |  J   | , ;  |      |      |  |      |      |  V   |  G   |  W   |  X   |  Q   |      |
+ * |      |  K   |  M   |  F   |  J   | , ;  |      | T2_G |  |  TH  |  GM  |  V   |  G   |  W   |  X   |  Q   |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
- *                      | AUX  |      | ESC  |  E   | TAB  |  | ENT  | SPC  | BSPC | DEL  |      |
+ *                      | AUX  |  UL  | ESC  |  E   | TAB  |  | ENT  | SPC  | BSPC | DEL  |      |
  *                      `----------------------------------'  `----------------------------------' */
 [BSE] = LAYOUT(
-  _,    _,  U_P, U_L , U_U, U_QUES,                         U_B,  U_D,  U_R, U_QUOT,  _,  _,
+  _,    _,  U_P, U_L,  U_U, U_QUES,                         U_B,  U_D,  U_R, U_QUOT, _,   _,
   U_Z, U_Y, U_T, U_H,  U_A, U_DOT,                          U_C,  U_S,  U_N, U_O,    U_I, U_SL,
-  _,   U_K, U_M, U_F,  U_J, U_COMM, _,    _,    U_TH, U_GM, U_V,  U_G,  U_W, U_X,    U_Q, _,
-                 T_LK, _,   T_L1,   T_L2, T_L3, T_R3, T_R2, T_R1, T_R0, _
+  _,   U_K, U_M, U_F,  U_J, U_COMM, _,    T2_G, U_TH, U_GM, U_V,  U_G,  U_W, U_X,    U_Q, _,
+                 T_LK, UL,  T_L1,   T_L2, T_L3, T_R3, T_R2, T_R1, T_R0, _
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |      |  6   |  5   |  4   |  ^   |                              |      |      |      |      |      |      |
@@ -165,7 +168,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(KC_SPC);
         set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
       }
-      return false;
+      break;
       // finish a sentence using question and space and shift the next character
     case QUES:
       if (record->event.pressed) {
@@ -178,15 +181,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(KC_SPC);
         set_oneshot_mods(MOD_BIT(KC_LSHIFT) | get_oneshot_mods());
       }
-      return false;
+      break;
       // enable smartcaps
     case SMRTCAPS:
       if (record->event.pressed) {
         smart_caps_enable();
       }
-      return false;
+      break;
+    case UL:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LGUI(SS_TAP(X_SPC)));
+      }
+      break;
+    default:
+      return true;
   }
-  return true;
+  return false;
 }
 
 #ifdef ENCODER_ENABLE
@@ -213,3 +223,22 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 #  define IS_LEFT false
 #endif
 bool is_keyboard_left(void) { return IS_LEFT; }
+
+
+/*
+qmk-keyboard-format:json:begin
+{
+    "name": "Kyria",
+    "numkeys": 50,
+    "rows": [
+        [  0,  1,  2,  3,  4,  5, -1, -1, -2, -1, -1,  6,  7,  8,  9, 10, 11 ],
+        [ 12, 13, 14, 15, 16, 17, -1, -1, -2, -1, -1, 18, 19, 20, 21, 22, 23 ],
+        [ 24, 25, 26, 27, 28, 29, 30, 31, -2, 32, 33, 34, 35, 36, 37, 38, 39 ],
+        [ -1, -1, -1, 40, 41, 42, 43, 44, -2, 45, 46, 47, 48, 49, -1, -1, -1 ]
+    ],
+    "spacing": [
+        0
+    ]
+}
+qmk-keyboard-format:json:end
+*/

@@ -22,6 +22,9 @@ COMB(caps, SMRTCAPS, KC_R, KC_D)  // trigger smart caps
 
 SUBS(semi, ";\n", KC_W, KC_G)  // end line of c code
 SUBS(arrow, "->", KC_F, KC_J)  // arrow
+
+// COMB(tab, A(KC_TAB), U_T, T_L3)  // alt tab
+
 #define END_ACTIONS combo_arrow
 
 // combos that require that they are held

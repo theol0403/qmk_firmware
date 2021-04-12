@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
 enum layers { BSE, NUM, SYM, NAV, FUN, MDA, THE, GME };
-enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS };
+enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS, UL };
 
 // function shortcuts
 #define RDO C(KC_Y)  // KC_AGIN
