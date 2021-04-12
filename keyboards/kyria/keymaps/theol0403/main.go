@@ -21,6 +21,28 @@ func is_comment_line(line string) bool {
 	return strings.HasPrefix(line, "//") || strings.HasPrefix(line, "*") || strings.HasPrefix(line, "/*") || strings.HasPrefix(line, "*/")
 }
 
+func sprint_element(element string, separator string, width int) string {
+	// left align the element
+	// followed by the seperator
+	// padded with space until reaching width
+
+	str := make([]rune, 0, width+1)
+	cnt := 0
+	for _, c := range element {
+		str = append(str, c)
+		cnt += 1
+	}
+	for _, c := range separator {
+		str = append(str, c)
+		cnt += 1
+	}
+	for cnt < width {
+		str = append(str, ' ')
+		cnt += 1
+	}
+	return string(str)
+}
+
 func print_formatted(kb *keyboard_t, layer *layer_t) []string {
 	output := make([]string, 0, 8)
 	width := make([]int, len(kb.Rows[0]))
@@ -32,45 +54,40 @@ func print_formatted(kb *keyboard_t, layer *layer_t) []string {
 		}
 	}
 	for _, row := range kb.Rows {
-		for i, ki := range row {
+		for ci, ki := range row {
 			if ki >= 0 {
 				key := layer.Keymap[ki]
-				if len(key) > width[i] {
-					width[i] = len(key)
+				if len(key) > width[ci] {
+					width[ci] = len(key)
 				}
 			} else {
 				ki = -ki
 				if ki >= 0 && ki < len(kb.Spacing) {
-					if kb.Spacing[ki] > width[i] {
-						width[i] = kb.Spacing[ki]
+					if kb.Spacing[ki] > width[ci] {
+						width[ci] = kb.Spacing[ki]
 					}
 				}
 			}
 		}
 	}
-	key_formats := make([]string, len(width))
-	for i, w := range width {
-		key_formats[i] = fmt.Sprintf("%s%d%s", "%-", w, "s")
-	}
 
 	for ri, row := range kb.Rows {
-		separator := ""
-		line := "    "
+		line := ""
 		for i, ki := range row {
+			last_column := ki == (kb.Numkeys - 1)
 			if ki < 0 {
-				line = line + fmt.Sprintf(key_formats[i], " ")
-				line = line + "  "
+				line = line + sprint_element("", " ", width[i]+2)
 			} else {
-				line = line + fmt.Sprint(separator)
-				line = line + fmt.Sprintf(key_formats[i], layer.Keymap[ki])
-				separator = ", "
+				if last_column {
+					line = line + sprint_element(layer.Keymap[ki], " ", width[i]+2)
+				} else {
+					line = line + sprint_element(layer.Keymap[ki], ",", width[i]+2)
+				}
 			}
 		}
 
-		// the last row does not need a comma at the end
-		if ri < (len(kb.Rows) - 1) {
-			line = line + ","
-		}
+		// add eol part
+		line = line + layer.EOLs[ri]
 
 		output = append(output, line)
 	}
@@ -106,12 +123,22 @@ func parse_layer_id(line string) string {
 	return idstr
 }
 
-func parse_elements(line string) []string {
+func parse_elements(line string) ([]string, string) {
 	keymap := make([]string, 0, 80)
 
-	line = strings.TrimRightFunc(line, func(r rune) bool {
-		return r == ' ' || r == '/' || r == '*' || r == '\t' || r == '\\'
-	})
+	eol_pos := len(line)
+	for cursor, r := range line {
+		if r == '/' || r == '\\' {
+			eol_pos = cursor
+			break
+		}
+	}
+
+	// snip the end of the line part and remember it
+	end_of_line_part := line[eol_pos:]
+
+	// continue with the trimmed line
+	line = line[0:eol_pos]
 
 	state := PARSER_WHITESPACE
 	open := 0
@@ -150,7 +177,7 @@ func parse_elements(line string) []string {
 		elemstr = strings.TrimSpace(elemstr)
 		keymap = append(keymap, elemstr)
 	}
-	return keymap
+	return keymap, end_of_line_part
 }
 
 func parse_viz_layer_names(line string) []string {
@@ -312,8 +339,9 @@ func mainReturnWithCode() int {
 					output = append(output, line)
 				} else {
 					// collect the elements from these lines
-					elems := parse_elements(line)
+					elems, eol_part := parse_elements(line)
 					layer.Keymap = append(layer.Keymap, elems...)
+					layer.EOLs = append(layer.EOLs, eol_part)
 				}
 			} else if state == STATE_TAIL {
 				output = append(output, line)
@@ -370,15 +398,16 @@ type keyboard_t struct {
 	Name       string            `json:"name"`
 	Numkeys    int               `json:"numkeys"`
 	Rows       [][]int           `json:"rows"`
+	Spacing    []int             `json:"spacing"`
 	VizWidth   int               `json:"vizcellwidth"`
 	VizBoard   []string          `json:"vizboard"`
 	VizSymbols map[string]string `json:"vizsymbols"`
-	Spacing    []int             `json:"spacing"`
 }
 
 type layer_t struct {
 	Name   string
 	Keymap []string
+	EOLs   []string
 }
 
 // key symbols
