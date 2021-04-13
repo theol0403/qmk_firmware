@@ -55,15 +55,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |      |  *   |  %   |  (   |  )   |  @   |                              |      | RCTL | RSFT | LALT | RGUI |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      | ` ~  |  &   |  [   |  ]   |  =   |      |      |  |      |      |      |      |      |      |      |      |
+ * |  ~/  | ` ~  |  &   |  [   |  ]   |  =   |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |  _   |  $   |  #   |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------' */
 [SYM] = LAYOUT(
-  _, KC_PIPE, KC_LT,   KC_LCBR, KC_RCBR, KC_GT,                            _, _,       _,       _,       _,       L(SYM), 
-  _, KC_ASTR, KC_PERC, KC_LPRN, KC_RPRN, KC_AT,                            _, KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,    
-  _, KC_GRV,  KC_AMPR, KC_LBRC, KC_RBRC, KC_EQL,  _,      _,         _, _, _, _,       _,       _,       _,       _,      
-                       _,       _,       KC_UNDS, KC_DLR, KC_HASH,   _, _, _, _,       _                                  
+  _,    KC_PIPE, KC_LT,   KC_LCBR, KC_RCBR, KC_GT,                            _, _,       _,       _,       _,       L(SYM), 
+  _,    KC_ASTR, KC_PERC, KC_LPRN, KC_RPRN, KC_AT,                            _, KC_RCTL, KC_RSFT, KC_LALT, KC_RGUI, UNL,    
+  HOME, KC_GRV,  KC_AMPR, KC_LBRC, KC_RBRC, KC_EQL,  _,      _,         _, _, _, _,       _,       _,       _,       _,      
+                          _,       _,       KC_UNDS, KC_DLR, KC_HASH,   _, _, _, _,       _                                  
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |      |      |      |      |      |                              | HOME | PGDN | PGUP | END  | CAPS |      |
@@ -191,6 +191,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case UL:
       if (record->event.pressed) {
         SEND_STRING(SS_LGUI(SS_TAP(X_SPC)));
+      }
+      break;
+    case HOME:
+      if (record->event.pressed) {
+        SEND_STRING("~/");
       }
       break;
     default:
