@@ -1,6 +1,6 @@
 .PHONY: %
 %:
-	keymapviz -r keyboards/kyria/keymaps/theol0403/keymap.c -c keyboards/kyria/keymaps/theol0403/keymapviz.toml > /dev/null
+	 cat keyboards/kyria/keymaps/theol0403/keymap.c | go run keyboards/kyria/keymaps/theol0403/main.go > /tmp/layout.c && mv /tmp/layout.c keyboards/kyria/keymaps/theol0403/keymap.c | keymapviz -r keyboards/kyria/keymaps/theol0403/keymap.c -c keyboards/kyria/keymaps/theol0403/keymapviz.toml > /dev/null
 
 OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
 ENCODER_ENABLE = yes       # Enables the use of one or more encoders

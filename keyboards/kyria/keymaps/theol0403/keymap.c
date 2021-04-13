@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      | AUX  |  UL  | ESC  |  E   | TAB  |  | ENT  | SPC  | BSPC | DEL  |      |
  *                      `----------------------------------'  `----------------------------------' */
 [BSE] = LAYOUT(
-  _,   GUI, U_P, U_L,  U_U, U_QUES,                            U_B,  U_D,  U_R, U_QUOT, _,   _,    
+  _,   GUI, U_P, U_L,  U_U, U_QUES,                           U_B,  U_D,  U_R, U_QUOT, _,   _,    
   U_Z, U_Y, U_T, U_H,  U_A, U_DOT,                            U_C,  U_S,  U_N, U_O,    U_I, U_SL, 
   _,   U_K, U_M, U_F,  U_J, U_COMM, UL,   GUI,    U_TH, U_GM, U_V,  U_G,  U_W, U_X,    U_Q, _,    
                  T_LK, UL,  T_L1,   T_L2, T_L3,   T_R3, T_R2, T_R1, T_R0, _                       
