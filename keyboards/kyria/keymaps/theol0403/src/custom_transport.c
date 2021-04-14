@@ -27,10 +27,6 @@
 #  include "rgblight.h"
 #endif
 
-#ifdef BACKLIGHT_ENABLE
-#  include "backlight.h"
-#endif
-
 #ifdef ENCODER_ENABLE
 #  include "encoder.h"
 static pin_t encoders_pad[] = ENCODERS_PAD_A;
@@ -42,6 +38,8 @@ static pin_t encoders_pad[] = ENCODERS_PAD_A;
 #endif
 
 #include "serial.h"
+
+#include "smartcaps.h"
 
 typedef struct _Serial_s2m_buffer_t {
   matrix_row_t smatrix[ROWS_PER_HAND];
@@ -64,14 +62,12 @@ typedef struct _Serial_m2s_buffer_t {
 #ifdef SPLIT_TRANSPORT_MIRROR
   matrix_row_t mmatrix[ROWS_PER_HAND];
 #endif
-#ifdef BACKLIGHT_ENABLE
-  uint8_t backlight_level;
-#endif
 #ifdef WPM_ENABLE
   uint8_t current_wpm;
 #endif
   bool          oled_on;
   layer_state_t t_layer_state;
+  bool          smart_caps;
 } __attribute__((packed)) Serial_m2s_buffer_t;
 
 #if defined(RGBLIGHT_ENABLE) && defined(RGBLIGHT_SPLIT)
@@ -168,11 +164,6 @@ bool transport_master(matrix_row_t master_matrix[], matrix_row_t slave_matrix[])
 #endif
   }
 
-#ifdef BACKLIGHT_ENABLE
-  // Write backlight level for slave to read
-  serial_m2s_buffer.backlight_level = is_backlight_enabled() ? get_backlight_level() : 0;
-#endif
-
 #ifdef ENCODER_ENABLE
   encoder_update_raw((uint8_t *)serial_s2m_buffer.encoder_state);
 #endif
@@ -191,13 +182,11 @@ bool transport_master(matrix_row_t master_matrix[], matrix_row_t slave_matrix[])
 #endif
 
   serial_m2s_buffer.t_layer_state = layer_state;
+  serial_m2s_buffer.smart_caps    = smart_caps_status();
 #ifdef OLED_DRIVER_ENABLE
   serial_m2s_buffer.oled_on = is_oled_on();
 #endif
 
-#ifdef RGB_MATRIX_ENABLE
-  serial_m2s_buffer.is_rgb_matrix_suspended = rgb_matrix_get_suspend_state();
-#endif
 #ifndef DISABLE_SYNC_TIMER
   serial_m2s_buffer.sync_timer = sync_timer_read32() + SYNC_TIMER_OFFSET;
 #endif
@@ -218,10 +207,6 @@ void transport_slave(matrix_row_t master_matrix[], matrix_row_t slave_matrix[]) 
 #endif
   }
 
-#ifdef BACKLIGHT_ENABLE
-  backlight_set(serial_m2s_buffer.backlight_level);
-#endif
-
 #ifdef ENCODER_ENABLE
   encoder_state_raw((uint8_t *)serial_s2m_buffer.encoder_state);
 #endif
@@ -241,15 +226,14 @@ void transport_slave(matrix_row_t master_matrix[], matrix_row_t slave_matrix[]) 
   if (layer_state != serial_m2s_buffer.t_layer_state) {
     layer_state = serial_m2s_buffer.t_layer_state;
   }
-#ifdef OLED_DRIVER_ENABLE
-  if (serial_m2s_buffer.oled_on) {
-    oled_on();
-  } else {
-    oled_off();
-  }
-#endif
 
-#ifdef RGB_MATRIX_ENABLE
-  rgb_matrix_set_suspend_state(serial_m2s_buffer.is_rgb_matrix_suspended);
+  if (smart_caps_status() != serial_m2s_buffer.smart_caps) {
+    serial_m2s_buffer.smart_caps ? smart_caps_enable() : smart_caps_disable();
+  }
+
+#ifdef OLED_DRIVER_ENABLE
+  if (serial_m2s_buffer.oled_on != is_oled_on()) {
+    serial_m2s_buffer.oled_on ? oled_on() : oled_off();
+  }
 #endif
 }

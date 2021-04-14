@@ -2,6 +2,8 @@
 
 // turn on smart caps
 void smart_caps_enable(void);
+void smart_caps_disable(void);
+void smart_caps_toggle(void);
 
 // turn on smart caps
 bool smart_caps_status(void);

@@ -30,6 +30,7 @@ MOUSEKEY_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
 # left slave
+CFLAGS += -DRGBLIGHT_LAYERS
 CFLAGS += -DIS_LEFT=true
 endif
 

@@ -13,9 +13,10 @@
 
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
-#define LAYER_STATE_8BIT
+#define LAYER_STATE_16BIT
 
 #define QMK_KEYS_PER_SCAN 4  // Recommended for heavy chording.
+#define SPLIT_MODS_ENABLE
 
 // rgb settings
 #ifdef RGBLIGHT_ENABLE

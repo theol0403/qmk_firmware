@@ -27,38 +27,76 @@ static void render_kyria_logo(void) {
 
 // left slave
 static void render_status(void) {
-  oled_write_P(PSTR("\nLayer\n"), false);
+  oled_write_P(PSTR("\nLayer: "), false);
   switch (get_highest_layer(layer_state)) {
     case BSE:
-      oled_write_P(PSTR("Bse\n"), false);
+      oled_write_P(PSTR("Base     "), false);
       break;
     case MDA:
-      oled_write_P(PSTR("Med\n"), false);
+      oled_write_P(PSTR("Media    "), false);
       break;
     case NAV:
-      oled_write_P(PSTR("Nav\n"), false);
+      oled_write_P(PSTR("Nav      "), false);
       break;
     case SYM:
-      oled_write_P(PSTR("Sym\n"), false);
+      oled_write_P(PSTR("Symbol   "), false);
       break;
     case NUM:
-      oled_write_P(PSTR("Num\n"), false);
+      oled_write_P(PSTR("Number   "), false);
       break;
     case FUN:
-      oled_write_P(PSTR("Fun\n"), false);
+      oled_write_P(PSTR("Func     "), false);
+      break;
+    case MOUS:
+      oled_write_P(PSTR("Mouse    "), false);
       break;
     case GME:
-      oled_write_P(PSTR("Gme\n"), false);
+      oled_write_P(PSTR("Game     "), false);
       break;
     case THE:
-      oled_write_P(PSTR("THE\n"), false);
+      oled_write_P(PSTR("THE-1    "), false);
       break;
   }
-  if (smart_caps_status()) {
-    oled_write_P(PSTR("SMART CAPS\n"), false);
-  } else {
-    oled_write_P(PSTR("\n"), false);
+
+  oled_write_P(PSTR("Caps\n"), smart_caps_status());
+
+  int mods = get_mods() | get_oneshot_mods();
+
+  oled_write_P(PSTR("Shift: "), false);
+  oled_write_P(PSTR("L"), mods & MOD_BIT(KC_LSHIFT));
+  oled_write_P(PSTR("R"), mods & MOD_BIT(KC_RSHIFT));
+
+  oled_write_P(PSTR("   "), false);
+
+  oled_write_P(PSTR("Ctrl: "), false);
+  oled_write_P(PSTR("L"), mods & MOD_BIT(KC_LCTL));
+  oled_write_P(PSTR("R\n"), mods & MOD_BIT(KC_RCTL));
+
+  oled_write_P(PSTR("Alt:   "), false);
+  oled_write_P(PSTR("L"), mods & MOD_BIT(KC_LALT));
+  oled_write_P(PSTR("R"), mods & MOD_BIT(KC_RALT));
+
+  oled_write_P(PSTR("   "), false);
+
+  oled_write_P(PSTR("Met:  "), false);
+  oled_write_P(PSTR("L"), mods & MOD_BIT(KC_LGUI));
+  oled_write_P(PSTR("R\n"), mods & MOD_BIT(KC_RGUI));
+
+  oled_write_P(PSTR("RGB: "), false);
+  switch (rgblight_get_mode()) {
+    case RGBLIGHT_MODE_STATIC_LIGHT:
+      oled_write_P(PSTR("Static"), false);
+      break;
+
+    case RGBLIGHT_MODE_RAINBOW_SWIRL:
+      oled_write_P(PSTR("Rainbow"), false);
+      break;
+
+    default:
+      oled_write_P(PSTR("unknown"), false);
   }
+
+  rgblight_set_layer_state(0, smart_caps_status());
 }
 
 static void render_qmk_logo(void) {
@@ -69,6 +107,14 @@ static void render_qmk_logo(void) {
     0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,0};
   // clang-format on
   oled_write_P(qmk_logo, false);
+}
+
+const rgblight_segment_t PROGMEM        smartcaps_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 5, HSV_GREEN});
+const rgblight_segment_t* const PROGMEM my_rgb_layers[]   = RGBLIGHT_LAYERS_LIST(smartcaps_layer);
+
+void keyboard_post_init_user(void) {
+  // Enable the LED layers
+  rgblight_layers = my_rgb_layers;
 }
 
 #endif

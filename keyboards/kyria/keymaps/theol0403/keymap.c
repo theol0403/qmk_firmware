@@ -166,11 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  // let smart caps handle keys
-  if (!smart_caps_process(keycode, record)) {
-    return false;
-  };
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   switch (keycode) {
       // finish a sentence using period and space and shift the next character
     case SENT:
@@ -196,7 +192,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       // enable smartcaps
     case SMRTCAPS:
       if (record->event.pressed) {
-        smart_caps_enable();
+        smart_caps_toggle();
       }
       break;
     case UL:
@@ -210,6 +206,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
     default:
+      // let smart caps handle keys
+      if (!smart_caps_process(keycode, record)) {
+        return false;
+      };
       return true;
   }
   return false;
