@@ -59,6 +59,7 @@
 #define COMBO_HOLD_TERM 150
 #define COMBO_PROCESS_KEY_RELEASE
 #define COMBO_BUFFER_LENGTH 8
+#define EXTRA_SHORT_COMBOS
 
 // Mouse key speed and acceleration.
 #define MK_KINETIC_SPEED

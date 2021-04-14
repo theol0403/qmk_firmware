@@ -43,15 +43,15 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
       break;
     case U_N:
       switch (tapping) {
-        case KC_DOT:
-        case KC_QUES:
-        case KC_COMMA:
+        case U_DOT:
+        case U_QUES:
+        case U_COMM:
           return true;
       }
       break;
     case U_H:
       switch (tapping) {
-        case KC_QUOT:
+        case U_QUOT:
         case U_SL:
           return true;
       }
