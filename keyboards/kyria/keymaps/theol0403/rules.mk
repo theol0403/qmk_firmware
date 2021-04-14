@@ -48,3 +48,5 @@ endif
 SRC += src/smartcaps.c
 SRC += src/timing.c
 
+SPLIT_TRANSPORT = custom
+QUANTUM_LIB_SRC += src/custom_transport.c serial.c
