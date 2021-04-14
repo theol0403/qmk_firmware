@@ -2,27 +2,34 @@
 %:
 	 cat keyboards/kyria/keymaps/theol0403/keymap.c | go run keyboards/kyria/keymaps/theol0403/main.go > /tmp/layout.c && mv /tmp/layout.c keyboards/kyria/keymaps/theol0403/keymap.c | keymapviz -r keyboards/kyria/keymaps/theol0403/keymap.c -c keyboards/kyria/keymaps/theol0403/keymapviz.toml > /dev/null
 
-OLED_DRIVER_ENABLE = yes   # Enables the use of OLED displays
-ENCODER_ENABLE = yes       # Enables the use of one or more encoders
-RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
-TAP_DANCE_ENABLE = no
-CONSOLE_ENABLE = no
+# required
+RGBLIGHT_ENABLE = yes    
+ENCODER_ENABLE = yes      
+OLED_DRIVER_ENABLE = yes   
 
+# disable
+CONSOLE_ENABLE = no
 MAGIC_ENABLE = no
 SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
+
+# off by default
+TAP_DANCE_ENABLE = no
 MOUSEKEY_ENABLE = no
 
-KEY_OVERRIDE_ENABLE = yes
-COMBO_ENABLE = yes
 
 ifndef HAND
 HAND = RIGHT
 endif
 
 ifeq ($(HAND),RIGHT)
+# right master
+KEY_OVERRIDE_ENABLE = yes
+COMBO_ENABLE = yes
+MOUSEKEY_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
+# left slave
 CFLAGS += -DIS_LEFT=true
 endif
 
