@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 
-enum layers { BSE, NUM, SYM, NAV, FUN, MDA, THE, GME };
+enum layers { BSE, NUM, SYM, NAV, FUN, MDA, MOUS, THE, GME };
 enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS, UL, HOME };
 
 // function shortcuts
@@ -56,7 +56,7 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS, UL, HOME };
 #define T_LK KC_MUTE
 #define T_L1 LT(MDA, KC_ESC)
 #define T_L2 LT(NAV, KC_E)
-#define T_L3 MT(MOD_LSFT, KC_TAB)
+#define T_L3 LT(MOUS, KC_TAB)
 
 // right thumbs
 #define T_R3 LT(FUN, KC_ENT)
