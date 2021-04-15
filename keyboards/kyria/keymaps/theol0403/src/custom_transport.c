@@ -62,9 +62,6 @@ typedef struct _Serial_m2s_buffer_t {
 #ifdef SPLIT_TRANSPORT_MIRROR
   matrix_row_t mmatrix[ROWS_PER_HAND];
 #endif
-#ifdef WPM_ENABLE
-  uint8_t current_wpm;
-#endif
   bool          oled_on;
   layer_state_t t_layer_state;
   bool          smart_caps;
@@ -168,11 +165,6 @@ bool transport_master(matrix_row_t master_matrix[], matrix_row_t slave_matrix[])
   encoder_update_raw((uint8_t *)serial_s2m_buffer.encoder_state);
 #endif
 
-#ifdef WPM_ENABLE
-  // Write wpm to slave
-  serial_m2s_buffer.current_wpm = get_current_wpm();
-#endif
-
 #ifdef SPLIT_MODS_ENABLE
   serial_m2s_buffer.real_mods = get_mods();
   serial_m2s_buffer.weak_mods = get_weak_mods();
@@ -209,10 +201,6 @@ void transport_slave(matrix_row_t master_matrix[], matrix_row_t slave_matrix[]) 
 
 #ifdef ENCODER_ENABLE
   encoder_state_raw((uint8_t *)serial_s2m_buffer.encoder_state);
-#endif
-
-#ifdef WPM_ENABLE
-  set_current_wpm(serial_m2s_buffer.current_wpm);
 #endif
 
 #ifdef SPLIT_MODS_ENABLE

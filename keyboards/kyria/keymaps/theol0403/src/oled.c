@@ -82,7 +82,7 @@ static void render_status(void) {
   oled_write_P(PSTR("L"), mods & MOD_BIT(KC_LGUI));
   oled_write_P(PSTR("R\n"), mods & MOD_BIT(KC_RGUI));
 
-  oled_write_P(PSTR("RGB: "), false);
+  oled_write_P(PSTR("RGB:   "), false);
   switch (rgblight_get_mode()) {
     case RGBLIGHT_MODE_STATIC_LIGHT:
       oled_write_P(PSTR("Static"), false);

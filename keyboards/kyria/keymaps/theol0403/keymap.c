@@ -17,7 +17,7 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* ,-----------------------------------------.                              ,-----------------------------------------.
- * |      | GUI  |  P   |  L   |  U   | ? !  |                              |  B   |  D   |  R   | ' "  |      |      |
+ * |      |      |  P   |  L   |  U   | ? !  |                              |  B   |  D   |  R   | ' "  |      |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |  Z   |  Y   |  T   |  H   |  A   | . :  |                              |  C   |  S   |  N   |  O   |  I   | / \  |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      | AUX  |  UL  | ESC  |  E   | TAB  |  | ENT  | SPC  | BSPC | DEL  |      |
  *                      `----------------------------------'  `----------------------------------' */
 [BSE] = LAYOUT(
-  _,   GUI, U_P, U_L,  U_U, U_QUES,                           U_B,  U_D,  U_R, U_QUOT, _,   _,    
+  _,   _,   U_P, U_L,  U_U, U_QUES,                           U_B,  U_D,  U_R, U_QUOT, _,   _,    
   U_Z, U_Y, U_T, U_H,  U_A, U_DOT,                            U_C,  U_S,  U_N, U_O,    U_I, U_SL, 
   _,   U_K, U_M, U_F,  U_J, U_COMM, _,    GUI,    U_TH, U_GM, U_V,  U_G,  U_W, U_X,    U_Q, _,    
                  T_LK, UL,  T_L1,   T_L2, T_L3,   T_R3, T_R2, T_R1, T_R0, _                       
@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                           _,       _,       KC_UNDS, KC_DLR, KC_HASH,   _, _, _, _,       _                             
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
- * |      |      |      |      |      |      |                              | HOME | PGDN | PGUP | END  | CAPS |      |
+ * |      |      |      |      |      |      |                              | HOME | PGDN | PGUP | END  |      |      |
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |      | LGUI | LALT | LSFT | LCTL |      |                              | LEFT | DOWN |  UP  | RGHT |      |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
@@ -71,10 +71,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      |      |      |      |      |      |  | ENT  | SPC  | BSPC | DEL  |      |
  *                      `----------------------------------'  `----------------------------------' */
 [NAV] = LAYOUT(
-  _, RST,     EST,     _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_CAPS, _, 
-  _, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _,       _, 
-  _, RDO,     CUT,     CPY,     PST,     UND, _, _,   _,      _,      _,       _,       _,       _,       _,       _, 
-                       _,       _,       _,   _, _,   KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _                             
+  _, RST,     EST,     _,       _,       _,                           KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _, _, 
+  _, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _, _, 
+  _, RDO,     CUT,     CPY,     PST,     UND, _, _,   _,      _,      _,       _,       _,       _,       _, _, 
+                       _,       _,       _,   _, _,   KC_ENT, KC_SPC, KC_BSPC, KC_DEL,  _                       
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      | F10  |  F6  |  F5  |  F4  |      |                              |      |      |      |      |      |      |
@@ -96,15 +96,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |      | LGUI | LALT | LSFT | LCTL |      |                              | MPRV | VOLD | VOLU | MNXT | MPLY |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      | RDO  | CUT  | CPY  | PST  | UND  |      |      |  |      |      |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  | MSTP | MPLY | MUTE |      |      |
  *                      `----------------------------------'  `----------------------------------' */
 [MDA] = LAYOUT(
-  _, RST,     EST,     _,       _,       _,                             RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, _, 
-  _, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                             KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, _, 
-  _, RDO,     CUT,     CPY,     PST,     UND, _, _,   _,       _,       _,       _,       _,       _,       _,       _, 
-                       _,       _,       _,   _, _,   KC_MSTP, KC_MPLY, KC_MUTE, _,       _                             
+  _, RST,     EST,     _,       _,       _,                           RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, _, 
+  _, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, _,                           KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY, _, 
+  _, _,       _,       _,       _,       _, _, _,   _,       _,       _,       _,       _,       _,       _,       _, 
+                       _,       _,       _, _, _,   KC_MSTP, KC_MPLY, KC_MUTE, _,       _                             
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |      |      |      |      |      |                              |      |      |      |      |      |      |
