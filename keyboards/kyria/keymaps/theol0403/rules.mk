@@ -5,7 +5,7 @@
 # required
 RGBLIGHT_ENABLE = yes    
 ENCODER_ENABLE = yes      
-OLED_DRIVER_ENABLE = yes   
+OLED_DRIVER_ENABLE = no   
 
 # disable
 CONSOLE_ENABLE = no
@@ -26,10 +26,12 @@ ifeq ($(HAND),RIGHT)
 # right master
 KEY_OVERRIDE_ENABLE = yes
 COMBO_ENABLE = yes
-MOUSEKEY_ENABLE = yes
+MOUSEKEY_ENABLE = no
+CONSOLE_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
 # left slave
+OLED_DRIVER_ENABLE = yes   
 CFLAGS += -DRGBLIGHT_LAYERS
 CFLAGS += -DIS_LEFT=true
 endif
@@ -45,6 +47,7 @@ endif
 ifeq ($(strip $(KEY_OVERRIDE_ENABLE)), yes)
 	SRC += src/overrides.c
 endif
+
 
 SRC += src/smartcaps.c
 SRC += src/timing.c

@@ -1,6 +1,10 @@
 #include "keymap.h"
 #include "src/smartcaps.h"
 
+#ifdef CONSOLE_ENABLE
+#  include "print.h"
+#endif
+
 // structural helpers
 #define _ KC_NO
 #define __ _______
@@ -167,6 +171,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+#ifdef CONSOLE_ENABLE
+  if (record->event.pressed) {
+    uprintf("0x%04X,%u,%u,%u\n", keycode, record->event.key.row, record->event.key.col, get_highest_layer(layer_state));
+  }
+#endif
   switch (keycode) {
       // finish a sentence using period and space and shift the next character
     case SENT:
