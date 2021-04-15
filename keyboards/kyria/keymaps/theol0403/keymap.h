@@ -63,3 +63,8 @@ enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS, UL, HOME };
 #define T_R2 LT(NUM, KC_SPC)
 #define T_R1 LT(SYM, KC_BSPC)
 #define T_R0 LT(SYM, KC_DEL)
+
+// num layer
+#define ASTR KC_F20
+#define NUM_0 LT(NAV, KC_0)
+#define NUM_ASTR LT(SYM, ASTR)

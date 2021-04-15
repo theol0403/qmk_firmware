@@ -17,7 +17,6 @@ GRAVE_ESC_ENABLE = no
 TAP_DANCE_ENABLE = no
 MOUSEKEY_ENABLE = no
 
-
 ifndef HAND
 HAND = RIGHT
 endif

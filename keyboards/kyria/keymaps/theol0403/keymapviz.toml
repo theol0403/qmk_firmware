@@ -25,7 +25,7 @@ KC_UNDS = _
 KC_MINS = -
 KC_EQL = =
 U_SL = / \
-KC_SLSH = / \
+KC_SLSH = /
 U_COMM = , ;
 KC_COMM = , ;
 KC_ASTR = *
@@ -92,3 +92,6 @@ RST =
 EST =
 
 HOME = ~/
+
+NUM_ASTR = *
+NUM_0 = 0
