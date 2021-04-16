@@ -38,39 +38,6 @@ KC_SCLN = ; :
 _ =
 __ =
 
-U_P = P
-U_L = L
-U_U = U
-U_Z = Z
-
-U_Y = Y
-U_T = T
-U_H = H
-U_A = A
-
-U_K = K
-U_M = M
-U_F = F
-U_J = J
-U_B = B
-U_D = D
-U_R = R
-
-U_C = C
-U_S = S
-U_N = N
-U_O = O
-U_I = I
-
-U_V = V
-U_G = G
-U_W = W
-U_X = X
-U_Q = Q
-
-U_TH = TH
-U_GM = GM
-
 T_LK = AUX
 T_L1 = ESC
 T_L2 = E
