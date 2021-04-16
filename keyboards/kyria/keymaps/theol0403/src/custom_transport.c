@@ -33,9 +33,9 @@ static pin_t encoders_pad[] = ENCODERS_PAD_A;
 #  define NUMBER_OF_ENCODERS (sizeof(encoders_pad) / sizeof(pin_t))
 #endif
 
-#ifdef OLED_DRIVER_ENABLE
-#  include "oled_driver.h"
-#endif
+// #ifdef OLED_DRIVER_ENABLE
+// #  include "oled_driver.h"
+// #endif
 
 #include "serial.h"
 
@@ -62,7 +62,7 @@ typedef struct _Serial_m2s_buffer_t {
 #ifdef SPLIT_TRANSPORT_MIRROR
   matrix_row_t mmatrix[ROWS_PER_HAND];
 #endif
-  bool          oled_on;
+  // bool          oled_on;
   layer_state_t t_layer_state;
   bool          smart_caps;
 } __attribute__((packed)) Serial_m2s_buffer_t;
@@ -175,9 +175,9 @@ bool transport_master(matrix_row_t master_matrix[], matrix_row_t slave_matrix[])
 
   serial_m2s_buffer.t_layer_state = layer_state;
   serial_m2s_buffer.smart_caps    = smart_caps_status();
-#ifdef OLED_DRIVER_ENABLE
-  serial_m2s_buffer.oled_on = is_oled_on();
-#endif
+  // #ifdef OLED_DRIVER_ENABLE
+  //   serial_m2s_buffer.oled_on = is_oled_on();
+  // #endif
 
 #ifndef DISABLE_SYNC_TIMER
   serial_m2s_buffer.sync_timer = sync_timer_read32() + SYNC_TIMER_OFFSET;
@@ -219,9 +219,9 @@ void transport_slave(matrix_row_t master_matrix[], matrix_row_t slave_matrix[]) 
     serial_m2s_buffer.smart_caps ? smart_caps_enable() : smart_caps_disable();
   }
 
-#ifdef OLED_DRIVER_ENABLE
-  if (serial_m2s_buffer.oled_on != is_oled_on()) {
-    serial_m2s_buffer.oled_on ? oled_on() : oled_off();
-  }
-#endif
+  // #ifdef OLED_DRIVER_ENABLE
+  //   if (serial_m2s_buffer.oled_on != is_oled_on()) {
+  //     serial_m2s_buffer.oled_on ? oled_on() : oled_off();
+  //   }
+  // #endif
 }
