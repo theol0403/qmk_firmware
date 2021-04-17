@@ -95,7 +95,7 @@ const combo_t key_combos[] = {
 #define TAPP A_TAPP
 #define TAPP8 A_TAPP8
 void process_combo_event(uint16_t combo_index, bool pressed) {
-#ifdef CONSOLE_ENABLE
+#ifdef CONSOLE_KEYLOG
   if (pressed) {
     const combo_t *combo = &key_combos[combo_index];
     uint8_t        idx   = 0;

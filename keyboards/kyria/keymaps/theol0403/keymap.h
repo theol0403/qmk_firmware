@@ -1,5 +1,9 @@
 #include QMK_KEYBOARD_H
 
+#ifdef CONSOLE_ENABLE
+#  include "print.h"
+#endif
+
 enum layers { BSE, NUM, SYM, NAV, FUN, MDA, MOUS, THE, GME };
 enum custom_keycodes { START = SAFE_RANGE, SENT, QUES, SMRTCAPS, UL, HOME };
 
