@@ -30,6 +30,15 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   return TAPPING_TERM;
 }
 
+// bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+//   switch (keycode) {
+//     case U_H:
+//     case U_N:
+//       return true;
+//   }
+//   return false;
+// }
+
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
   int tapping = get_event_keycode(record->event, false);
   switch (keycode) {
