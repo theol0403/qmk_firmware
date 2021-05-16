@@ -20,7 +20,10 @@
 #define LAYER_STATE_16BIT
 
 #define QMK_KEYS_PER_SCAN 4  // Recommended for heavy chording.
+#define USB_POLLING_INTERVAL_MS 1
 #define SPLIT_MODS_ENABLE
+#undef DEBOUNCE
+#define DEBOUNCE 15
 
 // rgb settings
 #ifdef RGBLIGHT_ENABLE

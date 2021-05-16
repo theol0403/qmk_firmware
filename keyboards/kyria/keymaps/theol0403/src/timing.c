@@ -1,9 +1,9 @@
 #include "../keymap.h"
 
 #define THUMB_TERM 190
-#define PINKY_TERM 240
-#define CTRL_TERM 200
-#define SHIFT_TERM 140
+#define PINKY_TERM 260
+#define CTRL_TERM 170
+#define SHIFT_TERM 120
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case T_R1:
@@ -100,6 +100,6 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
 
 bool get_bilateral_combinations(keypos_t *hold, keypos_t *tap) {
   bool same     = (hold->row < MATRIX_ROWS / 2) == (tap->row < MATRIX_ROWS / 2);
-  bool adjacent = same && (abs(hold->row - tap->row) < 3) && (abs(tap->col - hold->col) < 3);
+  bool adjacent = same && (abs(hold->row - tap->row) < 4) && (abs(tap->col - hold->col) < 4);
   return adjacent;
 }
