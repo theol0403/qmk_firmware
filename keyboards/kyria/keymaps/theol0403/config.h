@@ -48,8 +48,12 @@
 #define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 #define PERMISSIVE_HOLD_PER_KEY
-#define BILATERAL_COMBINATIONS 300
+#define BILATERAL_COMBINATIONS 350
 // #define RETRO_TAPPING_PER_KEY
+
+#define AUTO_SHIFT_NO_SETUP
+#define RETRO_TAPPING
+#define RETRO_SHIFT 300
 
 // Prevent normal rollover on alphas from accidentally triggering mods.
 #define IGNORE_MOD_TAP_INTERRUPT

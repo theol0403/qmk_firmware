@@ -36,52 +36,6 @@ static struct {
     bool holding_shift : 1;
 } autoshift_flags = {true, false, false, false};
 
-/** \brief Record the press of an autoshiftable key
- *
- *  \return Whether the record should be further processed.
- */
-static bool autoshift_press(uint16_t keycode, uint16_t now, keyrecord_t *record) {
-    if (!autoshift_flags.enabled) {
-        return true;
-    }
-
-#    ifndef AUTO_SHIFT_MODIFIERS
-    if (get_mods()) {
-        return true;
-    }
-#    endif
-#    ifdef AUTO_SHIFT_REPEAT
-    const uint16_t elapsed = TIMER_DIFF_16(now, autoshift_time);
-#        ifndef AUTO_SHIFT_NO_AUTO_REPEAT
-    if (!autoshift_flags.lastshifted) {
-#        endif
-        if (elapsed < TAPPING_TERM && keycode == autoshift_lastkey) {
-            // Allow a tap-then-hold for keyrepeat.
-            if (!autoshift_flags.lastshifted) {
-                register_code(autoshift_lastkey);
-            } else {
-                // Simulate pressing the shift key.
-                add_weak_mods(MOD_BIT(KC_LSFT));
-                register_code(autoshift_lastkey);
-            }
-            return false;
-        }
-#        ifndef AUTO_SHIFT_NO_AUTO_REPEAT
-    }
-#        endif
-#    endif
-
-    // Record the keycode so we can simulate it later.
-    autoshift_lastkey           = keycode;
-    autoshift_time              = now;
-    autoshift_flags.in_progress = true;
-
-#    if !defined(NO_ACTION_ONESHOT) && !defined(NO_ACTION_TAPPING)
-    clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
-#    endif
-    return false;
-}
-
 /** \brief Registers an autoshiftable key under the right conditions
  *
  * If the autoshift delay has elapsed, register a shift and the key.
@@ -216,33 +170,7 @@ bool process_auto_shift(uint16_t keycode, keyrecord_t *record) {
 #    endif
         }
     }
-    if (get_auto_shifted_key(keycode, record)) {
-        if (record->event.pressed) {
-            return autoshift_press(keycode, now, record);
-        } else {
-            autoshift_end(keycode, now, false);
-            return false;
-        }
-    }
     return true;
-}
-
-__attribute__((weak)) bool get_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-#    ifndef NO_AUTO_SHIFT_ALPHA
-        case KC_A ... KC_Z:
-#    endif
-#    ifndef NO_AUTO_SHIFT_NUMERIC
-        case KC_1 ... KC_0:
-#    endif
-#    ifndef NO_AUTO_SHIFT_SPECIAL
-        case KC_TAB:
-        case KC_MINUS ... KC_SLASH:
-        case KC_NONUS_BSLASH:
-#    endif
-            return true;
-    }
-    return false;
 }
 
 #endif

@@ -27,6 +27,7 @@ KEY_OVERRIDE_ENABLE = yes
 COMBO_ENABLE = yes
 MOUSEKEY_ENABLE = no
 CONSOLE_ENABLE = yes
+AUTO_SHIFT_ENABLE = yes
 CFLAGS += -DIS_LEFT=false
 else ifeq ($(HAND),LEFT)
 # left slave

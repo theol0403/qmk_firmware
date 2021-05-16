@@ -43,8 +43,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int tp_buttons;
 
-#if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY)
+#if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY) || defined(RETRO_SHIFT)
 int retro_tapping_counter = 0;
+#endif
+
+#ifdef RETRO_SHIFT
+#    include "quantum.h"
 #endif
 
 #ifdef FAUXCLICKY_ENABLE
@@ -79,7 +83,7 @@ void action_exec(keyevent_t event) {
         dprint("EVENT: ");
         debug_event(event);
         dprintln();
-#if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY)
+#if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY) || defined(RETRO_SHIFT)
         retro_tapping_counter++;
 #endif
     }
@@ -312,6 +316,17 @@ void process_action(keyrecord_t *record, action_t action) {
 #ifndef NO_ACTION_TAPPING
     uint8_t tap_count = record->tap.count;
 #endif
+#ifdef RETRO_SHIFT
+    static uint16_t retro_shift_start_time;
+#endif
+
+    if (event.pressed) {
+        // clear the potential weak mods left by previously pressed keys
+        clear_weak_mods();
+#ifdef RETRO_SHIFT
+        retro_shift_start_time = event.time;
+#endif
+    }
 
 #ifndef NO_ACTION_ONESHOT
     bool do_release_oneshot = false;
@@ -465,6 +480,13 @@ void process_action(keyrecord_t *record, action_t action) {
                             unregister_mods(mods);
 #    ifdef BILATERAL_COMBINATIONS
                             // mod-tap release
+                            /* if (bilateral_combinations.code != get_event_keycode(record->event, false)) { */
+                            /*     bilateral_combinations_tap(event); */
+                            /* }  */
+                            /* if (bilateral_combinations.code == action.key.code) { */
+                            /*     tap_code(KC_SPC); */
+                            /*     nsns nsn nsn n n    nsns             nnsns */
+                            /* } */
                             bilateral_combinations_release(action.key.code);
 #    endif
                         }
@@ -774,7 +796,7 @@ void process_action(keyrecord_t *record, action_t action) {
 #endif
 
 #ifndef NO_ACTION_TAPPING
-#    if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY)
+#    if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY) || defined(RETRO_SHIFT)
     if (!is_tap_action(action)) {
         retro_tapping_counter = 0;
     } else {
@@ -791,7 +813,15 @@ void process_action(keyrecord_t *record, action_t action) {
                     get_retro_tapping(get_event_keycode(record->event, false), record) &&
 #        endif
                     retro_tapping_counter == 2) {
+#        ifdef RETRO_SHIFT
+                    if (!(RETRO_SHIFT + 0) || TIMER_DIFF_16(event.time, retro_shift_start_time) < (RETRO_SHIFT + 0)) {
+#            ifdef RETRO_TAPPING
+                        tap_code(action.layer_tap.code);
+#            endif
+                    }
+#        else
                     tap_code(action.layer_tap.code);
+#        endif
                 }
                 retro_tapping_counter = 0;
             }
@@ -865,10 +895,9 @@ void register_code(uint8_t code) {
     }
 #endif
 
-    else if
-        IS_KEY(code) {
-            // TODO: should push command_proc out of this block?
-            if (command_proc(code)) return;
+    else if IS_KEY (code) {
+        // TODO: should push command_proc out of this block?
+        if (command_proc(code)) return;
 
 #ifndef NO_ACTION_ONESHOT
 /* TODO: remove
@@ -885,35 +914,33 @@ void register_code(uint8_t code) {
         } else
 */
 #endif
-            {
-                // Force a new key press if the key is already pressed
-                // without this, keys with the same keycode, but different
-                // modifiers will be reported incorrectly, see issue #1708
-                if (is_key_pressed(keyboard_report, code)) {
-                    del_key(code);
-                    send_keyboard_report();
-                }
-                add_key(code);
+        {
+            // Force a new key press if the key is already pressed
+            // without this, keys with the same keycode, but different
+            // modifiers will be reported incorrectly, see issue #1708
+            if (is_key_pressed(keyboard_report, code)) {
+                del_key(code);
                 send_keyboard_report();
             }
-        }
-    else if
-        IS_MOD(code) {
-            add_mods(MOD_BIT(code));
+            add_key(code);
             send_keyboard_report();
         }
+    } else if IS_MOD (code) {
+        add_mods(MOD_BIT(code));
+        send_keyboard_report();
+    }
 #ifdef EXTRAKEY_ENABLE
-    else if
-        IS_SYSTEM(code) { host_system_send(KEYCODE2SYSTEM(code)); }
-    else if
-        IS_CONSUMER(code) { host_consumer_send(KEYCODE2CONSUMER(code)); }
+    else if IS_SYSTEM (code) {
+        host_system_send(KEYCODE2SYSTEM(code));
+    } else if IS_CONSUMER (code) {
+        host_consumer_send(KEYCODE2CONSUMER(code));
+    }
 #endif
 #ifdef MOUSEKEY_ENABLE
-    else if
-        IS_MOUSEKEY(code) {
-            mousekey_on(code);
-            mousekey_send();
-        }
+    else if IS_MOUSEKEY (code) {
+        mousekey_on(code);
+        mousekey_send();
+    }
 #endif
 }
 
@@ -958,26 +985,22 @@ void unregister_code(uint8_t code) {
     }
 #endif
 
-    else if
-        IS_KEY(code) {
-            del_key(code);
-            send_keyboard_report();
-        }
-    else if
-        IS_MOD(code) {
-            del_mods(MOD_BIT(code));
-            send_keyboard_report();
-        }
-    else if
-        IS_SYSTEM(code) { host_system_send(0); }
-    else if
-        IS_CONSUMER(code) { host_consumer_send(0); }
+    else if IS_KEY (code) {
+        del_key(code);
+        send_keyboard_report();
+    } else if IS_MOD (code) {
+        del_mods(MOD_BIT(code));
+        send_keyboard_report();
+    } else if IS_SYSTEM (code) {
+        host_system_send(0);
+    } else if IS_CONSUMER (code) {
+        host_consumer_send(0);
+    }
 #ifdef MOUSEKEY_ENABLE
-    else if
-        IS_MOUSEKEY(code) {
-            mousekey_off(code);
-            mousekey_send();
-        }
+    else if IS_MOUSEKEY (code) {
+        mousekey_off(code);
+        mousekey_send();
+    }
 #endif
 }
 
