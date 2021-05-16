@@ -58,12 +58,17 @@ float bell_song[][2] = SONG(TERMINAL_SOUND);
 #    include "process_auto_shift.h"
 #endif
 
-static void do_code16(uint16_t code, void (*f)(uint8_t)) {
+#ifdef KEY_OVERRIDE_ENABLE
+extern bool process_key_override(const uint16_t keycode, const keyrecord_t *const record);
+extern void matrix_scan_key_override(void);
+#endif
+
+uint8_t extract_mod_bits(uint16_t code) {
     switch (code) {
         case QK_MODS ... QK_MODS_MAX:
             break;
         default:
-            return;
+            return 0;
     }
 
     uint8_t mods_to_send = 0;
@@ -80,7 +85,11 @@ static void do_code16(uint16_t code, void (*f)(uint8_t)) {
         if (code & QK_LGUI) mods_to_send |= MOD_BIT(KC_LGUI);
     }
 
-    f(mods_to_send);
+    return mods_to_send;
+}
+
+static void do_code16(uint16_t code, void (*f)(uint8_t)) {
+    f(extract_mod_bits(code));
 }
 
 void register_code16(uint16_t code) {
@@ -242,6 +251,9 @@ bool process_record_quantum(keyrecord_t *record) {
 #endif
 #if (defined(AUDIO_ENABLE) || (defined(MIDI_ENABLE) && defined(MIDI_BASIC))) && !defined(NO_MUSIC_MODE)
             process_music(keycode, record) &&
+#endif
+#ifdef KEY_OVERRIDE_ENABLE
+            process_key_override(keycode, record) &&
 #endif
 #ifdef TAP_DANCE_ENABLE
             process_tap_dance(keycode, record) &&
@@ -406,6 +418,10 @@ void matrix_scan_quantum() {
 
 #if defined(AUDIO_ENABLE) && !defined(NO_MUSIC_MODE)
     matrix_scan_music();
+#endif
+
+#ifdef KEY_OVERRIDE_ENABLE
+    matrix_scan_key_override();
 #endif
 
 #ifdef SEQUENCER_ENABLE
