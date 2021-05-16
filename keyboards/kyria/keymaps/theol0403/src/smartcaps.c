@@ -4,7 +4,6 @@ static bool smart_caps_on = false;
 
 void smart_caps_enable() { smart_caps_on = true; }
 void smart_caps_disable() { smart_caps_on = false; }
-void smart_caps_toggle() { smart_caps_on = !smart_caps_on; }
 bool smart_caps_status() { return smart_caps_on; }
 
 // decide whether the incoming keycode should disable smart caps

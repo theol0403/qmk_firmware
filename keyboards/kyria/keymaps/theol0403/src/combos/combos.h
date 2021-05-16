@@ -8,9 +8,6 @@
 COMB(back, KC_BSPC, U_V, T_R1)
 #define END_HOLDS combo_back
 
-COMB(dott, SENT, U_DOT, T_R2)   // sentence end .
-COMB(ques, QUES, U_QUES, T_R2)  // sentence end ?
-
 SUBS(semi, ";\n", U_W, U_G)  // end line of c code
 SUBS(arrow, "->", U_F, U_J)  // arrow
 

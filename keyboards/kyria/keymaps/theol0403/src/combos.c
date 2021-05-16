@@ -10,8 +10,8 @@ int16_t get_combo_term(uint16_t index, combo_t *combo) {
       return 25;
     case BEGIN_HOLDS ... END_HOLDS:
       return 150;
-    case BEGIN_BIGRAMS ... END_BIGRAMS:
-      return 7;
+    /* case BEGIN_BIGRAMS ... END_BIGRAMS: */
+    /*   return 7; */
     case BEGIN_TRIGRAMS ... END_TRIGRAMS:
       return 20;
     case BEGIN_WORDS ... END_WORDS:

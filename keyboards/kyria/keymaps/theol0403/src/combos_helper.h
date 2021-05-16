@@ -113,7 +113,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
   // apply smart caps to combos
   if (smart_caps_status()) {
     switch (combo_index) {
-      case BEGIN_BIGRAMS ... END_BIGRAMS:
+      // case BEGIN_BIGRAMS ... END_BIGRAMS:
       case BEGIN_TRIGRAMS ... END_TRIGRAMS:
       case BEGIN_WORDS ... END_WORDS:
         if (pressed) {

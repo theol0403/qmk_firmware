@@ -1,5 +1,5 @@
 #define BEGIN_BIGRAMS combo_bi_th
-SUBS(bi_th, "th", U_T, U_H)
+// SUBS(bi_th, "th", U_T, U_H)
 // SUBS(bi_he, "he", U_H, T_L2)
 // SUBS(bi_in, "in", U_I, U_N)
 // SUBS(bi_er, "er", T_L2, KC_R)
@@ -72,6 +72,6 @@ SUBS(tri_ion, "ion", U_I, U_O, U_N)
 // SUBS(tri_int, "int", U_I, U_N, U_T)
 // SUBS(tri_one, "one", U_O, U_N, T_L2)
 // SUBS(tri_you, "you", U_Y, U_O, KC_U)
-SUBS(ng_ions, "ions", U_I, U_O, U_N, U_S)
-SUBS(ng_tion, "tion", U_T, U_I, U_O, U_N)
-#define END_TRIGRAMS combo_ng_tion
+// SUBS(ng_ions, "ions", U_I, U_O, U_N, U_S)
+// SUBS(ng_tion, "tion", U_T, U_I, U_O, U_N)
+#define END_TRIGRAMS combo_tri_ion
