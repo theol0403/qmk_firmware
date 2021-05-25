@@ -1,9 +1,9 @@
 #include "../keymap.h"
 
 #define THUMB_TERM 190
-#define PINKY_TERM 260
+#define PINKY_TERM 300
 #define CTRL_TERM 170
-#define SHIFT_TERM 120
+#define SHIFT_TERM 125
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case T_R1:

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/theol/Documents/qmk
+cd /home/theol/Documents/qmk_firmware
 
 if [[ $1 -eq 0 ]]
 then
