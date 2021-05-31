@@ -22,15 +22,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                              |------+------+------+------+------+------|
  * |      |  Y   |  T   |  H   |  A   | . :  |                              |  C   |  S   |  N   |  O   |  I   |      |
  * |------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------|
- * |      |  K   |  M   |  F   |  J   | , ;  | NAV  |LCTRL |  |      | NUM  |  V   |  G   |  W   |  X   |  Q   |      |
+ * |      |  K   |  M   |  F   |  J   | , ;  | NAV  |      |  |      | NUM  |  V   |  G   |  W   |  X   |  Q   |      |
  * `------+------+------+------+------+------+------+------.  ,------+------+------+------+------+------+------+------'
  *                      | AUX  | GUI  | ESC  |  E   | TAB  |  | ENT  | SPC  | BSPC | DEL  |      |
  *                      `----------------------------------'  `----------------------------------' */
 [BSE] = LAYOUT(
-  _, U_Z, U_P, U_L,  U_U, U_QUES,                                 U_B,  U_D,  U_R, U_QUOT, U_SL, _, 
-  _, U_Y, U_T, U_H,  U_A, U_DOT,                                  U_C,  U_S,  U_N, U_O,    U_I,  _, 
-  _, U_K, U_M, U_F,  U_J, U_COMM, U_NAV, KC_LCTRL,   _,    U_NUM, U_V,  U_G,  U_W, U_X,    U_Q,  _, 
-               T_LK, GUI, T_L1,   T_L2,  T_L3,       T_R3, T_R2,  T_R1, T_R0, _                     
+  _, U_Z, U_P, U_L,  U_U, U_QUES,                             U_B,  U_D,  U_R, U_QUOT, U_SL, _, 
+  _, U_Y, U_T, U_H,  U_A, U_DOT,                              U_C,  U_S,  U_N, U_O,    U_I,  _, 
+  _, U_K, U_M, U_F,  U_J, U_COMM, U_NAV, _,      _,    U_NUM, U_V,  U_G,  U_W, U_X,    U_Q,  _, 
+               T_LK, GUI, T_L1,   T_L2,  T_L3,   T_R3, T_R2,  T_R1, T_R0, _                     
 ),
 /* ,-----------------------------------------.                              ,-----------------------------------------.
  * |      |      |  6   |  5   |  4   |  ^   |                              |      |      |      |      |      |      |
@@ -203,7 +203,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 }
 
 #ifdef ENCODER_ENABLE
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) {
     // Volume control
     if (clockwise) {
@@ -219,6 +219,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
       tap_code(KC_DOWN);
     }
   }
+  return true;
 }
 #endif
 

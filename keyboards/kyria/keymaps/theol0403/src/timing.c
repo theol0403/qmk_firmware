@@ -1,6 +1,6 @@
 #include "../keymap.h"
 
-#define THUMB_TERM 190
+#define THUMB_TERM 150
 #define PINKY_TERM 300
 #define CTRL_TERM 170
 #define SHIFT_TERM 125

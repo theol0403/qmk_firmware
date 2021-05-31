@@ -4,6 +4,7 @@
 #ifdef OLED_DRIVER_ENABLE
 #  define OLED_DISPLAY_128X64
 #  define OLED_UPDATE_INTERVAL 40
+#  define OLED_FADE_OUT 10
 #endif
 
 #ifdef ENCODER_ENABLE
